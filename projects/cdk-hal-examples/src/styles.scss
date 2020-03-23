@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/theme.scss";
+
+body {
+    margin: 0px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.title-example{
+    font-size: 50px;
+    
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+  
+.subtitle-example{
+    font-size: 30px;
+    font-weight: normal;
+}
+  
+.example-container{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 150px;
+}

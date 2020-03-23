@@ -1,0 +1,11 @@
+{
+  "name": "diaas-angular-cdk-hal",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  },
+  "dependencies": {
+    "@dxc-technology/halstack-client": "^1.1.5"
+  }
+}

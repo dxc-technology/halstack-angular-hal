@@ -1,0 +1,89 @@
+<div class="haltest-example-container">
+    <h1 class="title-example">Hal resource Service</h1>
+    <h2>Multiple instance example</h2>
+    <div *ngIf="(errorProspect | async) || (errorTelephone | async) as error"  >
+            <dxc-alert
+                type="error"
+                mode="inline"
+                [inlineText]="error"
+                margin="medium"
+                size="fitContent"
+                (onClose)="onClose()">
+            </dxc-alert>
+    </div>
+    <div *ngIf="((fetchProspectStatus | async) === 'done' || 
+        (fetchProspectStatus | async) !== 'fetching') && ((fetchTelephoneStatus | async) === 'done' || 
+        (fetchTelephoneStatus | async) !== 'fetching') as fetched; else loading">
+        <div *ngIf="(fetchProspectStatus | async) !== 'done' || (fetchTelephoneStatus | async) !== 'done'" 
+                class="spinner-form">
+            <div class="spinner-form-loading">
+                <dxc-spinner label="Loading..."></dxc-spinner>  
+            </div>
+        </div>
+   
+        <div *ngIf="(prospectResource | async) as entity">
+            <div>
+                <dxc-input-text
+                    label="Update User"
+                    [value]="getProspectPropertyValue('prospect-update-user')"
+                    assistiveText="prospect update user"
+                    (onBlur)="onPatchUpdateUser($event)"
+                    [required]=""
+                    size="fillParent"
+                    margin="medium">
+                </dxc-input-text>
+            </div>
+            <div>
+                <dxc-input-text
+                    label="Email"
+                    [value]="getProspectPropertyValue('prospect-email')"
+                    assistiveText="prospect email"
+                    (onBlur)="onPatchEmail($event)"
+                    size="fillParent"
+                    margin="medium">
+                </dxc-input-text>
+            </div>
+            <div>
+                <dxc-button
+                    mode="basic"
+                    label="Refresh"
+                    (onClick)="onRefreshProspect()"
+                    margin="medium"
+                    size="fillParent">
+                </dxc-button>
+            </div>
+        </div>
+
+        <div *ngIf="telephoneProspectResource | async as telEntity">
+                <div>
+                  <dxc-input-text
+                    label="Update User"
+                    [value]="getTelephonePropertyValue('prospect-phone-number')"
+                    assistiveText="phone number"
+                    (onBlur)="onPatchTelephoneNumber($event)"
+                    [required]=""
+                    size="fillParent"
+                    margin="medium"
+                  >
+                  </dxc-input-text>
+                </div>
+             
+                <div>
+                  <dxc-button
+                    mode="basic"
+                    label="Refresh Telephone"
+                    (onClick)="onRefreshTelephone()"
+                    margin="medium"
+                    size="fillParent"
+                  ></dxc-button>
+                </div>
+        </div>
+    </div>
+
+<ng-template #loading>
+    <div class="spinner">
+      <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>  
+    </div>    
+</ng-template>
+
+</div>

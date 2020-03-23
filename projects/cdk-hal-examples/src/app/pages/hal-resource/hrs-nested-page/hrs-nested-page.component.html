@@ -1,0 +1,78 @@
+<div class="haltest-example-container">
+        <h1 class="title-example">Hal resource Service</h1>
+        <h2>Nested instance example</h2>
+        <div *ngIf="(error | async) as error"  >
+                <dxc-alert
+                    type="error"
+                    mode="inline"
+                    [inlineText]="error"
+                    margin="medium"
+                    size="fitContent"
+                    (onClose)="close()">
+                </dxc-alert>
+        </div>
+        <div *ngIf="(fetchStatus | async) === 'done' || 
+            (fetchStatus | async) !== 'fetching' as fetched; else loading">
+            <div *ngIf="(fetchStatus | async) !== 'done' as fetched" 
+                class="spinner-form">
+                <div class="spinner-form-loading">
+                    <dxc-spinner label="Loading..."></dxc-spinner>  
+                </div>
+            </div>
+       
+            <div *ngIf="(resource | async) as entity">
+                <div>
+                    <dxc-input-text
+                        label="Update User"
+                        [value]="getPropertyValue('prospect-update-user')"
+                        assistiveText="prospect update user"
+                        (onBlur)="onPatchUpdateUser($event)"
+                        [required]=""
+                        size="fillParent"
+                        margin="medium">
+                    </dxc-input-text>
+                </div>
+                <div>
+                    <dxc-input-text
+                        label="Email"
+                        [value]="getPropertyValue('prospect-email')"
+                        assistiveText="prospect email"
+                        (onBlur)="onPatchEmail($event)"
+                        size="fillParent"
+                        margin="medium">
+                    </dxc-input-text>
+                </div>
+                <div>
+                    <dxc-button
+                        mode="basic"
+                        label="Refresh"
+                        (onClick)="onClick()"
+                        margin="medium"
+                        size="fillParent">
+                    </dxc-button>
+                    <dxc-button
+                        mode="basic"
+                        label="Load Telephone resource"
+                        (onClick)="loadTelephone()"
+                        margin="medium"
+                        size="fillParent">
+                    </dxc-button>
+                    <dxc-button
+                        *ngIf="showTelephoneResource"
+                        mode="basic"
+                        label="Log Telephone resource"
+                        (onClick)="logTelephoneResource()"
+                        margin="medium"
+                        size="fillParent">
+                    </dxc-button>
+                </div>
+            </div>
+        </div>
+    
+    <ng-template #loading>
+        <div class="spinner">
+          <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>  
+        </div>    
+    </ng-template>
+    
+    </div>
