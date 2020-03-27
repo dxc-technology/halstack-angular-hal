@@ -6,6 +6,8 @@
     "@angular/core": "^8.2.14"
   },
   "dependencies": {
-    "@dxc-technology/halstack-client": "^1.1.5"
+    "@dxc-technology/halstack-client": "^1.1.5",
+    "@angular/core": "8.2.14",
+    "emotion": "10.0.27"
   }
 }
