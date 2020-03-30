@@ -32,11 +32,11 @@ export class HrsMultiPageComponent implements OnInit {
   }
 
   onRefreshProspect(){
-    this.propectService.getHandlers().find(x => x.rel == 'fetch').handler();
+    this.propectService.executeHandler('fetch');
   }
 
   onRefreshTelephone(){
-    this.telephonePropectService.getHandlers().find(x => x.rel == 'fetch').handler();
+    this.telephonePropectService.executeHandler('fetch');
   }
 
   onPatchUpdateUser(value){
@@ -54,11 +54,11 @@ export class HrsMultiPageComponent implements OnInit {
   onPatchTelephoneNumber(value){
     const payload = {};    
     payload['prospect-email'] = value;
-    this.telephonePropectService.getHandlers().find(x => x.rel == 'update').handler(payload);    
+    this.telephonePropectService.executeHandler('update', payload);
   }
 
   private patchResource(payload){
-    this.propectService.getHandlers().find(x => x.rel == 'update').handler(payload);    
+    this.propectService.executeHandler('update', payload);
   }
 
   getProspectPropertyValue(propertyName:string){

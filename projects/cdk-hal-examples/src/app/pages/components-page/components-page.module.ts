@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HrsMultiPageModule } from '../hal-resource/hrs-multi-page/hrs-multi-page.module';
 import { HrsNestedPageModule } from '../hal-resource/hrs-nested-page/hrs-nested-page.module';
+import { HrsCollectionPageModule } from '../hal-resource/hrs-collection-page/hrs-collection-page.module';
 
 @NgModule({
   declarations: [ComponentsPageComponent],
@@ -20,7 +21,8 @@ import { HrsNestedPageModule } from '../hal-resource/hrs-nested-page/hrs-nested-
     BrowserAnimationsModule,
     HrsSinglePageModule,
     HrsMultiPageModule,
-    HrsNestedPageModule
+    HrsNestedPageModule,
+    HrsCollectionPageModule
   ],
   exports: [ComponentsPageComponent]
 })

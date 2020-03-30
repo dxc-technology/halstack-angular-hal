@@ -50,11 +50,11 @@ export class HrsSinglePageComponent implements OnInit {
   }
 
   private patchResource(payload){
-    this.halResource.getHandlers().find(x => x.rel == 'update').handler(payload);    
- }
+    this.halResource.executeHandler('update', payload);
+  }  
 
   onClick(){
-    this.halResource.getHandlers().find(x => x.rel == 'fetch').handler();
+    this.halResource.executeHandler('fetch');
   }
 
 }

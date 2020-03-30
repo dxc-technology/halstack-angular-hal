@@ -14,14 +14,11 @@ export class HrsNestedPageComponent implements OnInit {
   telephoneResource: HalResourceService;
   error = this.halResource.errorMessage;
 
-
-
   showTelephoneResource = false;
 
   constructor(private halResource: HalResourceService, private httpClient: HttpClient) { 
     this.halResource.fetchResource();
   }
-
   
   getPropertyValue(propertyName:string){
     return this.halResource.resource.getValue().resourceRepresentation[propertyName];
@@ -59,11 +56,11 @@ export class HrsNestedPageComponent implements OnInit {
   }
 
   private patchResource(payload){
-    this.halResource.getHandlers().find(x => x.rel == 'update').handler(payload);    
+    this.halResource.executeHandler('update', payload);
  }
 
   onClick(){
-    this.halResource.getHandlers().find(x => x.rel == 'fetch').handler();
+    this.halResource.executeHandler('fetch');
   }
 
 }
