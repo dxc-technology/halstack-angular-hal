@@ -18,6 +18,7 @@ export class HalResourceService {
   errorMessage: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   fetchStatus: BehaviorSubject<string> = new BehaviorSubject<string>(doneStatus);
   items: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  totalItems: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   constructor(
     public url: string,
@@ -33,8 +34,9 @@ export class HalResourceService {
         this.resource.next( 
           {... halResource });
 
-        if (halResource.getLinks()!== null && halResource.getLinks().length>0){          
+        if (halResource.getLinks()!== null && halResource.getLinks().length>0){     
           this.items.next(halResource.getItems());
+          this.totalItems.next(halResource.resourceRepresentation._links._count);
         }
 
         this.fetchStatus.next(doneStatus);
@@ -151,6 +153,7 @@ export class HalResourceService {
       });
       if (halResource.getLinks()!== null && halResource.getLinks().length>0){
         this.items.next(halResource.getItems());
+        this.totalItems.next(halResource.resourceRepresentation._links._count);
       }
       this.fetchStatus.next(doneStatus);
     }, err => {
@@ -198,5 +201,10 @@ export class HalResourceService {
       }
     });
     return valid;
+  }
+
+  addPageParams(page: number, itemsPerPage: number) {
+    let start = (page - 1) * itemsPerPage + 1;
+    return this.url + (this.url.includes("?") ? "&" : "?") + "_start=" + start + "&_num=" + itemsPerPage;
   }
 }

@@ -1,31 +1,19 @@
-<div #parentdiv class="haltest-example-container">
+<div #parentdiv class="hal-table-container">
     <div  *ngIf="(fetchStatus | async) === 'done' || 
             (fetchStatus | async) !== 'fetching' as fetched; else loading">
-
-         <div *ngIf="(fetchStatus | async) !== 'done' as fetched" 
-            class="spinner-form" [style.height.px]="parentdiv.offsetHeight">
-            <div class="spinner-form-loading">
-                <dxc-spinner label="Loading..."></dxc-spinner>  
-            </div>
-        </div>
-
-        <div *ngIf="(resource | async) as entity">    
-            <dxc-table size="medium">
+        <div #dxctable *ngIf="(resource | async) && 
+            (fetchStatus | async) === 'done' as entity">    
+            <dxc-table>
                 <tr>
-                    <th>Title</th>
-                    <th>Given name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
+                    <th *ngFor="let column of columns;">{{ column.header }}</th>
                 </tr> 
                 <tr *ngFor="let pItem of items | async">
-                    <td>{{ getItemPropertyValue(pItem, 'prospect-title') }}</td>
-                    <td>{{ getItemPropertyValue(pItem, 'prospect-given-name') }}</td>
-                    <td>{{ getItemPropertyValue(pItem, 'prospect-last-name') }}</td>
-                    <td>{{ getItemPropertyValue(pItem, 'prospect-email') }}</td>
+                    <td *ngFor="let column of columns">
+                        {{ getItemPropertyValue(pItem, column.property) }}
+                    </td>
                 </tr>
             </dxc-table>
-            
-            <dxc-paginator 
+            <dxc-paginator *ngIf="totalItems && totalItems > 0"
                 [totalItems]="totalItems"
                 [itemsPerPage]="itemsPerPage"
                 [currentPage]="page"
@@ -36,12 +24,12 @@
             >
             </dxc-paginator>
         </div>
-
     </div>
 
-    <ng-template #loading>
-            <div class="spinner">
-                <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>  
-            </div>    
-    </ng-template>
+    <div #loading *ngIf="(fetchStatus | async) !== 'done' as fetched else dxctable" 
+            [style.height.px]="parentdiv.offsetHeight">
+        <div class="loading-container">
+            <dxc-spinner margin="xxlarge" label="Fetching data"></dxc-spinner>
+        </div>
+    </div>
 </div>

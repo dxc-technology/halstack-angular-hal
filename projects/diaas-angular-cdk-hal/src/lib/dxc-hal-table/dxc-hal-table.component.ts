@@ -10,26 +10,40 @@ export class DxcHalTableComponent implements OnInit {
 
   @Input() halService : any;
   @Input() columns : Array<any>;
+  @Input() itemsPerPage : number;
 
   public fetchStatus;
   public resource;
   public error;
   public items;
-
+  
+  totalItems : number;
   page : number = 1;
-  totalItems : number = 27;
-  itemsPerPage : number =10;
 
   ngOnInit() {
-    this.halService.fetchResource();
+    this.halService.handleGet({
+      url: this.halService.addPageParams(this.page, this.itemsPerPage), 
+      status: 'navigating'
+    });
     this.fetchStatus = this.halService.fetchStatus;
     this.resource = this.halService.resource;
     this.error = this.halService.errorMessage;
     this.items = this.halService.items;
+    this.halService.totalItems.subscribe( (value) => this.totalItems = value );
   }
 
-  navigate(operation:string){
-    this.halService.executeItemsHandler(operation);
+  navigate(page: number, operation:string){
+    switch (operation) {
+      case 'next': 
+      case 'first':
+      case 'prev':
+      case 'last':
+        this.page=page;
+        return this.halService.handleGet({ url: this.halService.addPageParams(this.page, this.itemsPerPage) , status: 'navigating'});                                                                     
+      default:
+        this.halService.buildErrorResponse({message: `Error. Operation  ${operation} is not known.`});
+        break;
+    }
   }
 
   getItemPropertyValue(item, propertyKey){
