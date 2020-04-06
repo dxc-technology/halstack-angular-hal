@@ -1,0 +1,47 @@
+<div #parentdiv class="haltest-example-container">
+    <div  *ngIf="(fetchStatus | async) === 'done' || 
+            (fetchStatus | async) !== 'fetching' as fetched; else loading">
+
+         <div *ngIf="(fetchStatus | async) !== 'done' as fetched" 
+            class="spinner-form" [style.height.px]="parentdiv.offsetHeight">
+            <div class="spinner-form-loading">
+                <dxc-spinner label="Loading..."></dxc-spinner>  
+            </div>
+        </div>
+
+        <div *ngIf="(resource | async) as entity">    
+            <dxc-table size="medium">
+                <tr>
+                    <th>Title</th>
+                    <th>Given name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr> 
+                <tr *ngFor="let pItem of items | async">
+                    <td>{{ getItemPropertyValue(pItem, 'prospect-title') }}</td>
+                    <td>{{ getItemPropertyValue(pItem, 'prospect-given-name') }}</td>
+                    <td>{{ getItemPropertyValue(pItem, 'prospect-last-name') }}</td>
+                    <td>{{ getItemPropertyValue(pItem, 'prospect-email') }}</td>
+                </tr>
+            </dxc-table>
+            
+            <dxc-paginator 
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsPerPage"
+                [currentPage]="page"
+                (nextFunction)="navigate($event, 'next')"
+                (prevFunction)="navigate($event, 'prev')"
+                (firstFunction)="navigate($event, 'first')"
+                (lastFunction)="navigate($event, 'last')"
+            >
+            </dxc-paginator>
+        </div>
+
+    </div>
+
+    <ng-template #loading>
+            <div class="spinner">
+                <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>  
+            </div>    
+    </ng-template>
+</div>

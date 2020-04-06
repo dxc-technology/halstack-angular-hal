@@ -29,7 +29,6 @@ export class HalResourceService {
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient.get(this.url, { headers: this.headers }).subscribe(
       resp => {
-
         const halResource = HalResource(resp);
         this.resource.next( 
           {... halResource });
@@ -73,7 +72,6 @@ export class HalResourceService {
 
   executeItemsHandler(handlerName:string){
     const pathHandler = this.getCollectionHandlers().find(x => x.rel == handlerName);
-    debugger;
     if (pathHandler !==null && pathHandler !== undefined){
       pathHandler.handler();
     }else{

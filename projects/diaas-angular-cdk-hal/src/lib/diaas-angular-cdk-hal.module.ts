@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { DiaasAngularCdkHalComponent } from './diaas-angular-cdk-hal.component';
-import { DiaasHalPaginatorComponent } from './diaas-hal-paginator/diaas-hal-paginator.component';
-
-
+import { DxcHalTableModule } from './dxc-hal-table/dxc-hal-table.module';
 
 @NgModule({
-  declarations: [DiaasAngularCdkHalComponent, DiaasHalPaginatorComponent],
+  declarations: [DiaasAngularCdkHalComponent],
   imports: [
+    DxcHalTableModule
   ],
   exports: [DiaasAngularCdkHalComponent]
 })
