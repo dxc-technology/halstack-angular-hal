@@ -7,11 +7,11 @@ import { AppComponent } from './app.component';
 import { ThemeService, DXCHeaderModule,  ThemeModule,DXCFooterModule } from '@diaas/dxc-ngx-cdk';
 import { OverviewPageModule } from './pages/overview-page/overview-page.module';
 import { ComponentsPageModule } from './pages/components-page/components-page.module';
-import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-page/hrs-collection-page.component';
+import { HalTablePageModule } from './pages/hal-table-page/hal-table-page.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,8 +22,8 @@ import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-
     ComponentsPageModule,
     OverviewPageModule,
     DXCHeaderModule,
-    DXCFooterModule
-
+    DXCFooterModule,
+    HalTablePageModule
   ],
   providers: [{ provide: 'ThemeService', useClass: ThemeService }],
   bootstrap: [AppComponent]
