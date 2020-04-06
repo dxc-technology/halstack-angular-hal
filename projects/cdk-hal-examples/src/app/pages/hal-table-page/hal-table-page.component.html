@@ -1,7 +1,10 @@
-<h1 class="title-example">Hal resource Service</h1>
-<h2>HAL Table</h2>
-<dxc-hal-table 
-    [halService]="collectionProspectService"
-    [columns]="columns"
->
-</dxc-hal-table>
+<h1 class="title-example">Hal Table</h1>
+
+<div class="haltable-example-container">
+    <dxc-hal-table 
+        [halService]="collectionProspectService"
+        [columns]="columns"
+        [itemsPerPage]="itemsPerPage"
+    >
+    </dxc-hal-table>
+</div>

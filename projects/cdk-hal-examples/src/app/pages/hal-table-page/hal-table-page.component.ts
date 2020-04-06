@@ -10,13 +10,32 @@ import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 export class HalTablePageComponent implements OnInit {
 
   columns: Array<any>;
+  itemsPerPage : number = 10;
 
   constructor(@Inject('CollectionProspectService') private collectionProspectService: HalResourceService) { 
   
   }
 
   ngOnInit() {
-    this.columns = [];
+    this.columns = 
+    [
+      {
+        header: "Title",
+        property: "prospect-title"
+      },
+      {
+        header: "Given Name",
+        property: "prospect-given-name"
+      },
+      {
+        header: "Last Name",
+        property: "prospect-last-name"
+      },
+      {
+        header: "Email",
+        property: "prospect-email"
+      }
+    ]
   }
 
   getCollectionProspectService(){
