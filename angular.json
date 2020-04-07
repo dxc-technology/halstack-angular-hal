@@ -36,6 +36,7 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/cdk-hal-examples/src/styles.scss"
             ],
+            "preserveSymlinks": true,
             "scripts": []
           },
           "configurations": {

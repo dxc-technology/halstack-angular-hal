@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxcButtonModule, DXCAlertModule, DxcSpinnerModule, DxcTableModule, DxcBoxModule } from '@diaas/dxc-ngx-cdk';
+import { DxcButtonModule, DXCAlertModule, DxcSpinnerModule, DxcTableModule, DxcBoxModule, DxcPaginatorModule } from '@diaas/dxc-ngx-cdk';
 import { HalResourceServiceFactoryProvider } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider';
 import { HrsCollectionPageComponent } from './hrs-collection-page.component';
 
@@ -12,6 +12,7 @@ import { HrsCollectionPageComponent } from './hrs-collection-page.component';
     DxcTableModule,
     DxcSpinnerModule,
     DxcBoxModule,
+    DxcPaginatorModule,
     CommonModule
   ],
   exports: [HrsCollectionPageComponent],

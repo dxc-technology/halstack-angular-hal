@@ -9,14 +9,16 @@
                 </tr> 
                 <tr *ngFor="let pItem of items | async">
                     <td *ngFor="let column of columns">
-                       <span *ngIf="column.onClickItemFunction">
+                       <!-- <span *ngIf="column.onClickItemFunction">
                             <a (click)="runColumnFunction(column, pItem)">{{ getItemPropertyValue(pItem, column.property) }}</a>
-                       </span>
+                       </span> -->
+                       <dxc-hal-table-cell [value]="getItemPropertyValue(pItem, column.property)"
+                        [component]="column.component" [selector]="toto"></dxc-hal-table-cell>
                     </td>
                 </tr>
             </dxc-table>
-            <dxc-paginator *ngIf="totalItems && totalItems > 0"
-                [totalItems]="totalItems"
+            <dxc-paginator *ngIf="(totalItems | async) !== null"
+                [totalItems]="totalItems | async"
                 [itemsPerPage]="itemsPerPage"
                 [currentPage]="page"
                 (nextFunction)="navigate($event, 'next')"
