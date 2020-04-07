@@ -12,6 +12,10 @@ export class HalTablePageComponent implements OnInit {
   columns: Array<any>;
   itemsPerPage : number = 10;
 
+  columnFunction = `console.log(
+                      item.summary[column.property]
+                    );`;
+  
   constructor(@Inject('CollectionProspectService') private collectionProspectService: HalResourceService) { 
   
   }
@@ -21,7 +25,8 @@ export class HalTablePageComponent implements OnInit {
     [
       {
         header: "Title",
-        property: "prospect-title"
+        property: "prospect-title",
+        onClickItemFunction: "console.log('awesome');"
       },
       {
         header: "Given Name",
@@ -29,7 +34,8 @@ export class HalTablePageComponent implements OnInit {
       },
       {
         header: "Last Name",
-        property: "prospect-last-name"
+        property: "prospect-last-name",
+        onClickItemFunction: this.columnFunction
       },
       {
         header: "Email",
@@ -41,6 +47,5 @@ export class HalTablePageComponent implements OnInit {
   getCollectionProspectService(){
     return this.collectionProspectService;
   }
-
 
 }

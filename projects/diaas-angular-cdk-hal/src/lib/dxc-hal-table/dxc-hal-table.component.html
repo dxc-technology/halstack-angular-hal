@@ -9,7 +9,9 @@
                 </tr> 
                 <tr *ngFor="let pItem of items | async">
                     <td *ngFor="let column of columns">
-                        {{ getItemPropertyValue(pItem, column.property) }}
+                       <span *ngIf="column.onClickItemFunction">
+                            <a (click)="runColumnFunction(column, pItem)">{{ getItemPropertyValue(pItem, column.property) }}</a>
+                       </span>
                     </td>
                 </tr>
             </dxc-table>

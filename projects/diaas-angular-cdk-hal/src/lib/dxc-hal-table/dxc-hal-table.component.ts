@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { HalResourceService } from '../diaas-angular-cdk-hal.service';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'dxc-hal-table',
@@ -29,7 +28,7 @@ export class DxcHalTableComponent implements OnInit {
     this.resource = this.halService.resource;
     this.error = this.halService.errorMessage;
     this.items = this.halService.items;
-    this.halService.totalItems.subscribe( (value) => this.totalItems = value );
+    this.halService.totalItems.subscribe( (value: number) => this.totalItems = value );
   }
 
   navigate(page: number, operation:string){
@@ -39,11 +38,17 @@ export class DxcHalTableComponent implements OnInit {
       case 'prev':
       case 'last':
         this.page=page;
-        return this.halService.handleGet({ url: this.halService.addPageParams(this.page, this.itemsPerPage) , status: 'navigating'});                                                                     
+        return this.halService.handleGet({ 
+          url: this.halService.addPageParams(this.page, this.itemsPerPage),
+          status: 'navigating'});                                                                     
       default:
         this.halService.buildErrorResponse({message: `Error. Operation  ${operation} is not known.`});
         break;
     }
+  }
+
+  runColumnFunction(column: any, item: any) {
+    eval(column.onClickItemFunction);
   }
 
   getItemPropertyValue(item, propertyKey){
