@@ -1,6 +1,4 @@
-import { Component, OnInit, InjectionToken, Inject } from '@angular/core';
-
-export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
+import { Component, OnInit, InjectionToken, Inject, Input } from '@angular/core';
 
 @Component({
   selector: 'app-component-example',
@@ -9,11 +7,17 @@ export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
 })
 export class ComponentExampleComponent implements OnInit {
 
-  @Inject(CONTAINER_DATA) public componentData: any
+  @Input() componentData: string;
   
-  constructor() { }
+  constructor() {
+    this.componentData='uno';
+   }
 
   ngOnInit() {
+    console.log(this.componentData);
   }
 
+  ngAfterViewInit() {
+    console.log(this.componentData);
+  }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxcHalTableComponent } from './dxc-hal-table.component';
+import { DxcHalTableComponent, DxcCellDef, DxcRow, DataRowOutlet, DxcCellOutlet, CdkCell, CdkColumnDef, CdkRowDef } from './dxc-hal-table.component';
 import { DxcPaginatorModule, DxcTableModule, DxcSpinnerModule } from '@diaas/dxc-ngx-cdk';
 import { DxcHalTableCellModule } from './dxc-hal-table-cell.module';
 import { PortalModule } from '@angular/cdk/portal';
@@ -10,7 +10,14 @@ import { ComponentExampleComponent } from 'projects/cdk-hal-examples/src/app/com
 
 @NgModule({
   declarations: [
-    DxcHalTableComponent
+    DxcHalTableComponent,
+    DxcCellDef,
+    DxcRow,
+    DataRowOutlet,
+    DxcCellOutlet,
+    CdkCell,
+    CdkColumnDef,
+    CdkRowDef
   ],
   imports: [
     CommonModule,
@@ -22,7 +29,14 @@ import { ComponentExampleComponent } from 'projects/cdk-hal-examples/src/app/com
     DxcHalTableCellModule
   ],
   exports: [
-    DxcHalTableComponent
+    DxcHalTableComponent,
+    DxcCellDef,
+    DxcRow,
+    DataRowOutlet,
+    DxcCellOutlet,
+    CdkCell,
+    CdkColumnDef,
+    CdkRowDef
   ]
 })
 export class DxcHalTableModule { }

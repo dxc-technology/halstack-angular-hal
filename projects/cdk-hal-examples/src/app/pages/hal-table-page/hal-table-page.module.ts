@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { HalTablePageComponent } from './hal-table-page.component';
 import { DxcHalTableModule, HalResourceServiceFactoryProvider } from 'projects/diaas-angular-cdk-hal/src/projects';
 import { ComponentExampleComponent } from '../../components/component-example/component-example.component';
+import { DxcTagModule } from '@diaas/dxc-ngx-cdk';
 
 @NgModule({
   declarations: [
-    HalTablePageComponent
+    HalTablePageComponent,
+    ComponentExampleComponent
   ],
   imports: [
     CommonModule,
-    DxcHalTableModule
+    DxcHalTableModule,
+    DxcTagModule
   ],
   providers: [
     HalResourceServiceFactoryProvider.createInstance(

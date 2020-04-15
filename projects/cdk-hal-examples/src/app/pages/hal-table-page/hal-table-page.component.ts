@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HalResourceService } from 'projects/diaas-angular-cdk-hal/src/projects';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { ComponentExampleComponent } from '../../components/component-example/component-example.component';
 
 @Component({
@@ -10,7 +9,7 @@ import { ComponentExampleComponent } from '../../components/component-example/co
 })
 export class HalTablePageComponent implements OnInit {
 
-  columns: Array<any>;
+  columnsList: Array<any>;
   itemsPerPage : number = 10;
 
   columnFunction = function (column : any, item: any) {
@@ -22,7 +21,7 @@ export class HalTablePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.columns = 
+    this.columnsList = 
     [
       {
         header: "Title",

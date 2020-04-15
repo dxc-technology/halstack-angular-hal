@@ -4,18 +4,8 @@
         <div #dxctable *ngIf="(resource | async) && 
             (fetchStatus | async) === 'done' as entity">    
             <dxc-table>
-                <tr>
-                    <th *ngFor="let column of columns;">{{ column.header }}</th>
-                </tr> 
-                <tr *ngFor="let pItem of items | async">
-                    <td *ngFor="let column of columns">
-                       <!-- <span *ngIf="column.onClickItemFunction">
-                            <a (click)="runColumnFunction(column, pItem)">{{ getItemPropertyValue(pItem, column.property) }}</a>
-                       </span> -->
-                       <dxc-hal-table-cell [value]="getItemPropertyValue(pItem, column.property)"
-                        [component]="column.component" [selector]="toto"></dxc-hal-table-cell>
-                    </td>
-                </tr>
+                <ng-container rowOutlet></ng-container>
+                <!-- <ng-content></ng-content> -->
             </dxc-table>
             <dxc-paginator *ngIf="(totalItems | async) !== null"
                 [totalItems]="totalItems | async"

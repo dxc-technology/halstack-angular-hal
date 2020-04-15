@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ComponentFactoryResolver, Injector, ApplicationRef, AfterViewInit, OnDestroy, InjectionToken } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ComponentFactoryResolver, Injector, ApplicationRef, AfterViewInit, OnDestroy, InjectionToken, Optional } from '@angular/core';
 import {ComponentPortal, DomPortalHost, CdkPortal, PortalInjector} from '@angular/cdk/portal';
 
 export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
 
 @Component({
   selector: 'dxc-hal-table-cell',
-  template: '',
+  templateUrl: './dxc-hal-table-cell.component.html',
   providers: []
 })
 export class DxcHalTableCellComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -20,9 +20,9 @@ export class DxcHalTableCellComponent implements OnInit, AfterViewInit, OnDestro
   private portal;
   
   constructor(
-     private componentFactoryResolver: ComponentFactoryResolver, 
-     private injector: Injector,
-     private appRef: ApplicationRef
+    @Optional() private injector: Injector,
+    @Optional() private appRef: ApplicationRef,
+    @Optional() private componentFactoryResolver: ComponentFactoryResolver, 
   ) {}
   
   ngOnInit(): void {
@@ -30,14 +30,14 @@ export class DxcHalTableCellComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   createInjector(dataToPass): PortalInjector {
-    const injectorTokens = new WeakMap();
-    injectorTokens.set(CONTAINER_DATA, dataToPass);
-    return new PortalInjector(this.injector, injectorTokens);
+     const injectorTokens = new WeakMap();
+     injectorTokens.set(CONTAINER_DATA, dataToPass);
+     return new PortalInjector(this.injector, injectorTokens);
 }
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
+    // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    // Add 'implements AfterViewInit' to the class.
     
     const selector = (document.querySelector('#' + this.selector));
     // if (selector!==null){

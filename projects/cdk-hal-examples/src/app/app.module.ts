@@ -12,8 +12,7 @@ import { ComponentExampleComponent } from './components/component-example/compon
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ComponentExampleComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

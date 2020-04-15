@@ -1,10 +1,34 @@
 <h1 class="title-example">Hal Table</h1>
 
 <div class="haltable-example-container">
-    <dxc-hal-table 
+    <dxc-hal-table #basicTable  
         [halService]="collectionProspectService"
-        [columns]="columns"
+        [columns]="columnsList"
         [itemsPerPage]="itemsPerPage"
     >
+        <!-- <tr>
+            <th *ngFor="let column of basicTable.columns;">{{ column.header }}</th>
+        </tr> 
+        <tr *ngFor="let pItem of basicTable.items | async">
+            <td *ngFor="let column of basicTable.columns">
+                <span *ngIf="column.onClickItemFunction ">
+                    <a (click)="basicTable.runColumnFunction(column, pItem)">{{ basicTable.getItemPropertyValue(pItem, column.property) }}</a>
+               </span>
+               <dxc-tag  margin="medium" 
+      [iconSrc]="imgGithub"
+      [label]="basicTable.getItemPropertyValue(pItem, column.property)"
+      linkHref="https://www.github.com">
+  </dxc-tag>
+               <span>
+                    {{ basicTable.getItemPropertyValue(pItem, column.property) }}
+               </span> -->
+               <!-- <dxc-hal-table-cell [component]="column.component" [selector]="toto" [value]="getItemPropertyValue(pItem, column.property)" ></dxc-hal-table-cell> -->
+            <!-- </td> 
+        </tr> -->
+        <ng-container cdkColumnDef="position">
+            <td cdk-cell *cdkCellDef="">awesome</td>
+        </ng-container>
+
+        <!-- <tr dxc-row *cdkRowDef=""></tr> -->
     </dxc-hal-table>
 </div>
