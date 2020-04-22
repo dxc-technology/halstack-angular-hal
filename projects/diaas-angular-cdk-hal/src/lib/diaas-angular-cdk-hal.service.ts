@@ -144,7 +144,7 @@ export class HalResourceService {
     });
   }
 
-  private handleGet({url, status}) {
+  public handleGet({url, status}) {
     this.fetchStatus.next(status ? status : fetchingStatus);
     return this.httpClient.get(url ? url : this.url, { headers: this.headers }).subscribe(resp => {
       const halResource = HalResource(resp);
@@ -187,7 +187,7 @@ export class HalResourceService {
     });
   }
 
-  private buildErrorResponse(err: any) {
+  public buildErrorResponse(err: any) {
     this.errorMessage.next(err.message);
     this.fetchStatus.next(null);
     this.fetchStatus.next(doneStatus);

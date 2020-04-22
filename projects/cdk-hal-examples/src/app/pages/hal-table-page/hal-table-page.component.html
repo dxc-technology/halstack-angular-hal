@@ -1,34 +1,37 @@
 <h1 class="title-example">Hal Table</h1>
 
-<div class="haltable-example-container">
-    <dxc-hal-table #basicTable  
-        [halService]="collectionProspectService"
-        [columns]="columnsList"
-        [itemsPerPage]="itemsPerPage"
-    >
-        <!-- <tr>
-            <th *ngFor="let column of basicTable.columns;">{{ column.header }}</th>
-        </tr> 
-        <tr *ngFor="let pItem of basicTable.items | async">
-            <td *ngFor="let column of basicTable.columns">
-                <span *ngIf="column.onClickItemFunction ">
-                    <a (click)="basicTable.runColumnFunction(column, pItem)">{{ basicTable.getItemPropertyValue(pItem, column.property) }}</a>
-               </span>
-               <dxc-tag  margin="medium" 
-      [iconSrc]="imgGithub"
-      [label]="basicTable.getItemPropertyValue(pItem, column.property)"
-      linkHref="https://www.github.com">
-  </dxc-tag>
-               <span>
-                    {{ basicTable.getItemPropertyValue(pItem, column.property) }}
-               </span> -->
-               <!-- <dxc-hal-table-cell [component]="column.component" [selector]="toto" [value]="getItemPropertyValue(pItem, column.property)" ></dxc-hal-table-cell> -->
-            <!-- </td> 
-        </tr> -->
-        <ng-container cdkColumnDef="position">
-            <td cdk-cell *cdkCellDef="">awesome</td>
+<div #parentdiv class="haltable-example-container">
+
+      <dxc-hal-table [dataSource]="data" [displayedColumns]="displayedColumns">
+        <ng-container  dxcColumnDef="prospect-update-user">
+            <td dxc-cell *dxcCellDef="let element"> 
+              <dxc-button [label]="element['prospect-update-user']">
+                </dxc-button>
+            </td>
+        </ng-container>
+      
+        <ng-container dxcColumnDef="prospect-birthdate">
+          <td dxc-cell *dxcCellDef="let element"> 
+            <dxc-tag [label]="element['prospect-birthdate']">
+            </dxc-tag>
+          </td>
+        </ng-container>      
+
+        <ng-container dxcColumnDef="prospect-email">
+          <td dxc-cell *dxcCellDef="let element"> {{element['prospect-email']}} </td>
         </ng-container>
 
-        <!-- <tr dxc-row *cdkRowDef=""></tr> -->
-    </dxc-hal-table>
+       
+      </dxc-hal-table>
+
+      <dxc-paginator *ngIf="(totalItems | async) !== null"
+                  [totalItems]="totalItems | async"
+                  [itemsPerPage]="itemsPerPage"
+                  [currentPage]="page"
+                  (nextFunction)="navigate($event, 'next')"
+                  (prevFunction)="navigate($event, 'prev')"
+                  (firstFunction)="navigate($event, 'first')"
+                  (lastFunction)="navigate($event, 'last')"
+              >
+      </dxc-paginator>
 </div>

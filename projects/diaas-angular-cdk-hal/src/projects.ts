@@ -8,5 +8,5 @@ export * from './lib/diaas-angular-cdk-hal.service';
 // export * from './lib/diaas-angular-cdk-hal.module';
 
 //HAL Table
-export * from './lib/dxc-hal-table/dxc-hal-table.component';
-export * from './lib/dxc-hal-table/dxc-hal-table.module';
+// export * from './lib/dxc-hal-table/dxc-hal-table.component';
+// export * from './lib/dxc-hal-table/dxc-hal-table.module';

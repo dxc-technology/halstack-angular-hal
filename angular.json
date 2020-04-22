@@ -141,6 +141,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
+            "preserveSymlinks": true,
             "tsConfig": "projects/diaas-angular-cdk-hal/tsconfig.lib.json",
             "project": "projects/diaas-angular-cdk-hal/ng-package.json"
           }
