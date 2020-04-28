@@ -16,9 +16,11 @@ import {
   DxcColumnDef, DxcCell, DxcCellDef
 } from './cell';
 import { DxcTextColumn} from './text-column';
-import { DxcTableModule } from '@diaas/dxc-ngx-cdk';
+import { DxcTableModule, DxcPaginatorModule } from '@diaas/dxc-ngx-cdk';
 import { CommonModule } from '@angular/common';
 import { DxcRow } from './row';
+import { HalResourceService } from 'projects/diaas-angular-cdk-hal/src/projects';
+import { HalResourceServiceFactoryProvider } from '../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider';
 
 const EXPORTED_DECLARATIONS = [
   DxcHalTable,
@@ -34,9 +36,14 @@ const EXPORTED_DECLARATIONS = [
 
 @NgModule({
   exports: EXPORTED_DECLARATIONS,
-  imports: [DxcTableModule, CommonModule],
+  imports: [DxcTableModule, CommonModule, DxcPaginatorModule],
   declarations: EXPORTED_DECLARATIONS,
-  entryComponents: [DxcRow]
-
+  entryComponents: [DxcRow],
+  providers: [
+    HalResourceServiceFactoryProvider.createInstance(
+      HalResourceService,
+      'https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects',
+      {"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"})
+    ]
 })
 export class CdkTableModule { }

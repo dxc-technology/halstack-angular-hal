@@ -59,6 +59,8 @@ import {
 import {DXC_HAL_TABLE} from './tokens';
 import { BooleanInput } from '../coercion/boolean-property';
 import { DxcRow } from './row';
+import { HalResourceService } from '../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 /** Interface used to provide an outlet for rows to be inserted into. */
 export interface RowOutlet {
@@ -110,6 +112,16 @@ export const CDK_TABLE_TEMPLATE =
       <ng-container rowOutlet> 
       </ng-container>
     </dxc-table>
+    <dxc-paginator *ngIf="(totalItems | async) !== null"
+    [totalItems]="totalItems | async"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="page"
+    (nextFunction)="navigate($event, 'next')"
+    (prevFunction)="navigate($event, 'prev')"
+    (firstFunction)="navigate($event, 'first')"
+    (lastFunction)="navigate($event, 'last')"
+    >
+    </dxc-paginator>
 `;
 
 /**
@@ -169,7 +181,16 @@ export interface Columns {
 export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
 
   @Input()
+  itemsPerPage: number = 5;
+
+  @Input()
   displayedColumns:Columns;
+
+  totalItems; 
+
+  fetchStatus;
+
+  page : number = 1;
 
   private _document: Document;
 
@@ -245,36 +266,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
   private _trackByFn: TrackByFunction<T>;
 
-  /**
-   * The table's source of data, which can be provided in three ways (in order of complexity):
-   *   - Simple data array (each object represents one table row)
-   *   - Stream that emits a data array each time the array changes
-   *   - `DataSource` object that implements the connect/disconnect interface.
-   *
-   * If a data array is provided, the table must be notified when the array's objects are
-   * added, removed, or moved. This can be done by calling the `renderRows()` function which will
-   * render the diff since the last table render. If the data array reference is changed, the table
-   * will automatically trigger an update to the rows.
-   *
-   * When providing an Observable stream, the table will trigger an update automatically when the
-   * stream emits a new array of data.
-   *
-   * Finally, when providing a `DataSource` object, the table will use the Observable stream
-   * provided by the connect function and trigger updates when that stream emits new data array
-   * values. During the table's ngOnDestroy or when the data source is removed from the table, the
-   * table will call the DataSource's `disconnect` function (may be useful for cleaning up any
-   * subscriptions registered during the connect process).
-   */
-  @Input()
-  get dataSource(): DxcHalTableDataSourceInput<T> {
-    return this._dataSource;
-  }
-  set dataSource(dataSource: DxcHalTableDataSourceInput<T>) {
-    if (this._dataSource !== dataSource) {
-      this._switchDataSource(dataSource);
-    }
-  }
-  private _dataSource: DxcHalTableDataSourceInput<T>;
+  private dataSource: DxcHalTableDataSourceInput<T>;
 
   // TODO(andrewseguin): Remove max value as the end index
   //   and instead calculate the view on init and scroll.
@@ -303,7 +295,16 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       protected readonly _elementRef: ElementRef, @Attribute('role') role: string,
       @Optional() protected readonly _dir: Directionality, @Inject(DOCUMENT) _document: any,
       private resolver: ComponentFactoryResolver,
-      private _platform: Platform) {
+      private collectionResource: HalResourceService) {
+
+
+             
+        this.totalItems = this.collectionResource.totalItems;
+
+        this.fetchStatus = this.collectionResource.fetchStatus;
+    
+        this.dataSource = new TableDataSource(this.collectionResource.items);
+
     if (!role) {
       this._elementRef.nativeElement.setAttribute('role', 'grid');
     }
@@ -313,6 +314,11 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   ngOnInit() {
+
+    this.collectionResource.handleGet({
+      url: this.collectionResource.addPageParams(this.page, this.itemsPerPage), 
+      status: 'navigating'
+    });
 
     if (this._isNativeHtmlTable) {
       this._applyNativeTableSections();
@@ -496,7 +502,6 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       this._rowOutlet.viewContainer.clear();
     }
 
-    this._dataSource = dataSource;
   }
 
   /** Set up a subscription for the data provided by the data source. */
@@ -636,10 +641,48 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     return items.filter(item => !item._table || item._table === this);
   }
 
+  navigate(page: number, operation:string){
+    switch (operation) {
+      case 'next': 
+      case 'first':
+      case 'prev':
+      case 'last':
+        this.page=page;
+        return this.collectionResource.handleGet({ 
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          status: 'navigating'
+        });                                                                     
+      default:
+        this.collectionResource.buildErrorResponse({
+          message: `Error. Operation  ${operation} is not known.`
+        });
+        break;
+    }
+  }
+
   static ngAcceptInputType_multiTemplateDataRows: BooleanInput;
 }
 
 /** Utility function that gets a merged list of the entries in an array and values of a Set. */
 function mergeArrayAndSet<T>(array: T[], set: Set<T>): T[] {
   return array.concat(Array.from(set));
+}
+
+
+export class TableDataSource extends DataSource<any> {
+  /** Stream of data that is provided to the table. */
+
+  data = new BehaviorSubject<[]>([]);
+  
+  constructor(items){
+    super();
+    this.data = items;
+  }
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<[]> {
+    return this.data;
+  }
+
+  disconnect() {}
 }

@@ -1,8 +1,7 @@
 <h1 class="title-example">Hal Table</h1>
 
 <div #parentdiv class="haltable-example-container">
-
-      <dxc-hal-table [dataSource]="data" [displayedColumns]="displayedColumns">
+      <dxc-hal-table [displayedColumns]="displayedColumns" itemsPerPage="3">
         <ng-container  dxcColumnDef="prospect-update-user">
             <td dxc-cell *dxcCellDef="let element"> 
               <dxc-button [label]="element['prospect-update-user']">
@@ -19,19 +18,6 @@
 
         <ng-container dxcColumnDef="prospect-email">
           <td dxc-cell *dxcCellDef="let element"> {{element['prospect-email']}} </td>
-        </ng-container>
-
-       
+        </ng-container>       
       </dxc-hal-table>
-
-      <dxc-paginator *ngIf="(totalItems | async) !== null"
-                  [totalItems]="totalItems | async"
-                  [itemsPerPage]="itemsPerPage"
-                  [currentPage]="page"
-                  (nextFunction)="navigate($event, 'next')"
-                  (prevFunction)="navigate($event, 'prev')"
-                  (firstFunction)="navigate($event, 'first')"
-                  (lastFunction)="navigate($event, 'last')"
-              >
-      </dxc-paginator>
 </div>

@@ -20,11 +20,13 @@ export class HalResourceService {
   items: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
   totalItems: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
+
   constructor(
     public url: string,
     public headers: HttpHeaders,
     private httpClient: HttpClient
-  ) {}
+  ) {
+  }
 
   fetchResource() {
     this.fetchStatus.next(fetchingStatus);
