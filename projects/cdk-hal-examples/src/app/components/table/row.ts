@@ -185,6 +185,27 @@ export class DxcSpinnerDiv{
   encapsulation: ViewEncapsulation.None,
 })
 export class DxcRow {
+
+  
+}
+
+@Component({
+  selector: 'th',
+  template: `
+    <ng-container>{{columnName}}</ng-container>
+  `,
+  host: {
+    'role': 'row',
+  },
+  // See note on CdkTable for explanation on why this uses the default change detection strategy.
+  // tslint:disable-next-line:validate-decorators
+  changeDetection: ChangeDetectionStrategy.Default,
+  encapsulation: ViewEncapsulation.None,
+})
+export class DxcHeaderRow {
+
+  columnName;
+  
 }
 
 

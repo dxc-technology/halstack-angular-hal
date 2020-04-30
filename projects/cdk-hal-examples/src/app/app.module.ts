@@ -8,6 +8,7 @@ import { ThemeService, DXCHeaderModule,  ThemeModule,DXCFooterModule } from '@di
 import { OverviewPageModule } from './pages/overview-page/overview-page.module';
 import { ComponentsPageModule } from './pages/components-page/components-page.module';
 import { HalTablePageModule } from './pages/hal-table-page/hal-table-page.module';
+import { TableSpinnerComponent } from './components/table-spinner/table-spinner.component';
 
 @NgModule({
   declarations: [

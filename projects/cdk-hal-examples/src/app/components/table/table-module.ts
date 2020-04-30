@@ -7,7 +7,7 @@
  */
 
 import {NgModule} from '@angular/core';
-import { DataRowOutlet, DxcHalTable } from './table';
+import { DataRowOutlet, DxcHalTable, SpinnerOutlet, HeaderOutlet } from './table';
 import {
   DxcCellOutlet,
   DxcRowDef
@@ -16,11 +16,12 @@ import {
   DxcColumnDef, DxcCell, DxcCellDef
 } from './cell';
 import { DxcTextColumn} from './text-column';
-import { DxcTableModule, DxcPaginatorModule } from '@diaas/dxc-ngx-cdk';
+import { DxcTableModule, DxcPaginatorModule, DxcSpinnerModule, DxcSpinnerComponent } from '@diaas/dxc-ngx-cdk';
 import { CommonModule } from '@angular/common';
-import { DxcRow } from './row';
+import { DxcRow, DxcHeaderRow } from './row';
 import { HalResourceService } from 'projects/diaas-angular-cdk-hal/src/projects';
 import { HalResourceServiceFactoryProvider } from '../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider';
+import { TableSpinnerComponent } from '../table-spinner/table-spinner.component';
 
 const EXPORTED_DECLARATIONS = [
   DxcHalTable,
@@ -28,17 +29,21 @@ const EXPORTED_DECLARATIONS = [
   DxcCellDef,
   DxcCellOutlet,
   DxcColumnDef,
+  TableSpinnerComponent,
   DxcCell,
+  DxcHeaderRow,
+  HeaderOutlet,
   DataRowOutlet,
+  SpinnerOutlet,
   DxcRow,
   DxcTextColumn
 ];
 
 @NgModule({
   exports: EXPORTED_DECLARATIONS,
-  imports: [DxcTableModule, CommonModule, DxcPaginatorModule],
+  imports: [DxcTableModule, DxcSpinnerModule, CommonModule, DxcPaginatorModule],
   declarations: EXPORTED_DECLARATIONS,
-  entryComponents: [DxcRow],
+  entryComponents: [DxcRow,DxcHeaderRow, TableSpinnerComponent],
   providers: [
     HalResourceServiceFactoryProvider.createInstance(
       HalResourceService,
