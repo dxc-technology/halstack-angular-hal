@@ -1,23 +1,23 @@
 <h1 class="title-example">Hal Table</h1>
 
 <div class="haltable-example-container">
-      <dxc-hal-table itemsPerPage="3">
-        <ng-container  dxcColumnDef="PEPE">
-            <td dxc-cell *dxcCellDef="let element"> 
-              <dxc-button [label]="element['prospect-update-user']">
+      <dxc-hal-table  itemsPerPage="10">
+        <ng-container  dxcColumnDef="User">
+            <td *dxcCellDef="let item">
+              <dxc-button [label]="item['prospect-update-user']">
                 </dxc-button>
             </td>
         </ng-container>
-      
-        <ng-container dxcColumnDef="JUKLIO">
-          <td dxc-cell *dxcCellDef="let element"> 
+
+        <ng-container dxcColumnDef="Date">
+          <td *dxcCellDef="let element">
             <dxc-tag [label]="element['prospect-birthdate']">
             </dxc-tag>
           </td>
-        </ng-container>      
+        </ng-container>
 
-        <ng-container dxcColumnDef="MANU">
-          <td dxc-cell *dxcCellDef="let element"> {{element['prospect-email']}} </td>
-        </ng-container>       
+        <ng-container dxcColumnDef="Email">
+          <td *dxcCellDef="let element"> {{element['prospect-email']}} </td>
+        </ng-container>
       </dxc-hal-table>
 </div>

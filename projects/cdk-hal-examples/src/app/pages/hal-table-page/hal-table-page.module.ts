@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HalTablePageComponent } from './hal-table-page.component';
-import { DxcTagModule, DxcButtonModule, DxcTableModule, DxcPaginatorComponent, DxcPaginatorModule, DxcSpinnerComponent, DxcSpinnerModule } from '@diaas/dxc-ngx-cdk';
-import { CdkTableModule } from '../../components/table/table-module';
+import { DxcTagModule, DxcButtonModule, DxcTableModule, DxcSpinnerModule } from '@diaas/dxc-ngx-cdk';
+import { CdkTableModule } from '../../../../../diaas-angular-cdk-hal/src/lib/table/table-module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
-    HalTablePageComponent
-  ],
+    HalTablePageComponent  ],
   imports: [
     CommonModule,
+    FormsModule,
+    HttpClientModule,
     CdkTableModule,
     DxcTableModule,
     DxcButtonModule,
@@ -19,6 +23,6 @@ import { CdkTableModule } from '../../components/table/table-module';
   providers: [
   ],
   entryComponents: [
-  ]  
+  ]
 })
 export class HalTablePageModule { }

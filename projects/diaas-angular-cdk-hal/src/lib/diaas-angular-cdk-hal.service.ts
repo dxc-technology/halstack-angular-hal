@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {
   HalResource
-} from "@dxc-technology/halstack-client";
+} from '@dxc-technology/halstack-client';
 
 const fetchingStatus:string = 'fetching';
 const doneStatus:string = 'done';
@@ -33,10 +33,10 @@ export class HalResourceService {
     return this.httpClient.get(this.url, { headers: this.headers }).subscribe(
       resp => {
         const halResource = HalResource(resp);
-        this.resource.next( 
+        this.resource.next(
           {... halResource });
 
-        if (halResource.getLinks()!== null && halResource.getLinks().length>0){     
+        if (halResource.getLinks()!== null && halResource.getLinks().length>0){
           this.items.next(halResource.getItems());
           this.totalItems.next(halResource.resourceRepresentation._links._count);
         }
@@ -63,11 +63,11 @@ export class HalResourceService {
                 case 'first':
                 case 'prev':
                 case 'last':
-                  return this.handleGet({ url: interaction.href , status: 'navigating'});                                                                     
+                  return this.handleGet({ url: interaction.href , status: 'navigating'});
                 default:
                   this.buildErrorResponse({message: `Error. Operation  ${interaction.rel} is not known.`});
                   break;
-              }              
+              }
             }
           }
      ));
@@ -82,9 +82,9 @@ export class HalResourceService {
         this.errorMessage.next('Operation does not exist in handlers.');
     }
   }
-  
+
    getHandlers() {
-    if (this.resource.getValue().getInteractions()!=null && 
+    if (this.resource.getValue().getInteractions()!=null &&
     this.resource.getValue().getInteractions().length>0){
       return this.resource.getValue().getInteractions().map(
         interaction => (
@@ -94,27 +94,27 @@ export class HalResourceService {
             switch (interaction.method) {
               case 'GET':
                 return this.handleGet(null);
-              case 'PATCH': 
+              case 'PATCH':
                 if ( this.existPropertiesSchema(interaction,body)){
                   return this.handlePatch(body);
                 }else {
                   this.buildErrorResponse({message: `Error.Property ${Object.keys(body)} is not patcheable.`});
                   break;
-                }                  
-              case 'POST': 
+                }
+              case 'POST':
                 if ( this.existPropertiesSchema(interaction,body)){
                   return this.handlePost(body);
                 } else {
                   this.buildErrorResponse({message: `Error.Property ${Object.keys(body)} is not creatable.`});
                   break;
                 }
-              case 'DELETE': 
-                return this.handleDelete(body);                
+              case 'DELETE':
+                return this.handleDelete(body);
               default:
                 this.buildErrorResponse({message: `Error. Operation  ${interaction.rel} is not known.`});
                 break;
-            }       
-        } 
+            }
+        }
       }));
     }
    }

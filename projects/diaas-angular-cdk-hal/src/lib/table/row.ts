@@ -7,8 +7,6 @@
  */
 
 import {
-  ChangeDetectionStrategy,
-  Component,
   Directive,
   IterableChanges,
   IterableDiffer,
@@ -18,12 +16,12 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewContainerRef,
-  ViewEncapsulation,
   Inject,
   Optional
 } from '@angular/core';
-import {DxcCellDef, DxcColumnDef} from './cell';
 import {DXC_HAL_TABLE} from './tokens';
+import { DxcColumnDef } from './directives/dxc-column-def.directive';
+import { DxcCellDef } from './directives/dxc-cell-def.directive';
 
 /**
  * The row template that can be used by the mat-table. Should not be used outside of the
@@ -66,7 +64,7 @@ export abstract class BaseRowDef implements OnChanges {
 
   /** Gets this row def's relevant cell template from the provided column def. */
   extractCellTemplate(column: DxcColumnDef): TemplateRef<any> {
-      return column.cell.template;    
+      return column.cell.template;
   }
 }
 
@@ -155,58 +153,3 @@ export class DxcCellOutlet implements OnDestroy {
     }
   }
 }
-
-
-@Component({
-  selector: 'div[dxcSpinner]',
-  template: '<dxc-spinner margin="xxlarge" label="Fetching data"></dxc-spinner>',
-  // host: {
-  //   'margin': 'cdk-header-row',
-  //   'role': 'row',
-  // },
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.None,
-})
-export class DxcSpinnerDiv{
-  
-}
-
-
-
-@Component({
-  selector: 'tr',
-  template: CDK_ROW_TEMPLATE,
-  host: {
-    'role': 'row',
-  },
-  // See note on CdkTable for explanation on why this uses the default change detection strategy.
-  // tslint:disable-next-line:validate-decorators
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.None,
-})
-export class DxcRow {
-
-  
-}
-
-@Component({
-  selector: 'th',
-  template: `
-    <ng-container>{{columnName}}</ng-container>
-  `,
-  host: {
-    'role': 'row',
-  },
-  // See note on CdkTable for explanation on why this uses the default change detection strategy.
-  // tslint:disable-next-line:validate-decorators
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.None,
-})
-export class DxcHeaderRow {
-
-  columnName;
-  
-}
-
-
-

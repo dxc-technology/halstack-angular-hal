@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HalResourceService } from 'projects/diaas-angular-cdk-hal/src/projects';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -11,15 +10,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class HalTablePageComponent  {
 
-  displayedColumns = 
+  displayedColumns =
     {
-        columns: ["prospect-update-user", 
-                  "prospect-birthdate", 
+        columns: ["prospect-update-user",
+                  "prospect-birthdate",
                   "prospect-email"],
         labels: ['PROSPECT', 'BIRTHDATE', 'EMAIL']
     };
 
-  constructor() {  
+  constructor() {
   }
 }
 
