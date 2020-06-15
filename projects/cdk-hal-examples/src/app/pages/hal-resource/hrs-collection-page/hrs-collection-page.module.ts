@@ -14,10 +14,6 @@ import { HrsCollectionPageComponent } from './hrs-collection-page.component';
     DxcBoxModule,
     CommonModule
   ],
-  exports: [HrsCollectionPageComponent],
-  providers: [HalResourceServiceFactoryProvider.createInstance(
-    'CollectionProspectService',
-    'https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects',
-    {"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"})]  
+  exports: [HrsCollectionPageComponent]
 })
 export class HrsCollectionPageModule { }
