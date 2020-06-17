@@ -9,6 +9,15 @@
           <div class="sc-rBLzX eWHGgB">
             <div class="sc-jzgbtB iRVmnC">Components</div>
             <div class="sc-gJWqzi blNloH">
+
+                <div class="sc-fhYwyz ffpcba">
+                    <a
+                      [skipLocationChange]="true"
+                      [routerLink]="[{ outlets: { components: ['autocomplete'] } }]"
+                      >Autocomplete</a
+                    >
+                  </div>
+
               <div class="sc-fhYwyz ffpcba">
                 <a
                   [skipLocationChange]="true"
@@ -44,14 +53,14 @@
                   [skipLocationChange]="true"
                   [routerLink]="[{ outlets: { components: ['hrsnested'] } }]"
                   >Nested</a
-                > 
+                >
               </div>
               <div class="sc-fhYwyz ffpcba">
                   <a
                   [skipLocationChange]="true"
                   [routerLink]="[{ outlets: { components: ['hrscollection'] } }]"
                   >Collection</a
-                > 
+                >
               </div>
             </div>
         </div>
@@ -63,4 +72,3 @@
         <router-outlet name="components"></router-outlet>
       </div>
 </div>
-  
