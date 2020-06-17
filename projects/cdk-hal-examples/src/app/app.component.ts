@@ -25,10 +25,6 @@ export class AppComponent {
           properties: JSON.parse(JSON.stringify(resp))
         };
         this.themeService.registerTheme(remoteTheme);
-        this.themeService.setTheme("remote");
-      },
-      () => {
-        this.themeService.setTheme("default");
       }
     );
   }

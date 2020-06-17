@@ -1,0 +1,68 @@
+<mat-form-field
+  [class.invalid]="invalid"
+  [class.disabled]="disabled"
+  appearance="standard"
+>
+  <span
+    matPrefix
+    (click)="onClickPrefixHandler($event)"
+    class="prefixElement"
+    *ngIf="prefix && !prefixIconSrc"
+  >
+    {{ prefix }}</span
+  >
+  <img
+    matPrefix
+    (click)="onClickPrefixHandler($event)"
+    class="prefixElement"
+    *ngIf="prefixIconSrc"
+    src="{{ prefixIconSrc }}"
+  />
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <input
+    matInput
+    #dxcSingleInput
+    [value]="renderedValue"
+    (input)="onChanged($event)"
+    (blur)="onBlurHandle($event)"
+    (click)="onClickHandle($event)"
+    [required]="required"
+    [name]="name"
+    [type]="'text'"
+    [errorStateMatcher]="matcher"
+    [placeholder]="placeholder"
+    [matAutocomplete]="auto"
+    [formControl]="formControl"
+    [attr.aria-label]="label"
+  />
+  <span
+    matSuffix
+    (click)="onClickSuffixHandler($event)"
+    class="suffixElement"
+    *ngIf="suffix && !suffixIconSrc"
+    >{{ suffix }}</span
+  >
+  <img
+    matSuffix
+    (click)="onClickSuffixHandler($event)"
+    class="suffixElement"
+    *ngIf="suffixIconSrc"
+    src="{{ suffixIconSrc }}"
+  />
+  <mat-hint *ngIf="assistiveText">{{ assistiveText }}</mat-hint>
+</mat-form-field>
+
+<mat-autocomplete [class]="dxcAutocompleteMenu" #auto="matAutocomplete">
+  <ng-container *ngIf="!loading.getValue() && (options | async) as haloptions">
+
+    <mat-option
+      (click)="onClickOption(option.summary['prospect-full-name'])"
+      *ngFor="let option of haloptions"
+      [value]="option.summary['prospect-full-name']"
+      >{{ option.summary['prospect-full-name'] }}
+    </mat-option>
+  </ng-container>
+  <ng-container *ngIf="loading.getValue()">
+    <mat-option disabled=true>Searching... </mat-option>
+  </ng-container>
+</mat-autocomplete>

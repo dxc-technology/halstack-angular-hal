@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { ThemeService, DXCHeaderModule,  ThemeModule,DXCFooterModule } from '@diaas/dxc-ngx-cdk';
 import { OverviewPageModule } from './pages/overview-page/overview-page.module';
 import { ComponentsPageModule } from './pages/components-page/components-page.module';
-import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-page/hrs-collection-page.component';
+import { AutocompleteHalComponent } from './pages/autocomplete-hal/autocomplete-hal.component';
+import { AutocompleteHalModule } from './pages/autocomplete-hal/autocomplete-hal.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-
     FormsModule,
     CommonModule,
     ComponentsPageModule,
+    AutocompleteHalModule,
     OverviewPageModule,
     DXCHeaderModule,
     DXCFooterModule

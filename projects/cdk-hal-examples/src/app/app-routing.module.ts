@@ -6,6 +6,7 @@ import { HrsSinglePageComponent } from './pages/hal-resource/hrs-single-page/hrs
 import { HrsMultiPageComponent } from './pages/hal-resource/hrs-multi-page/hrs-multi-page.component';
 import { HrsNestedPageComponent } from './pages/hal-resource/hrs-nested-page/hrs-nested-page.component';
 import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-page/hrs-collection-page.component';
+import { AutocompleteHalComponent } from './pages/autocomplete-hal/autocomplete-hal.component';
 
 
 const routes: Routes = [];
@@ -32,6 +33,12 @@ routes.push({ path: "", redirectTo: "/overview", pathMatch: "full" }),
     path: "hrsnested",
     component: HrsNestedPageComponent,
     outlet: "components"
+  },
+  {
+    path: "autocomplete",
+    component: AutocompleteHalComponent,
+    outlet: "components"
+
   },
   {
     path: "hrscollection",
