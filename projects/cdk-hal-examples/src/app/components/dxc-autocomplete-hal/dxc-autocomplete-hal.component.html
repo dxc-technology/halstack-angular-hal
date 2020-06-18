@@ -1,4 +1,4 @@
-<mat-form-field
+<!-- <mat-form-field
   [class.invalid]="invalid"
   [class.disabled]="disabled"
   appearance="standard"
@@ -54,7 +54,6 @@
 
 <mat-autocomplete [class]="dxcAutocompleteMenu" #auto="matAutocomplete">
   <ng-container *ngIf="!loading.getValue() && (options | async) as haloptions">
-
     <mat-option
       (click)="onClickOption(option.summary['prospect-full-name'])"
       *ngFor="let option of haloptions"
@@ -65,4 +64,27 @@
   <ng-container *ngIf="loading.getValue()">
     <mat-option disabled=true>Searching... </mat-option>
   </ng-container>
-</mat-autocomplete>
+</mat-autocomplete> -->
+
+<dxc-input-text
+  [prefix]="prefix"
+  [suffix]="suffix"
+  [prefixIconSrc]="prefixIconSrc"
+  [suffixIconSrc]="suffixIconSrc"
+  [theme]="theme"
+  [disabled]="disabled"
+  [required]="required"
+  [invalid]="invalid"
+  [label]="label"
+  [assistiveText]="assistiveText"
+  [name]="name"
+  [value]="value"
+  [placeholder]="placeholder"
+  [margin]="margin"
+  [size]="size"
+  [autocompleteOptions]="options.asObservable()"
+  (onChange)="onChanged($event)"
+  (onClickPrefix)="onClickPrefixHandler($event)"
+  (onClickSuffix)="onClickSuffixHandler($event)"
+  (onBlur)="onBlurHandle($event)"
+></dxc-input-text>

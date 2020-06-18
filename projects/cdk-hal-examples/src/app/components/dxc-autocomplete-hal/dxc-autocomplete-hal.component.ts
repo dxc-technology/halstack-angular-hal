@@ -1,23 +1,35 @@
-import { Component, OnInit, HostBinding, Input, ChangeDetectionStrategy, OnChanges, AfterViewChecked, Output,
-  EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { SimpleChanges } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material';
+import {
+  Component,
+  OnInit,
+  HostBinding,
+  Input,
+  ChangeDetectionStrategy,
+  OnChanges,
+  AfterViewChecked,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef
+} from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { FormControl } from "@angular/forms";
+import { SimpleChanges } from "@angular/core";
+import { ErrorStateMatcher } from "@angular/material";
 import { css } from "emotion";
-import { CssUtils } from '../utils';
-import { HalResourceService } from '../../pages/services/diaas-angular-cdk-hal.service';
-import { HttpClient } from '@angular/common/http';
+import { CssUtils } from "../utils";
+import { HalResourceService } from "../../pages/services/diaas-angular-cdk-hal.service";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'dxc-autocomplete-hal',
-  templateUrl: './dxc-autocomplete-hal.component.html',
-  styleUrls: ['./dxc-autocomplete-hal.component.scss'],
+  selector: "dxc-autocomplete-hal",
+  templateUrl: "./dxc-autocomplete-hal.component.html",
+  styleUrls: ["./dxc-autocomplete-hal.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CssUtils]
 })
-export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterViewChecked {
-
+export class DxcAutocompleteHalComponent
+  implements OnInit, OnChanges, AfterViewChecked {
   @HostBinding("class") className;
   @HostBinding("class.dxc-light") isLight: boolean = true;
   @HostBinding("class.dxc-dark") isDark: boolean = false;
@@ -50,7 +62,6 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
   @Output() public onBlur: EventEmitter<any> = new EventEmitter<any>();
 
   loading = new BehaviorSubject(false);
-  renderedValue = "";
   private _valueChangeTrack: boolean;
   options = new BehaviorSubject([]);
 
@@ -87,7 +98,7 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
     size: "medium"
   });
 
-  fetchStatus: BehaviorSubject<string> = new BehaviorSubject('');
+  fetchStatus: BehaviorSubject<string> = new BehaviorSubject("");
   error: BehaviorSubject<any> = new BehaviorSubject(null);
   resource: BehaviorSubject<any> = new BehaviorSubject(null);
   collectionPropectService: HalResourceService;
@@ -95,22 +106,18 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
   public formControl = new FormControl();
   public matcher = new InvalidStateMatcher();
 
-  constructor(private utils: CssUtils,
+  constructor(
+    private utils: CssUtils,
     private ref: ChangeDetectorRef,
-    httpClient: HttpClient
-
-    ) {
-      console.log(this.halUrl);
-      this.collectionPropectService = new HalResourceService(
-        this.halUrl,null,
-        httpClient
-      );
-
-
-    }
+    private httpClient: HttpClient
+  ) {}
 
   ngOnInit() {
-    this.renderedValue = this.value || "";
+    this.collectionPropectService = new HalResourceService(
+      this.halUrl,
+      null,
+      this.httpClient
+    );
     this.className = `${this.getDynamicStyle(this.defaultInputs.getValue())}`;
     this.collectionPropectService.fetchResource();
     this.fetchStatus = this.collectionPropectService.fetchStatus;
@@ -119,18 +126,14 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
   }
 
   private bindAutocompleteOptions() {
-      this.options = this.collectionPropectService.items;
-
+    this.options = this.collectionPropectService.items;
   }
 
   ngAfterViewInit(): void {
     this.bindAutocompleteOptions();
-
-
   }
 
   ngAfterViewChecked(): void {
-
     if (this._valueChangeTrack) {
       this._valueChangeTrack = false;
       this.setCursorSelection(this.singleInput);
@@ -147,7 +150,6 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
     }
     this.isDisabled = this.disabled;
 
-    this.renderedValue = this.value || "";
     this.label = this.label || "";
     this.matcher.setInvalid(this.invalid);
 
@@ -166,25 +168,11 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
     this.selectionStart = $event.target.selectionStart;
     this.selectionEnd = $event.target.selectionEnd;
     this.onChange.emit($event.target.value);
-    if (this.value === undefined || this.value === null) {
-      this.renderedValue = $event.target.value;
-    } else {
-      $event.target.value = this.renderedValue;
-    }
 
-    console.log(this.options.value);
-
-    // this.options = this.collectionPropectService.items.pipe(filter(option =>
-    //   option.summary['prospect-full-name'].includes(this.renderedValue.toLowerCase())
-    // )));
-  }
-
-  public onClickOption($event: any) {
-    this.onChange.emit($event);
-    if (this.value === undefined || this.value === null) {
-      this.renderedValue = $event;
-    } else {
-      this.singleInput.nativeElement.value = this.renderedValue;
+    if ($event.target.value) {
+        const payload = {};    
+        payload[this.propertyName] = $event.target.value;
+        this.collectionPropectService.executeHandler('search', payload);
     }
   }
 
@@ -201,7 +189,7 @@ export class DxcAutocompleteHalComponent  implements OnInit, OnChanges, AfterVie
    *Executed when input lost the focus
    */
   public onBlurHandle($event: any): void {
-    this.onBlur.emit(this.renderedValue);
+    this.onBlur.emit($event);
   }
 
   public onClickSuffixHandler($event): void {

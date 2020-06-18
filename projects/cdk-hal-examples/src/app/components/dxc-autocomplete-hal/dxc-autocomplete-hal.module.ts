@@ -6,6 +6,7 @@ import {
 } from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
+import { DXCInputTextModule } from '@diaas/dxc-ngx-cdk';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    DXCInputTextModule
   ],
   exports: [DxcAutocompleteHalComponent]
 })
