@@ -82,7 +82,7 @@
   [placeholder]="placeholder"
   [margin]="margin"
   [size]="size"
-  [autocompleteOptions]="options.asObservable()"
+  [autocompleteOptions]="updateSuggestions"
   (onChange)="onChanged($event)"
   (onClickPrefix)="onClickPrefixHandler($event)"
   (onClickSuffix)="onClickSuffixHandler($event)"

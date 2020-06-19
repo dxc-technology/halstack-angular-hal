@@ -5,19 +5,13 @@ import {
   Input,
   ChangeDetectionStrategy,
   OnChanges,
-  AfterViewChecked,
   Output,
-  EventEmitter,
-  ViewChild,
-  ElementRef,
-  ChangeDetectorRef
+  EventEmitter
 } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { FormControl } from "@angular/forms";
+import { BehaviorSubject, of } from "rxjs";
+
 import { SimpleChanges } from "@angular/core";
-import { ErrorStateMatcher } from "@angular/material";
-import { css } from "emotion";
-import { CssUtils } from "../utils";
+
 import { HalResourceService } from "../../pages/services/diaas-angular-cdk-hal.service";
 import { HttpClient } from "@angular/common/http";
 
@@ -25,11 +19,9 @@ import { HttpClient } from "@angular/common/http";
   selector: "dxc-autocomplete-hal",
   templateUrl: "./dxc-autocomplete-hal.component.html",
   styleUrls: ["./dxc-autocomplete-hal.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CssUtils]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DxcAutocompleteHalComponent
-  implements OnInit, OnChanges, AfterViewChecked {
+export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   @HostBinding("class") className;
   @HostBinding("class.dxc-light") isLight: boolean = true;
   @HostBinding("class.dxc-dark") isDark: boolean = false;
@@ -61,13 +53,8 @@ export class DxcAutocompleteHalComponent
   @Output() public onChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() public onBlur: EventEmitter<any> = new EventEmitter<any>();
 
-  loading = new BehaviorSubject(false);
-  private _valueChangeTrack: boolean;
   options = new BehaviorSubject([]);
-
-  dxcAutocompleteMenu = this.getAutoCompleteStyle();
-
-  @ViewChild("dxcSingleInput", { static: false }) singleInput: ElementRef;
+  suggestions = new BehaviorSubject([]);
 
   selectionStart: number = 0;
   selectionEnd: number = 0;
@@ -103,41 +90,46 @@ export class DxcAutocompleteHalComponent
   resource: BehaviorSubject<any> = new BehaviorSubject(null);
   collectionPropectService: HalResourceService;
 
-  public formControl = new FormControl();
-  public matcher = new InvalidStateMatcher();
-
   constructor(
-    private utils: CssUtils,
-    private ref: ChangeDetectorRef,
     private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
+    this.updateSuggestions = this.updateSuggestions.bind(this);
     this.collectionPropectService = new HalResourceService(
       this.halUrl,
       null,
       this.httpClient
     );
-    this.className = `${this.getDynamicStyle(this.defaultInputs.getValue())}`;
     this.collectionPropectService.fetchResource();
-    this.fetchStatus = this.collectionPropectService.fetchStatus;
-    this.error = this.collectionPropectService.errorMessage;
-    this.resource = this.collectionPropectService.resource;
   }
 
   private bindAutocompleteOptions() {
     this.options = this.collectionPropectService.items;
+    this.options.subscribe(items => {
+      this.suggestions.next(
+        items.map(item => {
+          return item.summary[this.propertyName];
+        })
+      );
+    });
+  }
+
+  updateSuggestions(value) {
+    if (this.options) {
+      this.options.subscribe(items => {
+        this.suggestions.next(
+          items.map(item => {
+            return item.summary[this.propertyName];
+          })
+        );
+      });
+      return this.suggestions;
+    }
   }
 
   ngAfterViewInit(): void {
     this.bindAutocompleteOptions();
-  }
-
-  ngAfterViewChecked(): void {
-    if (this._valueChangeTrack) {
-      this._valueChangeTrack = false;
-      this.setCursorSelection(this.singleInput);
-    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -151,7 +143,6 @@ export class DxcAutocompleteHalComponent
     this.isDisabled = this.disabled;
 
     this.label = this.label || "";
-    this.matcher.setInvalid(this.invalid);
 
     const inputs = Object.keys(changes).reduce((result, item) => {
       result[item] = changes[item].currentValue;
@@ -159,30 +150,16 @@ export class DxcAutocompleteHalComponent
     }, {});
 
     this.defaultInputs.next({ ...this.defaultInputs.getValue(), ...inputs });
-    this.className = `${this.getDynamicStyle(this.defaultInputs.getValue())}`;
-    this._valueChangeTrack = true;
   }
 
   public onChanged($event: any): void {
-    this.clicked = false;
-    this.selectionStart = $event.target.selectionStart;
-    this.selectionEnd = $event.target.selectionEnd;
-    this.onChange.emit($event.target.value);
+    this.onChange.emit($event);
 
-    if ($event.target.value) {
-        const payload = {};    
-        payload[this.propertyName] = $event.target.value;
-        this.collectionPropectService.executeHandler('search', payload);
+    if ($event) {
+      const payload = {};
+      payload[this.propertyName] = $event;
+      this.collectionPropectService.executeHandler("search", payload);
     }
-  }
-
-  /**
-   * internal click event handler
-   *
-   * @param $event
-   */
-  public onClickHandle($event): void {
-    this.clicked = true;
   }
 
   /**
@@ -198,121 +175,5 @@ export class DxcAutocompleteHalComponent
 
   public onClickPrefixHandler($event): void {
     this.onClickPrefix.emit($event);
-  }
-
-  private setCursorSelection(input: ElementRef) {
-    if (!this.clicked && input) {
-      input.nativeElement.selectionStart = this.selectionStart;
-      input.nativeElement.selectionEnd = this.selectionEnd;
-    }
-  }
-
-  calculateWidth(inputs) {
-    if (inputs.size === "fillParent") {
-      return this.utils.calculateWidth(this.sizes, inputs);
-    }
-    return css`
-      width: ${this.sizes[inputs.size]};
-    `;
-  }
-
-  getDynamicStyle(inputs) {
-    return css`
-      min-height: 34px;
-      max-height: 74px;
-      ${this.calculateWidth(inputs)}
-      ${this.utils.getMargins(inputs.margin)}
-      display: inline-flex;
-
-      .prefixElement {
-        margin-right: 12px;
-      }
-      .suffixElement {
-        margin-left: 8px;
-        margin-right: 8px;
-      }
-
-      &.disabled {
-        cursor: not-allowed;
-      }
-      .mat-form-field {
-        line-height: unset;
-        width: 100%;
-        max-height: 74px;
-        input {
-          min-height: 22px;
-          text-overflow: ellipsis;
-        }
-        img {
-          width: 20px;
-          height: 20px;
-        }
-        &.disabled {
-          pointer-events: none;
-        }
-      }
-
-      .mat-form-field {
-        &.mat-form-field-should-float {
-          .mat-form-field-infix {
-            padding-bottom: 7px;
-          }
-          mat-label {
-            font-size: 15px;
-          }
-        }
-
-        .mat-form-field-label-wrapper {
-          display: flex;
-          .mat-form-field-label {
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-            display: flex;
-          }
-        }
-        .mat-form-field-subscript-wrapper {
-          margin-top: 6px;
-        }
-
-        .mat-form-field-infix {
-          padding-top: 6px;
-        }
-      }
-
-      .mat-form-field-flex {
-        align-items: center;
-        .mat-form-field-infix {
-          border-top: unset;
-        }
-      }
-    `;
-  }
-
-  getAutoCompleteStyle() {
-    return css`
-      &::-webkit-scrollbar {
-        width: 3px;
-      }
-      &::-webkit-scrollbar-track {
-        background-color: var(--lightGrey, #d9d9d9);
-        border-radius: 3px;
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--darkGrey, #666666);
-        border-radius: 3px;
-      }
-    `;
-  }
-}
-
-/** Error when invalid control is dirty, touched, or submitted. */
-class InvalidStateMatcher implements ErrorStateMatcher {
-  private invalid: boolean;
-  isErrorState(): boolean {
-    return this.invalid;
-  }
-
-  public setInvalid(invalid: boolean): void {
-    this.invalid = invalid;
   }
 }
