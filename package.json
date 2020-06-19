@@ -21,7 +21,7 @@
     "@angular/material-moment-adapter": "^8.1.2",
     "@angular/platform-browser": "8.2.14",
     "@angular/platform-browser-dynamic": "8.2.14",
-    "@diaas/dxc-ngx-cdk": "0.0.0-alpha.280",
+    "@diaas/dxc-ngx-cdk": "0.0.0-alpha.298",
     "@diaas/dxc-ngx-hal": "file:dist/diaas-angular-cdk-hal",
     "@angular/router": "8.2.14",
     "@babel/preset-env": "^7.4.5",

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HalTablePageComponent } from './hal-table-page.component';
 import { DxcTagModule, DxcButtonModule, DxcTableModule, DxcSpinnerModule } from '@diaas/dxc-ngx-cdk';
-import { CdkTableModule } from '../../../../../diaas-angular-cdk-hal/src/lib/table/table-module';
+import { CdkTableModule } from '@diaas/dxc-ngx-hal';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 

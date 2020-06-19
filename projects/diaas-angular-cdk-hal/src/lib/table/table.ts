@@ -57,6 +57,7 @@ import { DxcHeaderRowComponent } from './components/dxc-header-row/dxc-header-ro
 import { DxcRowComponent } from './components/dxc-row/dxc-row.component';
 import { DxcColumnDef } from './directives/dxc-column-def.directive';
 import { HalResourceService } from '../diaas-angular-cdk-hal.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 /** Interface used to provide an outlet for rows to be inserted into. */
 export interface RowOutlet {
@@ -149,6 +150,9 @@ export const CDK_TABLE_TEMPLATE =
       </ng-container>
     </dxc-table>
 
+    <ng-container spinnerOutlet>
+      </ng-container>
+
     <dxc-paginator *ngIf="(totalItems | async) !== null"
       [totalItems]="totalItems | async"
       [itemsPerPage]="itemsPerPage"
@@ -158,6 +162,7 @@ export const CDK_TABLE_TEMPLATE =
       (firstFunction)="navigate($event, 'first')"
       (lastFunction)="navigate($event, 'last')"
     ></dxc-paginator>
+
 `;
 /**
  * A data table that can render a header row, data rows, and a footer row.
@@ -181,6 +186,14 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
   @Input()
   itemsPerPage: number = 5;
+
+  @Input()
+  halUrl;
+
+  @Input()
+  headers:any;
+
+  collectionResource: HalResourceService;
 
   displayedColumns:string[] = [];
 
@@ -292,13 +305,11 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       protected readonly _differs: IterableDiffers,
       protected readonly _changeDetectorRef: ChangeDetectorRef,
       protected readonly _elementRef: ElementRef, @Attribute('role') role: string,
+      private httpClient: HttpClient,
       @Optional() protected readonly _dir: Directionality, @Inject(DOCUMENT) _document: any,
-      private resolver: ComponentFactoryResolver,
-      private collectionResource: HalResourceService) {
+      private resolver: ComponentFactoryResolver) {
 
-        this.totalItems = this.collectionResource.totalItems;
-        this.fetchStatus = this.collectionResource.fetchStatus;
-        this.dataSource = new TableDataSource(this.collectionResource.items);
+
 
     if (!role) {
       this._elementRef.nativeElement.setAttribute('role', 'grid');
@@ -309,6 +320,11 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   ngOnInit() {
+    this.collectionResource = new HalResourceService(this.halUrl,new HttpHeaders(this.headers), this.httpClient);
+
+    this.totalItems = this.collectionResource.totalItems;
+    this.fetchStatus = this.collectionResource.fetchStatus;
+    this.dataSource = new TableDataSource(this.collectionResource.items);
 
     this.collectionResource.handleGet({
       url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
@@ -363,6 +379,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   renderHeaders(){
     this._headerOutlet.viewContainer.clear();
     if (this._columnDefsByName !== null ){
+
       this._columnDefsByName.forEach((value: DxcColumnDef , key: string) => {
         const factory = this.resolver.resolveComponentFactory(DxcHeaderRowComponent);
         const viewRef = this._headerOutlet.viewContainer.createComponent(factory);
@@ -473,8 +490,6 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
    */
   private _getRenderRowsForData(
       data: T, dataIndex: number, cache?: WeakMap<Object, RenderRow<T>[]>): RenderRow<T>[] {
-
-      debugger;
     return this.displayedColumns.map(rowDef => {
       const cachedRenderRows = (cache && cache.has(rowDef)) ? cache.get(rowDef)! : [];
       debugger;
@@ -552,9 +567,9 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
     this._renderChangeSubscription = dataStream.pipe(takeUntil(this._onDestroy)).subscribe(data => {
       this._data = data || [];
-      console.log('Render change subscription');
-      this.renderHeaders();
+      debugger;
       this.renderSpinner(this._spinnerOutlet);
+      this.renderHeaders();
       this.renderRows();
     });
   }
