@@ -1,5 +1,5 @@
 {
-  "data": [{
+  "data": {
   "_links": {
       "next": {
           "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/?_start=16&_num=5"
@@ -279,5 +279,5 @@
       ],
       "title": "Prospect Interactions"
   }
-  }]
+  }
 }
