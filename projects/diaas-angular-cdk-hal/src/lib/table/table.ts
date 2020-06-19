@@ -33,7 +33,8 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  ComponentFactoryResolver
+  ComponentFactoryResolver,
+  HostBinding
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -58,6 +59,8 @@ import { DxcRowComponent } from './components/dxc-row/dxc-row.component';
 import { DxcColumnDef } from './directives/dxc-column-def.directive';
 import { HalResourceService } from '../diaas-angular-cdk-hal.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { SortService } from './services/sort.service';
+import { Ordering } from './directives/sorting.directive';
 
 /** Interface used to provide an outlet for rows to be inserted into. */
 export interface RowOutlet {
@@ -143,7 +146,7 @@ export interface Columns {
  */
 export const CDK_TABLE_TEMPLATE =
     `
-    <dxc-table>
+    <dxc-table [margin]="margin">
       <ng-container headerOutlet>
       </ng-container>
       <ng-container rowOutlet>
@@ -180,7 +183,7 @@ export const CDK_TABLE_TEMPLATE =
   // declared elsewhere, they are checked when their declaration points are checked.
   // tslint:disable-next-line:validate-decorators
   changeDetection: ChangeDetectionStrategy.Default,
-  providers: [{provide: DXC_HAL_TABLE, useExisting: DxcHalTable}]
+  providers: [{provide: DXC_HAL_TABLE, useExisting: DxcHalTable}, SortService]
 })
 export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
 
@@ -193,6 +196,10 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   @Input()
   headers:any;
 
+  @Input() margin:string;
+
+  @HostBinding("class") className;
+
   collectionResource: HalResourceService;
 
   displayedColumns:string[] = [];
@@ -204,6 +211,9 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   page : number = 1;
 
   private _document: Document;
+
+  /** List of ordering directives. */
+  private _allOrderingRefs: Ordering[] = [];
 
   /** Latest data provided by the data source. */
   protected _data: T[]|ReadonlyArray<T>;
@@ -307,7 +317,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       protected readonly _elementRef: ElementRef, @Attribute('role') role: string,
       private httpClient: HttpClient,
       @Optional() protected readonly _dir: Directionality, @Inject(DOCUMENT) _document: any,
-      private resolver: ComponentFactoryResolver) {
+      private resolver: ComponentFactoryResolver, private sortService: SortService) {
 
 
 
@@ -317,6 +327,8 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
     this._document = _document;
     this._isNativeHtmlTable = this._elementRef.nativeElement.nodeName === 'TABLE';
+
+    this.setClassName();
   }
 
   ngOnInit() {
@@ -384,6 +396,9 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
         const factory = this.resolver.resolveComponentFactory(DxcHeaderRowComponent);
         const viewRef = this._headerOutlet.viewContainer.createComponent(factory);
         viewRef.instance.columnName = key;
+        viewRef.instance.isSortable = value._isSortable; //Save if header is sortable in the created component
+        viewRef.instance.state = this.getMapStateHeaders().get(key); //Get header's current state for sorting and save it in the created component
+        viewRef.instance.parentClassName = this.className; // just in case there ar more tables in the page
         if (!this.displayedColumns.includes(key)){
           this.displayedColumns.push( key );
         }
@@ -683,8 +698,23 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   navigate(page: number, operation:string){
     switch (operation) {
       case 'next':
+        this.page=page;
+        return this.collectionResource.handleGet({
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          status: 'navigating'
+        });
       case 'first':
+        this.page=page;
+        return this.collectionResource.handleGet({
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          status: 'navigating'
+        });
       case 'prev':
+        this.page=page;
+        return this.collectionResource.handleGet({
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          status: 'navigating'
+        });
       case 'last':
         this.page=page;
         return this.collectionResource.handleGet({
@@ -699,6 +729,90 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     }
   }
 
+      //It is needed to give a unique id to the resultset table
+  private setClassName(){
+        this.className = Math.round(Math.random() * 100000000000);
+        let element = document.getElementsByClassName(this.className)[0];
+        while(element != undefined){
+          this.className = Math.round(Math.random() * 100000000000);
+          element = document.getElementsByClassName(this.className)[0];
+        }
+      }
+
+      /** Set to default others header's states if they are different to default state ("up" or "down"). */
+  removeOtherSorts(actualIdHeader){
+    this._allOrderingRefs.forEach(element => {
+      let nativeElement = element.elementRef.nativeElement;
+      if(actualIdHeader != nativeElement.id){
+        let stateElement = nativeElement.getAttribute("state");
+        if(stateElement === "up" || stateElement === "down"){
+          this.sortService.removeOtherSortings(nativeElement.id);
+        }
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.setDefaultStateHeaders();
+  }
+
+  /** Set to default all headers that are sortable. */
+  setDefaultStateHeaders(){
+    this._allOrderingRefs.forEach(element => {
+      let id = element.elementRef.nativeElement.id;
+      let columnName = id.split("-")[1];
+      this.sortService.mapStatesHeaders.set(columnName, "default");
+    });
+  }
+
+  /** Register all ordering directives references. */
+  registerOrderingRef(ref: Ordering) {
+    this._allOrderingRefs.push(ref);
+  }
+
+  /** Sort row elements from given column depending on given state. */
+  sortCells(columnName,state) {
+    /*let start = this.paginationService.getCurrentStart();
+    let end = this.paginationService.getCurrentEnd();
+    let list;
+    if(state === "up"){
+      list = this.ascSort(columnName, start, end);
+    }
+    else if(state === "down"){
+      list = this.descSort(columnName, start, end);
+    }
+    this.collectionData.next(list);*/
+  }
+
+  /** Sort row elements by ascendant */
+  ascSort(columnName, start, end){
+    return this.sortService.getSortedList(this.collectionResource,columnName,'asc').slice(start, end);
+  }
+
+  /** Sort row elements by descendant */
+  descSort(columnName, start, end){
+    return this.sortService.getSortedList(this.collectionResource,columnName,'desc').slice(start, end);
+  }
+
+  /** Change icon to up icon */
+  changeAscIcon(el: Ordering){
+    this.sortService.setAscIconSort(el);
+  }
+
+  /** Change icon to down icon */
+  changeDescIcon(el: Ordering){
+    this.sortService.setDescIconSort(el);
+  }
+
+  /** Change icon to default icon */
+  changeDefaultIcon(el: Ordering){
+    this.sortService.setDefaultIconSort(el);
+  }
+
+  /** Return map with header's states */
+  getMapStateHeaders(){
+    return this.sortService.mapStatesHeaders;
+  }
 }
 
 /** Utility function that gets a merged list of the entries in an array and values of a Set. */

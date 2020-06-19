@@ -13,6 +13,7 @@ import { DxcHalTable } from './table';
 import {  HeaderOutlet }  from './table';
 import { DataRowOutlet } from './table';
 import { SpinnerOutlet } from './table';
+import { Ordering } from './directives/sorting.directive';
 
 const EXPORTED_DECLARATIONS = [
   DxcHalTable,
@@ -25,7 +26,8 @@ const EXPORTED_DECLARATIONS = [
   HeaderOutlet,
   DataRowOutlet,
   SpinnerOutlet,
-  DxcRowComponent
+  DxcRowComponent,
+  Ordering
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const EXPORTED_DECLARATIONS = [
     DxcHalTable,
     DxcCellDef,
     DxcRowDef,
-    DxcColumnDef
+    DxcColumnDef,
+    Ordering
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ const EXPORTED_DECLARATIONS = [
     DxcCellDef,
     DxcCellOutlet,
     DxcColumnDef,
+    Ordering,
     TableSpinnerComponent,
     DxcHeaderRowComponent,
     HeaderOutlet,
