@@ -110,9 +110,6 @@ pipeline {
                 }
             }
             stage('.npmrc') {
-                when {
-                    expression { env.RELEASE_VALID == 'valid' | env.BRANCH_NAME == 'master' }
-                }
                 steps {
                     withCredentials([file(credentialsId: 'npmrc', variable: 'CONFIG')]) {
                         sh '''
@@ -141,7 +138,7 @@ pipeline {
                     '''
                 }
             }
-            
+
             stage('Publish dxc-ngx-hal alpha version to Artifactory ') {
                 when { branch 'master' }
                 steps {
