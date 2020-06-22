@@ -5,7 +5,7 @@ pipeline {
     agent any
 
     environment  {
-        REPO_NAME = 'diaas-angular-cdk-hal'
+        REPO_NAME = 'diaas-angular-hal-components'
         SERVICE_NAME='dxc-ngx-hal'
     }
     stages {
