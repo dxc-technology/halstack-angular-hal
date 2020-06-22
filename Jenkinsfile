@@ -57,43 +57,43 @@ pipeline {
             }
             stage('Release type') {
                 when {
-                docker    expression { BRANCH_NAME ==~ /^.*\b(release)\b.*$/ }
-                docker}
-                dockersteps {
-                docker    script {
-                docker        try {
-                docker            timeout(time: 10, unit: 'MINUTES') {
-                docker                env.RELEASE_OPTION = input message: 'Select a release option', ok: 'Continue',
-                docker                    parameters: [
-                docker                        choice(
-                docker                            name: 'type',
-                docker                            choices: "major\nminor\npatch\npremajor\npreminor\nprepatch\nprerelease\nno-release",
-                docker                            description: "Version to bump from: ${OLD_RELEASE_NUMBER}. If release is selected, a new release will be released. When you select release option, a tag is created in GitHub with that version, the release is pointed to that tag and release notes will be added. Also is important to note that the created package for the release is going to be uploaded to Artifactory. To continue without releasing, select no-release. After 10 minutes, if you don`t select any choice the default selected option will be `no-release`"
-                docker                        )
-                docker                    ]
-                docker            }
-                docker        } catch(err) {
-                docker            env.RELEASE_OPTION = 'no-release'
-                docker        }
-                docker    }
-                docker}
-            }docker
-            stagdockere('Password to continue') {
-                dockerwhen {
-                docker    expression { env.RELEASE_OPTION == 'major' | env.RELEASE_OPTION == 'minor' | env.RELEASE_OPTION == 'patch' | env.RELEASE_OPTION == 'premajor' | env.RELEASE_OPTION == 'preminor' | env.RELEASE_OPTION == 'prepatch' |env.RELEASE_OPTION == 'prerelease' }
-                docker}
-                dockersteps {
-                docker    script {
-                docker        withCredentials([usernamePassword(credentialsId:"diaas-rw", passwordVariable:"ARTIF_PASSWORD", usernameVariable:"ARTIF_USER")]) {
-                docker             env.RELEASE_VALID = 'valid';
-                docker        }
-                docker    }
-                docker}
-            }docker
-            stagdockere('Release versioning') {
-                dockerwhen {
-                docker    expression { env.RELEASE_VALID == 'valid' }
-                docker}
+                    expression { BRANCH_NAME ==~ /^.*\b(release)\b.*$/ }
+                }
+                steps {
+                    script {
+                        try {
+                            timeout(time: 10, unit: 'MINUTES') {
+                                env.RELEASE_OPTION = input message: 'Select a release option', ok: 'Continue',
+                                    parameters: [
+                                        choice(
+                                            name: 'type',
+                                            choices: "major\nminor\npatch\npremajor\npreminor\nprepatch\nprerelease\nno-release",
+                                            description: "Version to bump from: ${OLD_RELEASE_NUMBER}. If release is selected, a new release will be released. When you select release option, a tag is created in GitHub with that version, the release is pointed to that tag and release notes will be added. Also is important to note that the created package for the release is going to be uploaded to Artifactory. To continue without releasing, select no-release. After 10 minutes, if you don`t select any choice the default selected option will be `no-release`"
+                                        )
+                                    ]
+                            }
+                        } catch(err) {
+                            env.RELEASE_OPTION = 'no-release'
+                        }
+                    }
+                }
+            }
+            stage('Password to continue') {
+                when {
+                    expression { env.RELEASE_OPTION == 'major' | env.RELEASE_OPTION == 'minor' | env.RELEASE_OPTION == 'patch' | env.RELEASE_OPTION == 'premajor' | env.RELEASE_OPTION == 'preminor' | env.RELEASE_OPTION == 'prepatch' |env.RELEASE_OPTION == 'prerelease' }
+                }
+                steps {
+                    script {
+                        withCredentials([usernamePassword(credentialsId:"diaas-rw", passwordVariable:"ARTIF_PASSWORD", usernameVariable:"ARTIF_USER")]) {
+                             env.RELEASE_VALID = 'valid';
+                        }
+                    }
+                }
+            }
+            stage('Release versioning') {
+                when {
+                    expression { env.RELEASE_VALID == 'valid' }
+                }
                 steps {
                     script {
                         if (env.RELEASE_OPTION == 'premajor' | env.RELEASE_OPTION == 'preminor' | env.RELEASE_OPTION == 'prepatch' | env.RELEASE_OPTION == 'prerelease') {
