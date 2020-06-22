@@ -109,6 +109,21 @@ pipeline {
                     }
                 }
             }
+            stage('.npmrc') {
+                when {
+                    expression { env.RELEASE_VALID == 'valid' | env.BRANCH_NAME == 'master' }
+                }
+                steps {
+                    withCredentials([file(credentialsId: 'npmrc', variable: 'CONFIG')]) {
+                        sh '''
+                            cat ${CONFIG} > ~/.npmrc
+                            npm config set @diaas:registry https://artifactory.csc.com/artifactory/api/npm/diaas-npm-local/
+                        '''
+                    }
+                }
+            }
+
+
             stage('Build and Install lib dependencies'){
                 steps {
                     sh '''
@@ -126,19 +141,7 @@ pipeline {
                     '''
                 }
             }
-            stage('.npmrc') {
-                when {
-                    expression { env.RELEASE_VALID == 'valid' | env.BRANCH_NAME == 'master' }
-                }
-                steps {
-                    withCredentials([file(credentialsId: 'npmrc', variable: 'CONFIG')]) {
-                        sh '''
-                            cat ${CONFIG} > ~/.npmrc
-                            npm config set @diaas:registry https://artifactory.csc.com/artifactory/api/npm/diaas-npm-local/
-                        '''
-                    }
-                }
-            }
+            
             stage('Publish dxc-ngx-hal alpha version to Artifactory ') {
                 when { branch 'master' }
                 steps {
