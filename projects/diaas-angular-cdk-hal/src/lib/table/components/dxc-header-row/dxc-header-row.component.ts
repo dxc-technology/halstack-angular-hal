@@ -18,6 +18,7 @@ export class DxcHeaderRowComponent {
 
   state: string;
   parentClassName: any;
+  value: string;
 
   constructor(private sortService: SortService){}
 
@@ -32,6 +33,7 @@ export class DxcHeaderRowComponent {
       let divHeader = document.getElementById(`header-${this.columnName}-${this.parentClassName}`);
       divHeader.style.cursor = "pointer";
       divHeader.style.width = "fit-content";
+      divHeader.setAttribute("columnValue", this.value);
     }
   }
 

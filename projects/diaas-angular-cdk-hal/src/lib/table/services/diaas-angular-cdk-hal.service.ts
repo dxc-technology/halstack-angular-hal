@@ -24,9 +24,9 @@ export class HalResourceService {
   constructor(
     public url: string,
     public headers: HttpHeaders,
-    private httpClient: HttpClient
-  ) {
-  }
+    private httpClient: HttpClient) {
+      this.fetchResource();
+    }
 
   fetchResource() {
     this.fetchStatus.next(fetchingStatus);
@@ -146,10 +146,15 @@ export class HalResourceService {
     });
   }
 
-  public handleGet({url, status}) {
+  public handleGet({url, status}, page?, itemsPerPage?) {
     this.fetchStatus.next(status ? status : fetchingStatus);
     return this.httpClient.get(url ? url : this.url, { headers: this.headers }).subscribe(resp => {
       const halResource = HalResource(resp);
+      if(page && itemsPerPage){
+        let start = page * itemsPerPage - itemsPerPage;    
+        let end = page * itemsPerPage;
+        halResource.resourceRepresentation._links.item = halResource.resourceRepresentation._links.item.slice(start,end);
+      }
       this.resource.next({
         ...halResource
       });
@@ -208,5 +213,9 @@ export class HalResourceService {
   addPageParams(page: number, itemsPerPage: number) {
     let start = (page - 1) * itemsPerPage + 1;
     return this.url + (this.url.includes("?") ? "&" : "?") + "_start=" + start + "&_num=" + itemsPerPage;
+  }
+
+  addSortParams(sort:string){
+    return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort;
   }
 }

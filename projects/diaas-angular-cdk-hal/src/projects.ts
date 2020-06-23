@@ -2,7 +2,7 @@
  * Public API Surface of diaas-angular-cdk-hal
  */
 
-export * from './lib/diaas-angular-cdk-hal.service';
+export * from './lib/table/services/diaas-angular-cdk-hal.service';
 
 //HAL Table
 export * from './lib/table/row';

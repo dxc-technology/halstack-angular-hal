@@ -57,7 +57,7 @@ import { TableSpinnerComponent } from './components/table-spinner/table-spinner.
 import { DxcHeaderRowComponent } from './components/dxc-header-row/dxc-header-row.component';
 import { DxcRowComponent } from './components/dxc-row/dxc-row.component';
 import { DxcColumnDef } from './directives/dxc-column-def.directive';
-import { HalResourceService } from '../diaas-angular-cdk-hal.service';
+import { HalResourceService } from './services/diaas-angular-cdk-hal.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { SortService } from './services/sort.service';
 import { Ordering } from './directives/sorting.directive';
@@ -339,9 +339,9 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     this.dataSource = new TableDataSource(this.collectionResource.items);
 
     this.collectionResource.handleGet({
-      url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+      url: this.collectionResource.url,
       status: 'navigating'
-    });
+    },this.page, this.itemsPerPage);
 
     if (this._isNativeHtmlTable) {
       this._applyNativeTableSections();
@@ -396,9 +396,10 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
         const factory = this.resolver.resolveComponentFactory(DxcHeaderRowComponent);
         const viewRef = this._headerOutlet.viewContainer.createComponent(factory);
         viewRef.instance.columnName = key;
-        viewRef.instance.isSortable = value._isSortable; //Save if header is sortable in the created component
+        viewRef.instance.isSortable = value.sortable.isSortable; //Save if header is sortable in the created component
         viewRef.instance.state = this.getMapStateHeaders().get(key); //Get header's current state for sorting and save it in the created component
         viewRef.instance.parentClassName = this.className; // just in case there ar more tables in the page
+        viewRef.instance.value = value.sortable.propertyName;
         if (!this.displayedColumns.includes(key)){
           this.displayedColumns.push( key );
         }
@@ -507,7 +508,6 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       data: T, dataIndex: number, cache?: WeakMap<Object, RenderRow<T>[]>): RenderRow<T>[] {
     return this.displayedColumns.map(rowDef => {
       const cachedRenderRows = (cache && cache.has(rowDef)) ? cache.get(rowDef)! : [];
-      debugger;
       if (cachedRenderRows.length) {
         const dataRow = cachedRenderRows.shift()!;
         dataRow.dataIndex = dataIndex;
@@ -582,7 +582,6 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
     this._renderChangeSubscription = dataStream.pipe(takeUntil(this._onDestroy)).subscribe(data => {
       this._data = data || [];
-      debugger;
       this.renderSpinner(this._spinnerOutlet);
       this.renderHeaders();
       this.renderRows();
@@ -700,27 +699,27 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       case 'next':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
-          status: 'navigating'
-        });
+          url: this.collectionResource.url,
+          status: 'navigating',
+        },this.page, this.itemsPerPage);
       case 'first':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          url: this.collectionResource.url,
           status: 'navigating'
-        });
+        },this.page, this.itemsPerPage);
       case 'prev':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          url: this.collectionResource.url,
           status: 'navigating'
-        });
+        },this.page, this.itemsPerPage);
       case 'last':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
+          url: this.collectionResource.url,
           status: 'navigating'
-        });
+        },this.page, this.itemsPerPage);
       default:
         this.collectionResource.buildErrorResponse({
           message: `Error. Operation  ${operation} is not known.`
@@ -771,27 +770,19 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   /** Sort row elements from given column depending on given state. */
-  sortCells(columnName,state) {
-    /*let start = this.paginationService.getCurrentStart();
-    let end = this.paginationService.getCurrentEnd();
-    let list;
+  sortCells(value,state) {
     if(state === "up"){
-      list = this.ascSort(columnName, start, end);
+      return this.collectionResource.handleGet({
+        url: this.collectionResource.addSortParams(`${value}`),
+        status: 'sorting'
+      },this.page, this.itemsPerPage);
     }
     else if(state === "down"){
-      list = this.descSort(columnName, start, end);
+      return this.collectionResource.handleGet({
+        url: this.collectionResource.addSortParams(`-${value}`),
+        status: 'sorting'
+      },this.page, this.itemsPerPage);
     }
-    this.collectionData.next(list);*/
-  }
-
-  /** Sort row elements by ascendant */
-  ascSort(columnName, start, end){
-    return this.sortService.getSortedList(this.collectionResource,columnName,'asc').slice(start, end);
-  }
-
-  /** Sort row elements by descendant */
-  descSort(columnName, start, end){
-    return this.sortService.getSortedList(this.collectionResource,columnName,'desc').slice(start, end);
   }
 
   /** Change icon to up icon */

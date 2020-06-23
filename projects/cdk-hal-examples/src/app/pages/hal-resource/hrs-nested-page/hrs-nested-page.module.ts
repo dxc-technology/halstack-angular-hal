@@ -4,7 +4,7 @@ import { HrsNestedPageComponent } from './hrs-nested-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DXCInputTextModule, DxcButtonModule, DxcSpinnerModule, DXCAlertModule } from '@diaas/dxc-ngx-cdk';
 import { HalResourceServiceFactoryProvider } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider';
-import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.service';
+import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/table/services/diaas-angular-cdk-hal.service';
 
 
 

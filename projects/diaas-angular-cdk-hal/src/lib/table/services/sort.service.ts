@@ -15,32 +15,6 @@ export class SortService {
 
   constructor() { }
 
-  /** Get sorted list from given list, header's name and type of order ("asc" or "desc"). */
-  getSortedList(collectionResource,columnName, order){
-    return collectionResource.sort(this.compareValues(columnName,order));
-  }
-
-  /** Compare values for sorting with given order ("asc" or "desc") and header's name. */
-  private compareValues(key, order) {
-    return function innerSort(a, b) {
-      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-        return 0;
-      }
-      let varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-      let varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
-      let comparison = 0;
-      if (varA > varB) {
-        comparison = 1;
-      } 
-      else if (varA < varB) {
-        comparison = -1;
-      }
-      return (
-        (order === 'desc') ? (comparison * -1) : comparison
-      );
-    };
-  }
-
   /** Set to default state the given header id (like "header-user"). */
  removeOtherSortings(id){
     let columnName = id.split("-")[1];

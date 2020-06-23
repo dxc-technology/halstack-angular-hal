@@ -2,15 +2,15 @@
 
 <div class="haltable-example-container">
   <h2>Hal table example</h2>
-      <dxc-hal-table  halUrl="http://localhost:3000/data" headers="" itemsPerPage="5">
-        <ng-container  dxcColumnDef="User" isSortable="true">
+      <dxc-hal-table  halUrl="http://localhost:3000/data" headers="" itemsPerPage="4">
+        <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
             <td *dxcCellDef="let item">
               <dxc-button [label]="item['prospect-full-name']">
               </dxc-button>
             </td>
         </ng-container>
 
-        <ng-container dxcColumnDef="Date" isSortable="true">
+        <ng-container dxcColumnDef="Date" [sortable]="{isSortable:true, propertyName:'prospect-update-date'}">
           <td *dxcCellDef="let element">
             <dxc-tag [label]="element['prospect-update-date']">
             </dxc-tag>

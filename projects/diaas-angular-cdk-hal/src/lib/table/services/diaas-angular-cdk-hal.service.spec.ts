@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HalResourceService } from './diaas-angular-cdk-hal.service';
-import { HalResourceServiceFactoryProvider } from './diaas-angular-cdk-hal.factory-provider';
+import { HalResourceServiceFactoryProvider } from '../../diaas-angular-cdk-hal.factory-provider';
 
 describe('HalResourceService', () => {
 

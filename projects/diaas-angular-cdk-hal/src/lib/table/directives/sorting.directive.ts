@@ -19,7 +19,8 @@ export class Ordering {
   //Click event to change states and icons
   @HostListener('click') click() {
     if(this.ordering === "true"){
-      let idHeader = this.elementRef.nativeElement.id;
+      let nativeElement = this.elementRef.nativeElement as HTMLElement;
+      let idHeader = nativeElement.id;
       let columnName = idHeader.split("-")[1]; 
       this.state = this.parent.getMapStateHeaders().get(columnName);
       if(this.state === "default" || this.state === "down"){
@@ -32,10 +33,10 @@ export class Ordering {
         this.parent.getMapStateHeaders().set(columnName,"down");
         this.parent.changeDescIcon(this);
       }
-      let divHeader = document.getElementById(idHeader);
-      divHeader.setAttribute("state",this.state);
+      nativeElement.setAttribute("state",this.state);
       this.parent.removeOtherSorts(idHeader); //Remove all header's state different from default state.
-      this.parent.sortCells(columnName,this.state); //Sort all data
+      let columnValue = nativeElement.getAttribute("columnvalue");
+      this.parent.sortCells(columnValue,this.state); //Sort all data
       this.parent.navigate(1,'first'); //Navegate to first page from paginator
     }
   }
