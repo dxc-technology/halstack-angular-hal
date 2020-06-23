@@ -12,29 +12,23 @@ import { BaseError } from 'make-error';
   providers: [HalResourceService]
 })
 export class HrsCollectionPageComponent implements OnInit {
-  fetchStatus: BehaviorSubject<string> = new BehaviorSubject('');
-  error: BehaviorSubject<any> = new BehaviorSubject(null);
-  items: BehaviorSubject<Array<any>> = new BehaviorSubject([]);
-  resource: BehaviorSubject<any> = new BehaviorSubject(null);
-  collectionPropectService: HalResourceService;
 
-  constructor(
-    httpClient: HttpClient
-  ) {
-    this.collectionPropectService = new HalResourceService(
-      "http://localhost:3000/data",null,
-      httpClient
-    );
-    this.fetchStatus = this.collectionPropectService.fetchStatus;
-    this.error = this.collectionPropectService.errorMessage;
-    this.items = this.collectionPropectService.items;
-    this.resource = this.collectionPropectService.resource;
+  fetchStatus = this.collectionPropectService.fetchStatus;
+  resource = this.collectionPropectService.resource;
+  error = this.collectionPropectService.errorMessage;
+  items = this.collectionPropectService.items;
+
+  page : number = 1;
+  totalItems : number = 27;
+  itemsPerPage : number =10;
+  
+  constructor(@Inject('CollectionProspectService') private collectionPropectService: HalResourceService) { 
     this.collectionPropectService.fetchResource();
   }
 
   ngOnInit() {}
 
-  navigate(operation: string) {
+  navigate(page: number, operation:string){
     this.collectionPropectService.executeItemsHandler(operation);
   }
 
