@@ -1,10 +1,16 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
+    "moduleResolution": "node",
     "declaration": true,
+    "sourceMap": true,
     "inlineSources": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
     "types": [],
     "lib": [
       "dom",
@@ -17,7 +23,8 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "preserveSymlinks": true
   },
   "exclude": [
     "src/test.ts",

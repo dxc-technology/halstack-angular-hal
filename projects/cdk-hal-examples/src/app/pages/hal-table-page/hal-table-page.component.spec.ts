@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiaasHalPaginatorComponent } from './diaas-hal-paginator.component';
+import { HalTablePageComponent } from './hal-table-page.component';
 
-describe('DiaasHalPaginatorComponent', () => {
-  let component: DiaasHalPaginatorComponent;
-  let fixture: ComponentFixture<DiaasHalPaginatorComponent>;
+describe('HalTablePageComponent', () => {
+  let component: HalTablePageComponent;
+  let fixture: ComponentFixture<HalTablePageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiaasHalPaginatorComponent ]
+      declarations: [ HalTablePageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiaasHalPaginatorComponent);
+    fixture = TestBed.createComponent(HalTablePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
