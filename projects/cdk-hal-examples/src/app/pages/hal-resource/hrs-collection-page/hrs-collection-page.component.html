@@ -1,18 +1,18 @@
 <div #parentdiv class="haltest-example-container">
         <h1 class="title-example">Hal resource Service</h1>
         <h2>Collections</h2>
-        <div  *ngIf="(fetchStatus | async) === 'done' || 
+        <div  *ngIf="(fetchStatus | async) === 'done' ||
                 (fetchStatus | async) !== 'fetching' as fetched; else loading">
 
-                <div *ngIf="(fetchStatus | async) !== 'done' as fetched" 
+                <div *ngIf="(fetchStatus | async) !== 'done' as fetched"
                         class="spinner-form" [style.height.px]="parentdiv.offsetHeight">
                         <div class="spinner-form-loading">
-                                <dxc-spinner label="Loading..."></dxc-spinner>  
+                                <dxc-spinner label="Loading..."></dxc-spinner>
                         </div>
                 </div>
-   
+
                 <div *ngIf="(resource | async) as entity">
-                        
+
                         <div>
                                 <dxc-table size="medium">
                                 <tr>
@@ -20,7 +20,7 @@
                                         <th>Given name</th>
                                         <th>Last Name</th>
                                         <th>Email</th>
-                                </tr> 
+                                </tr>
                                 <tr *ngFor="let pItem of items | async">
                                         <td>{{ getItemPropertyValue(pItem, 'prospect-title') }}</td>
                                         <td>{{ getItemPropertyValue(pItem, 'prospect-given-name') }}</td>
@@ -64,7 +64,7 @@
 
         <ng-template #loading>
                 <div class="spinner">
-                        <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>  
-                </div>    
+                        <dxc-spinner margin="medium" label="Loading..."></dxc-spinner>
+                </div>
         </ng-template>
 </div>
