@@ -29,7 +29,7 @@
                                 </tr>
                                 </dxc-table>
                         </div>
-                        <div class="pagination">
+                        <!-- <div class="pagination">
                                 <dxc-button
                                         mode="basic"
                                         label="First"
@@ -48,8 +48,17 @@
                                         (onClick)="navigate('next')"
                                         size="medium"
                                 ></dxc-button>
-                        </div>
-
+                        </div>            -->
+                        <dxc-paginator 
+                        [totalItems]="totalItems"
+                        [itemsPerPage]="itemsPerPage"
+                        [currentPage]="page"
+                        (nextFunction)="navigate($event, 'next')"
+                        (prevFunction)="navigate($event, 'prev')"
+                        (firstFunction)="navigate($event, 'first')"
+                        (lastFunction)="navigate($event, 'last')"
+                        >
+                    </dxc-paginator>
                 </div>
         </div>
 

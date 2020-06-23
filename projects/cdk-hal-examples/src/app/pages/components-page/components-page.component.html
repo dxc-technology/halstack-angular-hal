@@ -21,19 +21,12 @@
               <div class="sc-fhYwyz ffpcba">
                 <a
                   [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['button'] } }]"
+                  [routerLink]="[{ outlets: { components: ['haltable'] } }]"
                   >HalTable</a
                 >
               </div>
-              <div class="sc-fhYwyz ffpcba">
-                <a
-                  [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['checkbox'] } }]"
-                  >HalPagination</a
-                >
-              </div>
             </div>
-            <div class="sc-jzgbtB iRVmnC">Hal Resource Service</div>
+            <!-- <div class="sc-jzgbtB iRVmnC">Hal Resource Service</div>
             <div class="sc-gJWqzi blNloH">
               <div class="sc-fhYwyz ffpcba">
                 <a
@@ -62,13 +55,13 @@
                   >Collection</a
                 >
               </div>
-            </div>
+            </div> -->
         </div>
       </div>
     </div>
 
   </div>
   <div class="container-content">
-        <router-outlet name="components"></router-outlet>
-      </div>
+    <router-outlet name="components"></router-outlet>
+  </div>
 </div>

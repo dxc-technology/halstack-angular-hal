@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "dist/cdk-hal-examples",
             "index": "projects/cdk-hal-examples/src/index.html",
             "main": "projects/cdk-hal-examples/src/main.ts",
@@ -36,6 +37,7 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/cdk-hal-examples/src/styles.scss"
             ],
+
             "scripts": []
           },
           "configurations": {
@@ -135,14 +137,13 @@
       "projectType": "library",
       "root": "projects/diaas-angular-cdk-hal",
       "sourceRoot": "projects/diaas-angular-cdk-hal/src",
-      "prefix": "lib",
+      "prefix": "dxc-ngx-hal-cdk",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/diaas-angular-cdk-hal/tsconfig.lib.json",
-            "project": "projects/diaas-angular-cdk-hal/ng-package.json"
-          }
+            "project": "projects/diaas-angular-cdk-hal/ng-package.json"          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -166,5 +167,5 @@
         }
       }
     }},
-  "defaultProject": "cdk-hal-examples"
+  "defaultProject": "diaas-angular-cdk-hal"
 }
