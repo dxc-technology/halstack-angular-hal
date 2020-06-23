@@ -27,8 +27,17 @@ router.render = (req, res) => {
         )
       );
     }
+    if (req.originalUrl.includes("start") && req.originalUrl.includes("num")) {
+      let pageNumber = req.query._start;
+      let itemsPerPage = req.query._num;
+      let start = pageNumber * itemsPerPage - itemsPerPage;    
+      let end = pageNumber * itemsPerPage;
+      console.log("start:",start);
+      console.log("end:",end);
+    }
+
   }
-  res.jsonp(res.locals.data);//Una vez ordenada la respuesta la devolvemos
+  res.jsonp(res.locals.data);
 };
 server.listen(3000, () => {
   console.log("JSON Server is running");

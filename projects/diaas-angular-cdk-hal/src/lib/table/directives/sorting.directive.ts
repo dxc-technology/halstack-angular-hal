@@ -35,8 +35,8 @@ export class Ordering {
       }
       nativeElement.setAttribute("state",this.state);
       this.parent.removeOtherSorts(idHeader); //Remove all header's state different from default state.
-      let columnValue = nativeElement.getAttribute("columnvalue");
-      this.parent.sortCells(columnValue,this.state); //Sort all data
+      let propertyName = nativeElement.getAttribute("propertyname");
+      this.parent.sortCells(propertyName,this.state); //Sort all data
       this.parent.navigate(1,'first'); //Navegate to first page from paginator
     }
   }

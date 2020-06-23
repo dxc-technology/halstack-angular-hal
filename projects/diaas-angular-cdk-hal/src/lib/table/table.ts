@@ -339,7 +339,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     this.dataSource = new TableDataSource(this.collectionResource.items);
 
     this.collectionResource.handleGet({
-      url: this.collectionResource.url,
+      url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
       status: 'navigating'
     },this.page, this.itemsPerPage);
 
@@ -699,25 +699,25 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       case 'next':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.url,
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating',
         },this.page, this.itemsPerPage);
       case 'first':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.url,
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
         },this.page, this.itemsPerPage);
       case 'prev':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.url,
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
         },this.page, this.itemsPerPage);
       case 'last':
         this.page=page;
         return this.collectionResource.handleGet({
-          url: this.collectionResource.url,
+          url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
         },this.page, this.itemsPerPage);
       default:

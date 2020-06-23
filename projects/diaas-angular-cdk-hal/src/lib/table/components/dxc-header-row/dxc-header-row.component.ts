@@ -33,7 +33,7 @@ export class DxcHeaderRowComponent {
       let divHeader = document.getElementById(`header-${this.columnName}-${this.parentClassName}`);
       divHeader.style.cursor = "pointer";
       divHeader.style.width = "fit-content";
-      divHeader.setAttribute("columnValue", this.value);
+      divHeader.setAttribute("propertyName", this.value);
     }
   }
 

@@ -150,11 +150,11 @@ export class HalResourceService {
     this.fetchStatus.next(status ? status : fetchingStatus);
     return this.httpClient.get(url ? url : this.url, { headers: this.headers }).subscribe(resp => {
       const halResource = HalResource(resp);
-      if(page && itemsPerPage){
+      /*if(page && itemsPerPage){
         let start = page * itemsPerPage - itemsPerPage;    
         let end = page * itemsPerPage;
         halResource.resourceRepresentation._links.item = halResource.resourceRepresentation._links.item.slice(start,end);
-      }
+      }*/
       this.resource.next({
         ...halResource
       });
