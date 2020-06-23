@@ -13,6 +13,10 @@ export class HrsCollectionPageComponent implements OnInit {
   error = this.collectionPropectService.errorMessage;
   items = this.collectionPropectService.items;
 
+  page : number = 1;
+  totalItems : number = 27;
+  itemsPerPage : number =10;
+  
   constructor(@Inject('CollectionProspectService') private collectionPropectService: HalResourceService) { 
     this.collectionPropectService.fetchResource();
   }
@@ -21,7 +25,7 @@ export class HrsCollectionPageComponent implements OnInit {
 
   }
 
-  navigate(operation:string){
+  navigate(page: number, operation:string){
     this.collectionPropectService.executeItemsHandler(operation);
   }
 
