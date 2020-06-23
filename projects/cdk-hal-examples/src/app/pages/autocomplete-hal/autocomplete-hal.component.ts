@@ -14,6 +14,7 @@ export class AutocompleteHalComponent implements OnInit {
   onChange(value) {
     this.inputValue = value;
   }
+  headers = {'Content-Type':'application/json; charset=utf-8'};
 
   constructor() { }
 

@@ -13,7 +13,7 @@ import { BehaviorSubject, of } from "rxjs";
 import { SimpleChanges } from "@angular/core";
 
 import { HalResourceService } from "../../pages/services/diaas-angular-cdk-hal.service";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: "dxc-autocomplete-hal",
@@ -44,6 +44,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   @Input() public placeholder: string;
   @Input() public halUrl: string;
   @Input() public propertyName: string;
+  @Input() public headers: any;
 
   @Input() public margin: any;
   @Input() public size: string;
@@ -98,7 +99,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
     this.updateSuggestions = this.updateSuggestions.bind(this);
     this.collectionPropectService = new HalResourceService(
       this.halUrl,
-      null,
+      new HttpHeaders(this.headers),
       this.httpClient
     );
     this.collectionPropectService.fetchResource();
