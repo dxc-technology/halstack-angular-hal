@@ -105,7 +105,7 @@ export class HalResourceService {
         .getInteractions()
         .map(interaction => ({
           rel: interaction.rel,
-          handler: (body?: any) => {
+          handler: (body?: any, additionalHeaders?: any) => {
             switch (interaction.method) {
               case "GET":
                 return this.handleGet(body);
@@ -149,10 +149,10 @@ export class HalResourceService {
     return pathHandler !== undefined ? pathHandler : null;
   }
 
-  executeHandler(handlerName: string, payload?: any) {
+  executeHandler(handlerName: string, payload?: any, additionalHeaders?:any) {
     const pathHandler = this.getHandlers().find(x => x.rel == handlerName);
     if (pathHandler !== null && pathHandler !== undefined) {
-      pathHandler.handler(payload);
+      pathHandler.handler(payload, additionalHeaders);
     } else {
       this.errorMessage.next("Operation does not exist in handlers.");
     }
@@ -176,18 +176,20 @@ export class HalResourceService {
       );
   }
 
-  public handleGet(body) {
+  public handleGet(body, additionalHeaders?) {
     let finalHalUrl = this.url;
-    finalHalUrl += Object.keys(body)
-      .map((key, index) =>
+    if(body) {
+      finalHalUrl += Object.keys(body)
+      .map((key) =>
         !this.url.includes("?")
           ? `?${key}=${body[key]}`
           : `&${key}=${body[key]}`
       )
       .reduce((prev, act) => prev + act);
+    }
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient
-      .get(finalHalUrl, { headers: this.headers })
+      .get(finalHalUrl, { headers: {...this.headers, ...additionalHeaders} })
       .subscribe(
         resp => {
           const halResource = HalResource(resp);
