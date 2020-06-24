@@ -25,7 +25,6 @@ export class HalResourceService {
     public url: string,
     public headers: HttpHeaders,
     private httpClient: HttpClient) {
-      this.fetchResource();
     }
 
   fetchResource() {
@@ -146,15 +145,10 @@ export class HalResourceService {
     });
   }
 
-  public handleGet({url, status}, page?, itemsPerPage?) {
+  public handleGet({url, status}) {
     this.fetchStatus.next(status ? status : fetchingStatus);
     return this.httpClient.get(url ? url : this.url, { headers: this.headers }).subscribe(resp => {
       const halResource = HalResource(resp);
-      /*if(page && itemsPerPage){
-        let start = page * itemsPerPage - itemsPerPage;    
-        let end = page * itemsPerPage;
-        halResource.resourceRepresentation._links.item = halResource.resourceRepresentation._links.item.slice(start,end);
-      }*/
       this.resource.next({
         ...halResource
       });
@@ -211,11 +205,10 @@ export class HalResourceService {
   }
 
   addPageParams(page: number, itemsPerPage: number) {
-    let start = (page - 1) * itemsPerPage + 1;
-    return this.url + (this.url.includes("?") ? "&" : "?") + "_start=" + start + "&_num=" + itemsPerPage;
+    return this.url + (this.url.includes("?") ? "&" : "?") + "_start=" + page + "&_num=" + itemsPerPage;
   }
 
-  addSortParams(sort:string){
-    return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort;
+  addSortParams(sort:string, page: number, itemsPerPage: number){
+    return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
   }
 }

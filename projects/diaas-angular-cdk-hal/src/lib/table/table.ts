@@ -341,7 +341,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     this.collectionResource.handleGet({
       url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
       status: 'navigating'
-    },this.page, this.itemsPerPage);
+    });
 
     if (this._isNativeHtmlTable) {
       this._applyNativeTableSections();
@@ -701,25 +701,25 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
         return this.collectionResource.handleGet({
           url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating',
-        },this.page, this.itemsPerPage);
+        });
       case 'first':
         this.page=page;
         return this.collectionResource.handleGet({
           url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
-        },this.page, this.itemsPerPage);
+        });
       case 'prev':
         this.page=page;
         return this.collectionResource.handleGet({
           url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
-        },this.page, this.itemsPerPage);
+        });
       case 'last':
         this.page=page;
         return this.collectionResource.handleGet({
           url: this.collectionResource.addPageParams(this.page, this.itemsPerPage),
           status: 'navigating'
-        },this.page, this.itemsPerPage);
+        });
       default:
         this.collectionResource.buildErrorResponse({
           message: `Error. Operation  ${operation} is not known.`
@@ -773,15 +773,15 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   sortCells(value,state) {
     if(state === "up"){
       return this.collectionResource.handleGet({
-        url: this.collectionResource.addSortParams(`${value}`),
+        url: this.collectionResource.addSortParams(`${value}`,this.page, this.itemsPerPage),
         status: 'sorting'
-      },this.page, this.itemsPerPage);
+      });
     }
     else if(state === "down"){
       return this.collectionResource.handleGet({
-        url: this.collectionResource.addSortParams(`-${value}`),
+        url: this.collectionResource.addSortParams(`-${value}`,this.page, this.itemsPerPage),
         status: 'sorting'
-      },this.page, this.itemsPerPage);
+      });
     }
   }
 
