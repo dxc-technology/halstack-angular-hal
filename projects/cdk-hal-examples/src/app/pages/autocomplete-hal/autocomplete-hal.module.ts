@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutocompleteHalComponent } from './autocomplete-hal.component';
-import { DxcAutocompleteHalModule } from '../../components/dxc-autocomplete-hal/dxc-autocomplete-hal.module';
+import { DxcAutocompleteHalModule } from '@diaas/dxc-ngx-hal';
 
 
 

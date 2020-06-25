@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { HalResourceService } from "../../services/diaas-angular-cdk-hal.service";
+import { HalResourceService } from "@diaas/dxc-ngx-hal";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { HalResourceServiceFactoryProvider } from "../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider";
 import { BehaviorSubject } from 'rxjs';
