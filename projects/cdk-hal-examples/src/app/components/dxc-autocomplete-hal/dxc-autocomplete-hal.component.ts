@@ -115,7 +115,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
     });
   }
 
-  updateSuggestions(value) {
+  updateSuggestions() {
     if (this.options) {
       this.options.subscribe(items => {
         this.suggestions.next(
@@ -162,11 +162,12 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
         this.asyncHeadersHandler &&
         typeof this.asyncHeadersHandler === "function"
       ) {
-        this.asyncHeadersHandler().subscribe(additionalHeaders =>
+        this.asyncHeadersHandler().subscribe(additionalHeaders => {
+          const newHeaders = new HttpHeaders(...this.headers, ...additionalHeaders);
           this.collectionPropectService.handleGet(
             payload,
-            additionalHeaders
-          )
+            newHeaders
+          )}
         );
       } else {
         this.collectionPropectService.handleGet(payload);
