@@ -105,7 +105,7 @@ export class HalResourceService {
         .getInteractions()
         .map(interaction => ({
           rel: interaction.rel,
-          handler: (body?: any, additionalHeaders?: any) => {
+          handler: (body?: any) => {
             switch (interaction.method) {
               case "GET":
                 return this.handleGet(body);
@@ -176,7 +176,7 @@ export class HalResourceService {
       );
   }
 
-  public handleGet(body, additionalHeaders?) {
+  public handleGet(body, headers?) {
     let finalHalUrl = this.url;
     if(body) {
       finalHalUrl += Object.keys(body)
@@ -189,7 +189,7 @@ export class HalResourceService {
     }
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient
-      .get(finalHalUrl, { headers: {...this.headers, ...additionalHeaders} })
+      .get(finalHalUrl, { headers: headers ? headers : this.headers })
       .subscribe(
         resp => {
           const halResource = HalResource(resp);
