@@ -12,7 +12,7 @@ import { BehaviorSubject, of } from "rxjs";
 
 import { SimpleChanges } from "@angular/core";
 
-import { HalResourceService } from "../../pages/services/diaas-angular-cdk-hal.service";
+import { HalResourceService } from "../diaas-angular-cdk-hal.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
