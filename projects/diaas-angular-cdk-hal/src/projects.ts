@@ -11,3 +11,5 @@ export * from './lib/table/directives/dxc-column-def.directive';
 export * from './lib/table/directives/sorting.directive';
 export * from './lib/table/table';
 export * from './lib/table/table-module';
+
+export * from './lib/dxc-autocomplete-hal/dxc-autocomplete-hal.module'
