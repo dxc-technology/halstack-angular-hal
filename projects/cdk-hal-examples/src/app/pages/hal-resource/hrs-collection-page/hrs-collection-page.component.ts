@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/table/services/diaas-angular-cdk-hal.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { HalResourceService } from "@diaas/dxc-ngx-hal";
 
 @Component({
-  selector: 'app-hrs-collection-page',
-  templateUrl: './hrs-collection-page.component.html',
-  styleUrls: ['./hrs-collection-page.component.scss']
+  selector: "app-hrs-collection-page",
+  templateUrl: "./hrs-collection-page.component.html",
+  styleUrls: ["./hrs-collection-page.component.scss"],
+  providers: [HalResourceService]
 })
 export class HrsCollectionPageComponent implements OnInit {
 
@@ -21,19 +22,20 @@ export class HrsCollectionPageComponent implements OnInit {
     this.collectionPropectService.fetchResource();
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   navigate(page: number, operation:string){
     this.collectionPropectService.executeItemsHandler(operation);
   }
 
-  getItemPropertyValue(item, propertyKey){
-    return item !== undefined && item !== null && item.summary!== null && item.summary && item.summary[propertyKey] !== null && item.summary[propertyKey] !== undefined ? 
-      item.summary[propertyKey]: '';
+  getItemPropertyValue(item, propertyKey) {
+    return item !== undefined &&
+      item !== null &&
+      item.summary !== null &&
+      item.summary &&
+      item.summary[propertyKey] !== null &&
+      item.summary[propertyKey] !== undefined
+      ? item.summary[propertyKey]
+      : "";
   }
-
-
-
 }
