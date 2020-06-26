@@ -281,4 +281,8 @@ export class HalResourceService {
       itemsPerPage
     );
   }
+
+  addSortParams(sort:string, page: number, itemsPerPage: number){
+    return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
+  }
 }
