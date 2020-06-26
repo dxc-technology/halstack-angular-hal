@@ -28,10 +28,13 @@ export class HalResourceService {
     }
 
   fetchResource() {
+    console.log("fetch url:",this.url);
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient.get(this.url, { headers: this.headers }).subscribe(
       resp => {
+        console.debug("fetch resp:",resp);
         const halResource = HalResource(resp);
+        console.debug("fetch halresource:",halResource);
         this.resource.next(
           {... halResource });
 
@@ -44,6 +47,7 @@ export class HalResourceService {
         this.errorMessage.next(null);
       },
       err => {
+        console.debug("fetch err:",err);
         this.buildErrorResponse(err);
       }
     );
@@ -146,8 +150,12 @@ export class HalResourceService {
   }
 
   public handleGet({url, status}) {
+    console.log("url:",url);
+    console.log("this.hhtp:", this.httpClient)
     this.fetchStatus.next(status ? status : fetchingStatus);
+    console.log("this.headers:", this.headers)
     return this.httpClient.get(url ? url : this.url, { headers: this.headers }).subscribe(resp => {
+      console.log("resp:", resp);
       const halResource = HalResource(resp);
       this.resource.next({
         ...halResource
@@ -158,6 +166,7 @@ export class HalResourceService {
       }
       this.fetchStatus.next(doneStatus);
     }, err => {
+      console.log("err:", err);
       this.buildErrorResponse(err);
     });
   }
