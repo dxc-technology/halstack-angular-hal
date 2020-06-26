@@ -12,7 +12,7 @@ import { BehaviorSubject, of } from "rxjs";
 
 import { SimpleChanges } from "@angular/core";
 
-import { HalResourceService } from "../../pages/services/diaas-angular-cdk-hal.service";
+import { HalResourceService } from "../diaas-angular-cdk-hal.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
@@ -45,6 +45,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   @Input() public halUrl: string;
   @Input() public propertyName: string;
   @Input() public headers: any;
+  @Input() public asyncHeadersHandler: Function;
 
   @Input() public margin: any;
   @Input() public size: string;
@@ -91,9 +92,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   resource: BehaviorSubject<any> = new BehaviorSubject(null);
   collectionPropectService: HalResourceService;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
     this.updateSuggestions = this.updateSuggestions.bind(this);
@@ -116,7 +115,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
     });
   }
 
-  updateSuggestions(value) {
+  updateSuggestions() {
     if (this.options) {
       this.options.subscribe(items => {
         this.suggestions.next(
@@ -159,7 +158,20 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
     if ($event) {
       const payload = {};
       payload[this.propertyName] = $event;
-      this.collectionPropectService.executeHandler("search", payload);
+      if (
+        this.asyncHeadersHandler &&
+        typeof this.asyncHeadersHandler === "function"
+      ) {
+        this.asyncHeadersHandler().subscribe(additionalHeaders => {
+          const newHeaders = new HttpHeaders(...this.headers, ...additionalHeaders);
+          this.collectionPropectService.handleGet(
+            payload,
+            newHeaders
+          )}
+        );
+      } else {
+        this.collectionPropectService.handleGet(payload);
+      }
     }
   }
 
