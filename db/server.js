@@ -44,8 +44,9 @@ router.render = (req, res) => {
   }
   res.jsonp(res.locals.data);
 };
-server.listen(3000, () => {
-  console.log("JSON Server is running");
+const port = 3000;
+server.listen(port, () => {
+  console.log("JSON Server is running, in port: " + port);
 });
 
 function sortArray(key, order) { //FUnción de ordenación
@@ -77,3 +78,5 @@ function sortArray(key, order) { //FUnción de ordenación
     return order === "desc" ? comparison * -1 : comparison;
   };
 }
+
+module.exports = server
