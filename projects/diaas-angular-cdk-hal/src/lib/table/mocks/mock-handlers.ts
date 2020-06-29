@@ -1,0 +1,9 @@
+export const createMockHandlers = rest => [
+    rest.get('http://localhost:3000/data?_start=1&_num=4', (req, res, ctx) => {
+      console.log("req.params mock:",req.params);
+      return res(
+        ctx.status(200),
+        ctx.json(req.params)
+      )
+    }),
+  ]
