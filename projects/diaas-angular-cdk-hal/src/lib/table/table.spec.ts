@@ -7,15 +7,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { setupServer } from 'msw/node';
 
 import { rest } from 'msw';
-import data from "./tableResponseMock";
+import data from "./mocks/tableResponseMock";
 
-const handlers = [
+/*const handlers = [
   rest.get('http://localhost:3000/data?_start=1&_num=4', async (req, res, ctx) => {
     return res(ctx.status(200),ctx.json(data))
   }),
 ]
 
 const server = setupServer(...handlers);
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())*/
+
+import 'jest-preset-angular'
+import { server } from './mocks/node'
+import { HalResourceService } from './services/diaas-angular-cdk-hal.service';
+import { of } from 'rxjs';
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -34,6 +43,14 @@ describe('DxcHalTable tests', () => {
                         </ng-container>
                     </dxc-hal-table>`,
        imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
+       providers:[
+        {
+          provide: HalResourceService,
+          useValue: {
+            handleGet: () => of(data),
+          },
+        },
+       ],
        excludeComponentDeclaration: true
     })
     await waitForElement(() => hal.getByText(/Loading/i));
