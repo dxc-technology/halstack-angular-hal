@@ -179,21 +179,23 @@ export class HalResourceService {
   }
 
   public handleGet(body, headers?) {
+    console.log("body:",body);
     let finalHalUrl = this.url;
     if(body) {
-      finalHalUrl += Object.keys(body)
+      Object.keys(body)
       .map((key) =>
-        !this.url.includes("?")
+        finalHalUrl += !finalHalUrl.includes("?")
           ? `?${key}=${body[key]}`
           : `&${key}=${body[key]}`
       )
-      .reduce((prev, act) => prev + act);
     }
     this.fetchStatus.next(fetchingStatus);
+    console.log("finalHalUrl:",finalHalUrl)
     return this.httpClient
       .get(finalHalUrl, { headers: headers ? headers : this.headers })
       .subscribe(
         resp => {
+          console.log("resp:",resp)
           const halResource = HalResource(resp);
           this.resource.next({
             ...halResource
