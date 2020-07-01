@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OverviewPageComponent } from './overview-page.component';
+import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
 
-describe('OverviewPageComponent', () => {
-  let component: OverviewPageComponent;
-  let fixture: ComponentFixture<OverviewPageComponent>;
+describe('DxcAutocompleteHalComponent', () => {
+  let component: DxcAutocompleteHalComponent;
+  let fixture: ComponentFixture<DxcAutocompleteHalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OverviewPageComponent ]
+      declarations: [ DxcAutocompleteHalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OverviewPageComponent);
+    fixture = TestBed.createComponent(DxcAutocompleteHalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
