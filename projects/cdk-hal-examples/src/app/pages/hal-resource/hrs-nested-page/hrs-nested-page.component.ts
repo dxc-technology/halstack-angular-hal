@@ -33,8 +33,8 @@ export class HrsNestedPageComponent implements OnInit {
   }
 
   loadTelephone(){
-    this.telephoneResource = new HalResourceService('https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/telephones/1',
-    new HttpHeaders({"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"}), this.httpClient);
+    this.telephoneResource = new HalResourceService('http://localhost:3000/data/prospects/5e044795cff47e0009e03ac5/telephones/1',
+    new HttpHeaders({}), this.httpClient);
     this.telephoneResource.fetchResource();
     this.showTelephoneResource = true;
   }
