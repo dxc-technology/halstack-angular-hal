@@ -1,10 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { HalResourceService } from "@diaas/dxc-ngx-hal";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HalResourceServiceFactoryProvider } from "../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider";
+import { BehaviorSubject } from 'rxjs';
+import { BaseError } from 'make-error';
 
 @Component({
-  selector: 'app-hrs-collection-page',
-  templateUrl: './hrs-collection-page.component.html',
-  styleUrls: ['./hrs-collection-page.component.scss']
+  selector: "app-hrs-collection-page",
+  templateUrl: "./hrs-collection-page.component.html",
+  styleUrls: ["./hrs-collection-page.component.scss"],
+  providers: [HalResourceService]
 })
 export class HrsCollectionPageComponent implements OnInit {
 
@@ -13,23 +18,28 @@ export class HrsCollectionPageComponent implements OnInit {
   error = this.collectionPropectService.errorMessage;
   items = this.collectionPropectService.items;
 
+  page : number = 1;
+  totalItems : number = 27;
+  itemsPerPage : number =10;
+  
   constructor(@Inject('CollectionProspectService') private collectionPropectService: HalResourceService) { 
     this.collectionPropectService.fetchResource();
   }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
-  navigate(operation:string){
+  navigate(page: number, operation:string){
     this.collectionPropectService.executeItemsHandler(operation);
   }
 
-  getItemPropertyValue(item, propertyKey){
-    return item !== undefined && item !== null && item.summary!== null && item.summary && item.summary[propertyKey] !== null && item.summary[propertyKey] !== undefined ? 
-      item.summary[propertyKey]: '';
+  getItemPropertyValue(item, propertyKey) {
+    return item !== undefined &&
+      item !== null &&
+      item.summary !== null &&
+      item.summary &&
+      item.summary[propertyKey] !== null &&
+      item.summary[propertyKey] !== undefined
+      ? item.summary[propertyKey]
+      : "";
   }
-
-
-
 }

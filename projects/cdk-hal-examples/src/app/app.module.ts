@@ -5,10 +5,9 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeService, DXCHeaderModule,  ThemeModule,DXCFooterModule } from '@diaas/dxc-ngx-cdk';
-import { OverviewPageModule } from './pages/overview-page/overview-page.module';
 import { ComponentsPageModule } from './pages/components-page/components-page.module';
-import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-page/hrs-collection-page.component';
-
+import { HalTablePageModule } from './pages/hal-table-page/hal-table-page.module';
+import { AutocompleteHalModule } from './pages/autocomplete-hal/autocomplete-hal.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,10 +19,10 @@ import { HrsCollectionPageComponent } from './pages/hal-resource/hrs-collection-
     FormsModule,
     CommonModule,
     ComponentsPageModule,
-    OverviewPageModule,
     DXCHeaderModule,
-    DXCFooterModule
-
+    DXCFooterModule,
+    AutocompleteHalModule,
+    HalTablePageModule
   ],
   providers: [{ provide: 'ThemeService', useClass: ThemeService }],
   bootstrap: [AppComponent]

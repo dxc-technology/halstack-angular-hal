@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiaasHalPaginatorComponent } from './diaas-hal-paginator.component';
+import { AutocompleteHalComponent } from './autocomplete-hal.component';
 
-describe('DiaasHalPaginatorComponent', () => {
-  let component: DiaasHalPaginatorComponent;
-  let fixture: ComponentFixture<DiaasHalPaginatorComponent>;
+describe('AutocompleteHalComponent', () => {
+  let component: AutocompleteHalComponent;
+  let fixture: ComponentFixture<AutocompleteHalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiaasHalPaginatorComponent ]
+      declarations: [ AutocompleteHalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiaasHalPaginatorComponent);
+    fixture = TestBed.createComponent(AutocompleteHalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
