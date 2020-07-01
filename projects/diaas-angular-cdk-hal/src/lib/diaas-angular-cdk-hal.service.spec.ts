@@ -6,250 +6,320 @@ import { HalResourceServiceFactoryProvider } from './diaas-angular-cdk-hal.facto
 describe('HalResourceService', () => {
 
   let httpMock: HttpTestingController;
-  const apiURL = 'https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5';
+  const apiURL = 'http://localhost:3000/data';
   const dummyResponse: any = {
-    "prospect-update-user": "Agent@csc.com",
-    "prospect-birthdate": "1992-06-26",
-    "prospect-email": "pepe",
-    "_links": {
-      "prospect:prospect-telephone-list": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/telephones"
+    "data": {
+      "_links": {
+          "next": {
+              "href": "http://localhost:3000/data/?_start=16&_num=5"
+          },
+          "item": [
+              {
+                  "summary": {
+                      "prospect-update-user": "Agent@csc.com",
+                      "prospect-birthdate": "2001-12-04",
+                      "prospect-email": "",
+                      "prospect-client-number": "",
+                      "prospect-create-user": "Agent@csc.com",
+                      "prospect-doc-type": "prospect",
+                      "prospect-full-name": "BOCJT FJUUZ",
+                      "prospect-given-name": "BOCJT",
+                      "prospect-update-date": "2020-03-23",
+                      "original-prospect": "",
+                      "prospect-last-name": "FJUUZ",
+                      "prospect-start-date": "2020-03-23",
+                      "prospect-doc-name": "",
+                      "_create_state": "CREATED",
+                      "prospect-doc-id": "5e7879bc8a1e3405298aa4fb",
+                      "prospect-title": "Dr",
+                      "prospect-mobile-phone": "",
+                      "prospect-distributor-id": "Agent@csc.com",
+                      "prospect-status": "DRAFT"
+                  },
+                  "name": "Prospects List",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7879bc8a1e3405298aa4fb",
+                  "title": "Prospects List"
+              },
+              {
+                  "summary": {
+                      "prospect-update-user": "Agent@csc.com",
+                      "prospect-birthdate": "1992-12-04",
+                      "prospect-email": "",
+                      "prospect-client-number": "",
+                      "prospect-create-user": "Agent@csc.com",
+                      "prospect-doc-type": "prospect",
+                      "prospect-full-name": "XIFYZ OROKQ",
+                      "prospect-given-name": "XIFYZ",
+                      "prospect-update-date": "2020-03-23",
+                      "original-prospect": "",
+                      "prospect-last-name": "OROKQ",
+                      "prospect-start-date": "2020-03-24",
+                      "prospect-doc-name": "",
+                      "_create_state": "CREATED",
+                      "prospect-doc-id": "5e7879768a1e3405298aa4fa",
+                      "prospect-title": "Dr",
+                      "prospect-mobile-phone": "",
+                      "prospect-distributor-id": "Agent@csc.com",
+                      "prospect-status": "DRAFT"
+                  },
+                  "name": "Prospects List",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7879768a1e3405298aa4fa",
+                  "title": "Prospects List"
+              },
+              {
+                  "summary": {
+                      "prospect-update-user": "Agent@csc.com",
+                      "prospect-birthdate": "2001-12-04",
+                      "prospect-email": "",
+                      "prospect-client-number": "",
+                      "prospect-create-user": "Agent@csc.com",
+                      "prospect-doc-type": "prospect",
+                      "prospect-full-name": "UOPSC CFRHV",
+                      "prospect-given-name": "UOPSC",
+                      "prospect-update-date": "2020-03-23",
+                      "original-prospect": "",
+                      "prospect-last-name": "CFRHV",
+                      "prospect-start-date": "2020-03-25",
+                      "prospect-doc-name": "",
+                      "_create_state": "CREATED",
+                      "prospect-doc-id": "5e7879748a1e3405298aa4f9",
+                      "prospect-title": "Dr",
+                      "prospect-mobile-phone": "",
+                      "prospect-distributor-id": "Agent@csc.com",
+                      "prospect-status": "DRAFT"
+                  },
+                  "name": "Prospects List",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7879748a1e3405298aa4f9",
+                  "title": "Prospects List"
+              },
+              {
+                  "summary": {
+                      "prospect-update-user": "Agent@csc.com",
+                      "prospect-birthdate": "1992-12-04",
+                      "prospect-email": "",
+                      "prospect-client-number": "",
+                      "prospect-create-user": "Agent@csc.com",
+                      "prospect-doc-type": "prospect",
+                      "prospect-full-name": "RBGMX SAWLZ",
+                      "prospect-given-name": "RBGMX",
+                      "prospect-update-date": "2020-03-23",
+                      "original-prospect": "",
+                      "prospect-last-name": "SAWLZ",
+                      "prospect-start-date": "2020-03-23",
+                      "prospect-doc-name": "",
+                      "_create_state": "CREATED",
+                      "prospect-doc-id": "5e7878968a1e3405298aa4f8",
+                      "prospect-title": "Dr",
+                      "prospect-mobile-phone": "",
+                      "prospect-distributor-id": "Agent@csc.com",
+                      "prospect-status": "DRAFT"
+                  },
+                  "name": "Prospects List",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7878968a1e3405298aa4f8",
+                  "title": "Prospects List"
+              },
+              {
+                  "summary": {
+                      "prospect-update-user": "Agent@csc.com",
+                      "prospect-birthdate": "2001-12-04",
+                      "prospect-email": "",
+                      "prospect-client-number": "",
+                      "prospect-create-user": "Agent@csc.com",
+                      "prospect-doc-type": "prospect",
+                      "prospect-full-name": "THISG ZDZOC",
+                      "prospect-given-name": "THISG",
+                      "prospect-update-date": "2020-03-23",
+                      "original-prospect": "",
+                      "prospect-last-name": "ZDZOC",
+                      "prospect-start-date": "2020-03-23",
+                      "prospect-doc-name": "",
+                      "_create_state": "CREATED",
+                      "prospect-doc-id": "5e7878958a1e3405298aa4f7",
+                      "prospect-title": "Dr",
+                      "prospect-mobile-phone": "",
+                      "prospect-distributor-id": "Agent@csc.com",
+                      "prospect-status": "DRAFT"
+                  },
+                  "name": "Prospects List",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7878958a1e3405298aa4f7",
+                  "title": "Prospects List"
+              },
+              {
+                "summary": {
+                    "prospect-update-user": "Agent222@csc.com",
+                    "prospect-birthdate": "2001-12-04",
+                    "prospect-email": "",
+                    "prospect-client-number": "",
+                    "prospect-create-user": "Agent@csc.com",
+                    "prospect-doc-type": "prospect",
+                    "prospect-full-name": "AAAA BBBB",
+                    "prospect-given-name": "AAAA",
+                    "prospect-update-date": "2020-03-02",
+                    "original-prospect": "",
+                    "prospect-last-name": "BBBB",
+                    "prospect-start-date": "2020-03-02",
+                    "prospect-doc-name": "",
+                    "_create_state": "CREATED",
+                    "prospect-doc-id": "5e7878958a1e3405298aa4f7",
+                    "prospect-title": "Dr",
+                    "prospect-mobile-phone": "",
+                    "prospect-distributor-id": "Agent222@csc.com",
+                    "prospect-status": "DRAFT"
+                },
+                "name": "Prospects List",
+                "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e7878958a1e3405298aa4f7",
+                "title": "Prospects List"
+            }
+          ],
+          "_count": 6,
+          "prev": {
+              "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/?_start=6&_num=5"
+          },
+          "self": {
+              "name": "Prospects List",
+              "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects",
+              "title": "Prospects List"
+          },
+          "up": {
+              "href": "http://ec2-alb-dev-central-external-292825563.ap-southeast-1.elb.amazonaws.com:80/omni-prospect-services/omni/service"
+          },
+          "first": {
+              "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/?_start=1&_num=5"
+          }
       },
-      "prospect:quote-linked-resource-creation": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/linkedResourceCreation"
-      },
-      "prospect:quote-link-resources": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/linkResources"
-      },
-      "prospect:prospect-address-list": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/addresses"
-      },
-      "prospect:status_report": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/status_report"
-      },
-      "prospect:prospect-risk": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/risk"
-      },
-      "prospect:prospect-financial-knowledge": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/financialKnowledge"
-      },
-      "prospect:prospect-email-list": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/emails"
-      },
-      "prospect:prospect-demography": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/demography"
-      },
-      "self": {
-        "name": "Prospects List",
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5",
-        "title": "Prospects List"
-      },
-      "prospect:prospect-id-list": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/ids"
-      },
-      "up": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects"
-      },
-      "prospect:prospect-financial-position": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/financial"
-      },
-      "prospect:prospect-pdpa": {
-        "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/pdpas"
+      "_options": {
+          "links": [
+              {
+                  "schema": {
+                      "properties": {
+                          "prospect-birthdate": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-email": {
+                              "type": "string"
+                          },
+                          "case_insensitive": {
+                              "type": "string",
+                              "enum": []
+                          },
+                          "prospect-update-date": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-client-number": {
+                              "type": "string"
+                          },
+                          "prospect-start-date": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-doc-name": {
+                              "type": "string"
+                          },
+                          "sort": {
+                              "type": "string",
+                              "enum": []
+                          },
+                          "prospect-full-name": {
+                              "type": "string"
+                          },
+                          "prospect-distributor-id": {
+                              "type": "string"
+                          }
+                      },
+                      "required": []
+                  },
+                  "method": "GET",
+                  "rel": "search-all",
+                  "mediaType": "application/vnd.hal+json",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects?mode=all",
+                  "title": "Search for a Prospect by criteria"
+              },
+              {
+                  "schema": {
+                      "properties": {
+                          "prospect-birthdate": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-email": {
+                              "type": "string"
+                          },
+                          "case_insensitive": {
+                              "type": "string",
+                              "enum": []
+                          },
+                          "prospect-update-date": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-client-number": {
+                              "type": "string"
+                          },
+                          "prospect-start-date": {
+                              "format": "date",
+                              "type": "string"
+                          },
+                          "prospect-doc-name": {
+                              "type": "string"
+                          },
+                          "sort": {
+                              "type": "string",
+                              "enum": []
+                          },
+                          "prospect-full-name": {
+                              "type": "string"
+                          },
+                          "prospect-distributor-id": {
+                              "type": "string"
+                          }
+                      },
+                      "required": []
+                  },
+                  "method": "GET",
+                  "rel": "search",
+                  "mediaType": "application/vnd.hal+json",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects",
+                  "title": "Search for a Prospect by criteria"
+              },
+              {
+                  "schema": {
+                      "properties": {},
+                      "required": []
+                  },
+                  "method": "POST",
+                  "rel": "create",
+                  "mediaType": "application/json",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects",
+                  "title": "Create a Prospect"
+              },
+              {
+                  "schema": {
+                      "properties": {
+                          "original-prospect": {
+                              "type": "string"
+                          }
+                      },
+                      "required": [
+                          "original-prospect"
+                      ]
+                  },
+                  "method": "POST",
+                  "rel": "copy",
+                  "mediaType": "application/json",
+                  "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects?mode=copy",
+                  "title": "Copy a prospect"
+              }
+          ],
+          "title": "Prospect Interactions"
+        }
       }
-    },
-    "prospect-client-number": "",
-    "_options": {
-      "links": [
-        {
-          "schema": {
-            "properties": {
-              "case_insensitive": {
-                "type": "string",
-                "enum": []
-              },
-              "sort": {
-                "type": "string",
-                "enum": []
-              }
-            },
-            "required": []
-          },
-          "method": "GET",
-          "rel": "fetch",
-          "mediaType": "application/vnd.hal+json",
-          "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5",
-          "title": "Fetch Prospect details"
-        },
-        {
-          "schema": {
-            "properties": {
-              "prospect-update-user": {
-                "type": "string"
-              },
-              "prospect-given-name": {
-                "type": "string"
-              },
-              "prospect-birthdate": {
-                "format": "date",
-                "type": "string"
-              },
-              "prospect-email": {
-                "type": "string"
-              },
-              "prospect-update-date": {
-                "format": "date",
-                "type": "string"
-              },
-              "prospect-last-name": {
-                "type": "string"
-              },
-              "prospect-title": {
-                "type": "string",
-                "enum": [
-                  "Dr",
-                  "Miss",
-                  "Mr",
-                  "Mrs",
-                  "Ms",
-                  "Professor",
-                  "Reverend",
-                  "Sir"
-                ]
-              },
-              "prospect-mobile-phone": {
-                "type": "string"
-              },
-              "prospect-full-name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "prospect-given-name",
-              "prospect-last-name",
-              "prospect-title"
-            ]
-          },
-          "method": "PATCH",
-          "rel": "update",
-          "mediaType": "application/json",
-          "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5",
-          "title": "Update a Prospect"
-        },
-        {
-          "schema": {
-            "properties": {},
-            "required": []
-          },
-          "method": "DELETE",
-          "rel": "delete",
-          "mediaType": "application/vnd.hal+json;application/json",
-          "href": "https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5",
-          "title": "Delete Prospect Resource"
-        }
-      ],
-      "title": "Prospect Interactions",
-      "properties": {
-        "prospect-update-user": {
-          "type": "string"
-        },
-        "prospect-birthdate": {
-          "format": "date",
-          "type": "string"
-        },
-        "prospect-email": {
-          "type": "string"
-        },
-        "prospect-client-number": {
-          "type": "string"
-        },
-        "prospect-create-user": {
-          "type": "string"
-        },
-        "prospect-doc-type": {
-          "type": "string"
-        },
-        "prospect-full-name": {
-          "type": "string"
-        },
-        "prospect-given-name": {
-          "type": "string"
-        },
-        "prospect-update-date": {
-          "format": "date",
-          "type": "string"
-        },
-        "original-prospect": {
-          "type": "string"
-        },
-        "prospect-last-name": {
-          "type": "string"
-        },
-        "prospect-start-date": {
-          "format": "date",
-          "type": "string"
-        },
-        "prospect-doc-name": {
-          "type": "string"
-        },
-        "_create_state": {
-          "type": "string",
-          "enum": [
-            "DRAFT",
-            "CREATED"
-          ]
-        },
-        "prospect-doc-id": {
-          "type": "string"
-        },
-        "prospect-title": {
-          "type": "string",
-          "enum": [
-            "Dr",
-            "Miss",
-            "Mr",
-            "Mrs",
-            "Ms",
-            "Professor",
-            "Reverend",
-            "Sir"
-          ]
-        },
-        "prospect-mobile-phone": {
-          "type": "string"
-        },
-        "prospect-distributor-id": {
-          "type": "string"
-        },
-        "prospect-status": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "prospect-given-name",
-        "prospect-last-name",
-        "prospect-title"
-      ]
-    },
-    "prospect-create-user": "Agent@csc.com",
-    "prospect-doc-type": "prospect",
-    "prospect-full-name": "Testsergsergseasdfasdfasdf Kumar",
-    "prospect-given-name": "Testsergsergseasdfasdfasdf",
-    "prospect-update-date": "2020-03-24",
-    "original-prospect": "",
-    "prospect-last-name": "Kumar",
-    "prospect-start-date": "2019-12-26",
-    "prospect-doc-name": "",
-    "_create_state": "CREATED",
-    "prospect-doc-id": "5e044795cff47e0009e03ac5",
-    "prospect-title": "",
-    "prospect-mobile-phone": "",
-    "prospect-distributor-id": "Agent@csc.com",
-    "prospect-status": "INVALID"
-  
+
 };
 
   beforeEach( () => TestBed.configureTestingModule({
-    
+
     imports: [
       HttpClientTestingModule
     ],
@@ -257,7 +327,7 @@ describe('HalResourceService', () => {
       HalResourceServiceFactoryProvider.createInstance(
         HalResourceService,
         apiURL,
-        {"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"})
+        {})
     ]
   })
    );
@@ -282,7 +352,7 @@ describe('HalResourceService', () => {
 
 
   it('should be returned a halResource:  Fetch operation and resource is returned.', () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
     const fetchStatus = service.fetchStatus;
@@ -300,23 +370,23 @@ describe('HalResourceService', () => {
   });
 
   it('should retrieves an error in patch operation: propety patch does not exist.', () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
-    
+
     const error = service.errorMessage;
     service.fetchResource();
     const req = httpMock.expectOne(apiURL);
     expect(req.request.method).toBe("GET");
     req.flush(dummyResponse);
 
-    service.getHandlers().find(x => x.rel == 'update').handler({'test':'julio valeije'});   
+    service.getHandlers().find(x => x.rel == 'update').handler({'test':'julio valeije'});
     expect(error.getValue()).toBeTruthy();
   });
 
 
   it('should retrieves response in patch operation: propety patch exist and patch is done.', () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
 
@@ -329,7 +399,7 @@ describe('HalResourceService', () => {
     expect(req.request.method).toBe("GET");
     req.flush(dummyResponse);
 
-    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});   
+    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});
     expect(fetchStatus.getValue()).toEqual('patching');
 
     const reqPatch = httpMock.expectOne(apiURL);
@@ -342,23 +412,23 @@ describe('HalResourceService', () => {
   });
 
   it('should retrieves an error in patch operation: propety patch does not exist.', () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
-    
+
     const error = service.errorMessage;
     service.fetchResource();
     const req = httpMock.expectOne(apiURL);
     expect(req.request.method).toBe("GET");
     req.flush(dummyResponse);
 
-    service.getHandlers().find(x => x.rel == 'update').handler({'test':'julio valeije'});   
+    service.getHandlers().find(x => x.rel == 'update').handler({'test':'julio valeije'});
     expect(error.getValue()).toBeTruthy();
   });
 
 
   it('should retrieves response in patch operation: propety patch exist and patch is done.', () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
 
@@ -371,7 +441,7 @@ describe('HalResourceService', () => {
     expect(req.request.method).toBe("GET");
     req.flush(dummyResponse);
 
-    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});   
+    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});
     expect(fetchStatus.getValue()).toEqual('patching');
 
     const reqPatch = httpMock.expectOne(apiURL);
@@ -384,9 +454,9 @@ describe('HalResourceService', () => {
   });
 
 
-  it('should retrieves response in delete operation: delete does not exist an retrieves an error.', 
+  it('should retrieves response in delete operation: delete does not exist an retrieves an error.',
     () => {
-    
+
     httpMock = TestBed.get(HttpTestingController);
     const service: HalResourceService = TestBed.get(HalResourceService);
 
@@ -399,7 +469,7 @@ describe('HalResourceService', () => {
     expect(req.request.method).toBe("GET");
     req.flush(dummyResponse);
 
-    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});   
+    service.getHandlers().find(x => x.rel == 'update').handler({'prospect-update-user':'julio valeije'});
     expect(fetchStatus.getValue()).toEqual('creating');
 
     const reqPatch = httpMock.expectOne(apiURL);

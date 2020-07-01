@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
-import { ThemeService } from "@diaas/dxc-ngx-cdk";
 import { HttpClient } from "@angular/common/http";
+import { ThemeService } from '@diaas/dxc-ngx-cdk';
 
 @Component({
   selector: "app-root",
@@ -25,10 +25,6 @@ export class AppComponent {
           properties: JSON.parse(JSON.stringify(resp))
         };
         this.themeService.registerTheme(remoteTheme);
-        this.themeService.setTheme("remote");
-      },
-      () => {
-        this.themeService.setTheme("default");
       }
     );
   }
