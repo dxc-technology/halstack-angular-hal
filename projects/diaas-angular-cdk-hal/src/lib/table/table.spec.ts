@@ -1,14 +1,10 @@
 import { render, waitForElement } from '@testing-library/angular';
-import { screen, waitFor, fireEvent } from "@testing-library/dom";
+import { screen, fireEvent } from "@testing-library/dom";
 import { DxcHalTable } from './table';
 import { CdkTableModule } from './table-module';
-import { HttpClientModule } from '@angular/common/http';
 import data from "./mocks/tableResponseMock";
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { HalResourceService } from '../diaas-angular-cdk-hal.service';
-import { of } from 'rxjs';
 import { TestBed, getTestBed } from '@angular/core/testing';
 
 describe('Hal table', () => {
@@ -37,15 +33,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
   });
     injector = getTestBed();
@@ -77,15 +65,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
   });    
     injector = getTestBed();
@@ -100,7 +80,10 @@ describe('Hal table', () => {
     const table = hal.getByRole("table");
     expect(table).toBeTruthy();
     hal.detectChanges();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
     expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("UOPSC CFRHV")).toBeTruthy();
+    expect(await screen.getByText("RBGMX SAWLZ")).toBeTruthy();
 
     const nextButton = hal.getAllByRole("button")[2];
     fireEvent.click(nextButton);
@@ -130,15 +113,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
   });    
     injector = getTestBed();
@@ -153,6 +128,7 @@ describe('Hal table', () => {
     const table = hal.getByRole("table");
     expect(table).toBeTruthy();
     hal.detectChanges();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
     expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
 
     const lastButton = hal.getAllByRole("button")[3];
@@ -184,15 +160,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
     });    
     injector = getTestBed();
@@ -208,6 +176,7 @@ describe('Hal table', () => {
     expect(table).toBeTruthy();
     hal.detectChanges();
     expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
 
     const lastButton = hal.getAllByRole("button")[3];
     fireEvent.click(lastButton);
@@ -249,15 +218,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
     });    
     injector = getTestBed();
@@ -273,6 +234,7 @@ describe('Hal table', () => {
     expect(table).toBeTruthy();
     hal.detectChanges();
     expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy(); 
 
     const lastButton = hal.getAllByRole("button")[3];
     fireEvent.click(lastButton);
@@ -314,19 +276,12 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule, HttpClientModule],
-     providers:[
-      {
-        provide: HalResourceService,
-        useValue: {
-          handleGet: () => of(data),
-        },
-      },
-     ],
+     imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
   });    
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
+
     let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
     expect(req.request.method).toBe('GET');
 
@@ -337,26 +292,77 @@ describe('Hal table', () => {
     const table = hal.getByRole("table");
     expect(table).toBeTruthy();
     hal.detectChanges();
-    expect(screen.getByText("BOCJT FJUUZ")).toBeTruthy();
-    expect(screen.getByText("XIFYZ OROKQ")).toBeTruthy();
-    expect(screen.getByText("UOPSC CFRHV")).toBeTruthy();
-    expect(screen.getByText("RBGMX SAWLZ")).toBeTruthy();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
+    expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("UOPSC CFRHV")).toBeTruthy();
+    expect(await screen.getByText("RBGMX SAWLZ")).toBeTruthy();
 
     const sortHeader = hal.getByText("User");
     fireEvent.click(sortHeader);
     hal.detectChanges();
-    req = httpMock.expectOne(`http://localhost:3000/data?_sort=prospect-full-name&_start=1&_num=4`);
-    expect(req.request.method).toBe('GET');
-    
+
     array = JSON.parse(JSON.stringify(data));
-    array._links.item = array._links.item.sort(
-      sortArray("prospect-full-name","asc")
-    );
-    req.flush(calculatePagination(1,4,array));
+    req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4&_sort=prospect-full-name`);
+    expect(req.request.method).toBe('GET');
+    array._links.item = await array._links.item.sort(sortArray("prospect-full-name","asc"));
+    req.flush(array);
     hal.detectChanges();
-    expect(screen.getByText("BOCJT FJUUZ")).toBeTruthy();
+    req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
+    expect(req.request.method).toBe('GET');
+    hal.detectChanges();
+    req.flush(await calculatePagination(1,4,array));
+    hal.detectChanges();
 
+    expect(await screen.getByText("AAAA BBBB")).toBeTruthy();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
+    expect(await screen.getByText("RBGMX SAWLZ")).toBeTruthy();
+    expect(await screen.getByText("THISG ZDZOC")).toBeTruthy();
+  });
 
+  test('should not sort data that is not sortable', async () =>{
+    let array = JSON.parse(JSON.stringify(data));
+    const hal = await render(DxcHalTable, {
+      template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="4">
+                      <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
+                          <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
+                      </ng-container>                
+                      <ng-container dxcColumnDef="Email">
+                          <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
+                      </ng-container>
+                  </dxc-hal-table>`,
+     imports: [CdkTableModule, HttpClientTestingModule],
+     excludeComponentDeclaration: true
+  });    
+    injector = getTestBed();
+    httpMock = injector.get(HttpTestingController);
+
+    let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
+    expect(req.request.method).toBe('GET');
+
+    req.flush(calculatePagination(1,4,array));
+
+    await waitForElement(() => hal.getByText(/Loading/i));
+    await waitForElement(() => hal.getByRole("table"));
+    const table = hal.getByRole("table");
+    expect(table).toBeTruthy();
+    hal.detectChanges();
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
+    expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("UOPSC CFRHV")).toBeTruthy();
+    expect(await screen.getByText("RBGMX SAWLZ")).toBeTruthy();
+
+    const sortHeader = hal.getByText("Email");
+    fireEvent.click(sortHeader);
+    hal.detectChanges();
+
+    httpMock.expectNone(`http://localhost:3000/data?_start=1&_num=4&_sort=prospect-distributor-id`);
+    
+    hal.detectChanges();
+
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
+    expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
+    expect(await screen.getByText("UOPSC CFRHV")).toBeTruthy();
+    expect(await screen.getByText("RBGMX SAWLZ")).toBeTruthy();
   });
 
 });
