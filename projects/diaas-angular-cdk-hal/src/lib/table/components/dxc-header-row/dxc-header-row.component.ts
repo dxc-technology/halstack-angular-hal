@@ -3,7 +3,7 @@ import { SortService } from '../../services/sort.service';
 
 @Component({
   selector: 'th',
-  template: `<div ordering="{{isSortable}}" id="header-{{columnName}}-{{parentClassName}}">{{columnName}} <span id="iconSort-{{columnName}}-{{parentClassName}}" *ngIf="isSortable"></span></div>`,
+  template: `<div ordering="{{isSortable}}" id="header-{{columnName}}-{{parentClassName}}" propertyname={{value}}>{{columnName}} <span id="iconSort-{{columnName}}-{{parentClassName}}" *ngIf="isSortable"></span></div>`,
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.None
 })

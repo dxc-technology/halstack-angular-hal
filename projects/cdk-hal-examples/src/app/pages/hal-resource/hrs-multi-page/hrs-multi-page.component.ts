@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/table/services/diaas-angular-cdk-hal.service';
+import { HalResourceService } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.service';
 
 @Component({
   selector: 'app-hrs-multi-page',
