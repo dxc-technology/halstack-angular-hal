@@ -31,8 +31,7 @@
                 "glob": "**/*",
                 "input": "./node_modules/@diaas/dxc-ngx-cdk/lib/assets",
                 "output": "./assets/"
-              },
-              "projects/diaas-angular-cdk-hal/src/mockServiceWorker.js"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
