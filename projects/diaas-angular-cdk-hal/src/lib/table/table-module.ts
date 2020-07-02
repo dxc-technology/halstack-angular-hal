@@ -15,21 +15,6 @@ import { DataRowOutlet } from './table';
 import { SpinnerOutlet } from './table';
 import { Ordering } from './directives/sorting.directive';
 
-const EXPORTED_DECLARATIONS = [
-  DxcHalTable,
-  DxcRowDef,
-  DxcCellDef,
-  DxcCellOutlet,
-  DxcColumnDef,
-  TableSpinnerComponent,
-  DxcHeaderRowComponent,
-  HeaderOutlet,
-  DataRowOutlet,
-  SpinnerOutlet,
-  DxcRowComponent,
-  Ordering
-];
-
 @NgModule({
   exports: [
     DxcHalTable,
