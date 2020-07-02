@@ -12,8 +12,8 @@ import { BehaviorSubject, of } from "rxjs";
 
 import { SimpleChanges } from "@angular/core";
 
-import { HalResourceService } from "../table/services/diaas-angular-cdk-hal.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HalResourceService } from '../diaas-angular-cdk-hal.service';
 
 @Component({
   selector: "dxc-autocomplete-hal",
