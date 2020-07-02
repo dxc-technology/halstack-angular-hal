@@ -20,11 +20,11 @@ import { HalResourceServiceFactoryProvider } from '../../../../../../diaas-angul
   exports: [HrsMultiPageComponent],
   providers: [HalResourceServiceFactoryProvider.createInstance(
       'PropectService',
-      'https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5',
-      {"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"}),
+      'http://localhost:3000/data',
+      {}),
     HalResourceServiceFactoryProvider.createInstance(
       'TelephonePropectService',
-      'https://api.dxc-dev-integral.hub-1.dev.us.insurance.dxc.com/prospects/5e044795cff47e0009e03ac5/telephones/1',
-      {"x-api-key":"F9Pl5g8RlA4bx7NkCYfIP6lEM78Gwage4ZTURipo"})]
+      'http://localhost:3000/data',
+      {})]
 })
 export class HrsMultiPageModule { }

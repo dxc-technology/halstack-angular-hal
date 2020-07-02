@@ -7,21 +7,21 @@ import data from "./mocks/tableResponseMock";
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { HalResourceService } from '../table/services/diaas-angular-cdk-hal.service';
+import { HalResourceService } from '../diaas-angular-cdk-hal.service';
 import { of } from 'rxjs';
 import { TestBed, getTestBed } from '@angular/core/testing';
 
 describe('Hal table', () => {
   let injector: TestBed;
   let httpMock: HttpTestingController;
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
 
   });
-  
+
   afterEach(() => {
     httpMock.verify();
   });
@@ -32,7 +32,7 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="4">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
@@ -47,7 +47,7 @@ describe('Hal table', () => {
       },
      ],
      excludeComponentDeclaration: true
-  });    
+  });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     const req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
