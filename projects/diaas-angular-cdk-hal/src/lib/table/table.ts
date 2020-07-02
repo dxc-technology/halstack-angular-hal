@@ -57,10 +57,10 @@ import { TableSpinnerComponent } from './components/table-spinner/table-spinner.
 import { DxcHeaderRowComponent } from './components/dxc-header-row/dxc-header-row.component';
 import { DxcRowComponent } from './components/dxc-row/dxc-row.component';
 import { DxcColumnDef } from './directives/dxc-column-def.directive';
-import { HalResourceService } from './services/diaas-angular-cdk-hal.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { SortService } from './services/sort.service';
 import { Ordering } from './directives/sorting.directive';
+import { HalResourceService } from '../diaas-angular-cdk-hal.service';
 
 /** Interface used to provide an outlet for rows to be inserted into. */
 export interface RowOutlet {
@@ -339,7 +339,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     this.dataSource = new TableDataSource(this.collectionResource.items);
 
     this.collectionResource.handleGet({
-      _start: this.page, 
+      _start: this.page,
       _num: this.itemsPerPage
     });
 
@@ -699,25 +699,25 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       case 'next':
         this.page=page;
         return this.collectionResource.handleGet({
-          _start: this.page, 
+          _start: this.page,
           _num: this.itemsPerPage
         });
       case 'first':
         this.page=page;
         return this.collectionResource.handleGet({
-          _start: this.page, 
+          _start: this.page,
           _num: this.itemsPerPage
         });
       case 'prev':
         this.page=page;
         return this.collectionResource.handleGet({
-          _start: this.page, 
+          _start: this.page,
           _num: this.itemsPerPage
         });
       case 'last':
         this.page=page;
         return this.collectionResource.handleGet({
-          _start: this.page, 
+          _start: this.page,
           _num: this.itemsPerPage
         });
       default:
@@ -773,14 +773,14 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   sortCells(value,state) {
     if(state === "up"){
       return this.collectionResource.handleGet({
-        _start: this.page, 
+        _start: this.page,
         _num: this.itemsPerPage,
         _sort: `${value}`
       });
     }
     else if(state === "down"){
       return this.collectionResource.handleGet({
-        _start: this.page, 
+        _start: this.page,
         _num: this.itemsPerPage,
         _sort: `${value}`
       });
