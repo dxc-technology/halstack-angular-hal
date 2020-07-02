@@ -179,7 +179,6 @@ export class HalResourceService {
   }
 
   public handleGet(body, headers?) {
-    console.log("body:",body);
     let finalHalUrl = this.url;
     if(body) {
       Object.keys(body)
@@ -190,12 +189,10 @@ export class HalResourceService {
       )
     }
     this.fetchStatus.next(fetchingStatus);
-    console.log("finalHalUrl:",finalHalUrl)
     return this.httpClient
       .get(finalHalUrl, { headers: headers ? headers : this.headers })
       .subscribe(
         resp => {
-          console.log("resp:",resp)
           const halResource = HalResource(resp);
           this.resource.next({
             ...halResource
