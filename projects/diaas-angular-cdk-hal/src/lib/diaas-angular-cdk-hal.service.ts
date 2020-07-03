@@ -26,7 +26,6 @@ export class HalResourceService {
     }
 
   fetchResource() {
-    console.log("fetch url:",this.url);
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient.get(this.url, { headers: this.headers }).subscribe(
       resp => {
@@ -38,7 +37,6 @@ export class HalResourceService {
           halResource.getLinks().length > 0
         ) {
           this.items.next(halResource.getItems());
-          console.debug("Resource service ITems: " + halResource.getItems());
           this.totalItems.next(
             halResource.resourceRepresentation._links._count
           );
@@ -107,10 +105,10 @@ export class HalResourceService {
         .getInteractions()
         .map(interaction => ({
           rel: interaction.rel,
-          handler: (body?: any) => {
+          handler: (body?: any, headers?: any) => {
             switch (interaction.method) {
               case "GET":
-                return this.handleGet(body);
+                return this.handleGet(body, headers);
               case "PATCH":
                 if (this.existPropertiesSchema(interaction, body)) {
                   return this.handlePatch(body);
