@@ -35,7 +35,7 @@ describe('Hal table', () => {
                   </dxc-hal-table>`,
      imports: [CdkTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-  });
+    });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     const req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
