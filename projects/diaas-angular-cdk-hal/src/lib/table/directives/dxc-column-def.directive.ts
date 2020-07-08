@@ -1,6 +1,7 @@
 import { Directive, Input, ContentChild, Inject, Optional } from '@angular/core';
 import { DxcCellDef } from './dxc-cell-def.directive';
 import {DXC_HAL_TABLE} from './../tokens';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 /** Base interface for a cell definition. Captures a column's cell template definition. */
 
@@ -32,6 +33,19 @@ export class DxcColumnDef extends _DxcColumnDefBase {
     }
   }
   _name: string;
+
+  @Input('sortable') sortable = {isSortable:false,propertyName:""};
+
+  @Input('value')
+  get value(): string {
+    return this._value;
+  }
+  set value(value: string) {
+    if (value) {
+      this._value = value;
+    }
+  }
+  _value: string;
 
   /** @docs-private */
   @ContentChild(DxcCellDef, { static:true }) cell: DxcCellDef;
