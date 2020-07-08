@@ -16,10 +16,10 @@ export class HrsNestedPageComponent implements OnInit {
 
   showTelephoneResource = false;
 
-  constructor(private halResource: HalResourceService, private httpClient: HttpClient) { 
+  constructor(private halResource: HalResourceService, private httpClient: HttpClient) {
     this.halResource.fetchResource();
   }
-  
+
   getPropertyValue(propertyName:string){
     return this.halResource.resource.getValue().resourceRepresentation[propertyName];
   }
@@ -44,13 +44,13 @@ export class HrsNestedPageComponent implements OnInit {
   }
 
   onPatchUpdateUser(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-update-user'] = value;
     this.patchResource(payload);
   }
 
   onPatchEmail(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-email'] = value;
     this.patchResource(payload);
   }

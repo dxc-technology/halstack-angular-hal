@@ -31,7 +31,6 @@ export class HalResourceService {
       resp => {
         const halResource = HalResource(Array.isArray(resp) ? resp[0] : resp);
         this.resource.next({ ...halResource });
-
         if (
           halResource.getLinks() !== null &&
           halResource.getLinks().length > 0
@@ -46,7 +45,6 @@ export class HalResourceService {
         this.errorMessage.next(null);
       },
       err => {
-        console.debug("fetch err:",err);
         this.buildErrorResponse(err);
       }
     );
@@ -267,19 +265,19 @@ export class HalResourceService {
     return valid;
   }
 
-  addPageParams(page: number, itemsPerPage: number) {
-    let start = (page - 1) * itemsPerPage + 1;
-    return (
-      this.url +
-      (this.url.includes("?") ? "&" : "?") +
-      "_start=" +
-      start +
-      "&_num=" +
-      itemsPerPage
-    );
-  }
+  // addPageParams(page: number, itemsPerPage: number) {
+  //   let start = (page - 1) * itemsPerPage + 1;
+  //   return (
+  //     this.url +
+  //     (this.url.includes("?") ? "&" : "?") +
+  //     "_start=" +
+  //     start +
+  //     "&_num=" +
+  //     itemsPerPage
+  //   );
+  // }
 
-  addSortParams(sort:string, page: number, itemsPerPage: number){
-    return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
-  }
+  // addSortParams(sort:string, page: number, itemsPerPage: number){
+  //   return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
+  // }
 }
