@@ -8,6 +8,7 @@
     "generate-lib": "npm run build-lib && npm run package",
     "generate-lib-prod": "npm run build-lib-prod && npm run package",
     "test": "jest --config ./jest.lib.config.js",
+    "test:coverage": "jest --config ./jest.lib.config.js --coverage",
     "build-lib:watch": "ng build --watch"
   },
   "dependencies": {

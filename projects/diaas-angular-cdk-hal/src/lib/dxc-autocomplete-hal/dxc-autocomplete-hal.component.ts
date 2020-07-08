@@ -165,7 +165,6 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
       ) {
         this.asyncHeadersHandler().subscribe(additionalHeaders => {
           let headersObject = new HttpHeaders(Object.assign(this.headers, additionalHeaders));
-          console.log(headersObject.get(Object.keys(additionalHeaders)[0]));
           this.collectionPropectService.executeHandler(this.rel, payload, headersObject);
         });
       } else {
