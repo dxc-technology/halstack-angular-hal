@@ -12,7 +12,7 @@ export class HrsSinglePageComponent implements OnInit {
   resource = this.halResource.resource;
   error = this.halResource.errorMessage;
 
-  constructor(private halResource: HalResourceService) { 
+  constructor(private halResource: HalResourceService) {
     this.halResource.fetchResource();
 
   }
@@ -29,18 +29,18 @@ export class HrsSinglePageComponent implements OnInit {
   }
 
   onPatchProspectTitle(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-title'] = value;
     this.patchResource(payload);
   }
   onPatchUpdateUser(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-update-user'] = value;
     this.patchResource(payload);
   }
 
   onPatchEmail(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-email'] = value;
     this.patchResource(payload);
   }
@@ -51,7 +51,7 @@ export class HrsSinglePageComponent implements OnInit {
 
   private patchResource(payload){
     this.halResource.executeHandler('update', payload);
-  }  
+  }
 
   onClick(){
     this.halResource.executeHandler('fetch');

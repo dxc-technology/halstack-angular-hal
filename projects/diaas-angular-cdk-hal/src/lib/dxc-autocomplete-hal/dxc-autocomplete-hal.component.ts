@@ -49,6 +49,7 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
 
   @Input() public margin: any;
   @Input() public size: string;
+  @Input() public rel: string;
 
   @Output() public onClickSuffix: EventEmitter<any> = new EventEmitter<any>();
   @Output() public onClickPrefix: EventEmitter<any> = new EventEmitter<any>();
@@ -163,14 +164,11 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
         typeof this.asyncHeadersHandler === "function"
       ) {
         this.asyncHeadersHandler().subscribe(additionalHeaders => {
-          const newHeaders = new HttpHeaders(...this.headers, ...additionalHeaders);
-          this.collectionPropectService.handleGet(
-            payload,
-            newHeaders
-          )}
-        );
+          let headersObject = new HttpHeaders(Object.assign(this.headers, additionalHeaders));
+          this.collectionPropectService.executeHandler(this.rel, payload, headersObject);
+        });
       } else {
-        this.collectionPropectService.handleGet(payload);
+        this.collectionPropectService.executeHandler(this.rel, payload, new HttpHeaders(this.headers));
       }
     }
   }
