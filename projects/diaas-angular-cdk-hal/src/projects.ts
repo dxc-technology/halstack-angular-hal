@@ -13,4 +13,3 @@ export * from './lib/table/table-module';
 
 export * from './lib/dxc-autocomplete-hal/dxc-autocomplete-hal.component';
 export * from './lib/dxc-autocomplete-hal/dxc-autocomplete-hal.module';
-

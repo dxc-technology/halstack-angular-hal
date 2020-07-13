@@ -6,6 +6,7 @@ import {
 } from "@angular/material";
 import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
 import { DXCInputTextModule } from '@diaas/dxc-ngx-cdk';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { DXCInputTextModule } from '@diaas/dxc-ngx-cdk';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     DXCInputTextModule
   ],
   exports: [DxcAutocompleteHalComponent]
