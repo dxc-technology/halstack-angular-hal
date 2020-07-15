@@ -637,13 +637,16 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     const viewContainer = this._rowOutlet.viewContainer;
     for (let renderIndex = 0, count = viewContainer.length; renderIndex < count; renderIndex++) {
       const viewRef = viewContainer.get(renderIndex) as RowViewRef<T>;
-      const context = viewRef.context as RowContext<T>;
-      context.count = count;
-      context.first = renderIndex === 0;
-      context.last = renderIndex === count - 1;
-      context.even = renderIndex % 2 === 0;
-      context.odd = !context.even;
-      context.index = this._renderRows[renderIndex].dataIndex;
+      if (viewRef !== null && viewRef.context !== null){
+        const context = viewRef.context as RowContext<T>;
+        context.count = count;
+        context.first = renderIndex === 0;
+        context.last = renderIndex === count - 1;
+        context.even = renderIndex % 2 === 0;
+        context.odd = !context.even;
+        context.index = this._renderRows[renderIndex].dataIndex;
+      }
+
     }
   }
 
@@ -730,12 +733,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
       //It is needed to give a unique id to the resultset table
   private setClassName(){
-        this.className = Math.round(Math.random() * 100000000000);
-        let element = document.getElementsByClassName(this.className)[0];
-        while(element != undefined){
-          this.className = Math.round(Math.random() * 100000000000);
-          element = document.getElementsByClassName(this.className)[0];
-        }
+        this.className =  `${Math.round(Math.random() * 100)}`;
       }
 
       /** Set to default others header's states if they are different to default state ("up" or "down"). */
