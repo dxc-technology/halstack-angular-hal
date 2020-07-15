@@ -50,4 +50,4 @@ import { Ordering } from './directives/sorting.directive';
     TableSpinnerComponent
   ]})
 
-export class CdkTableModule { }
+export class DxcHalTableModule { }
