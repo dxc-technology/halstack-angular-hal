@@ -1,148 +1,84 @@
-.body-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-    display: flex;    
-    background: rgb(248, 248, 248);
+:host {
+  dxc-sidenav-menu {
+    min-height: 100vh;
+  }
+  .container-content {
+    background: white;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    border: 1px #cccccc;
+  }
+  .sidenav-title img {
+    padding-left: 21px;
+    padding-bottom: 0px;
   }
   
+  .sidenav-title {
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
   
-    .container-content {
-      background: white;
-      -webkit-box-flex: 1;
-      -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      border: 1px #cccccc;
-    }
-  .sidenav-title img {
-      padding-left: 21px;
-      padding-bottom: 0px;
-    }
+    font-size: 24px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(100, 100, 100);
+    font-weight: normal;
+    line-height: 18px;
+    margin: 20px 0px 40px;
+  }
   
-    .sidenav-title {
-      margin-block-start: 0.67em;
-      margin-block-end: 0.67em;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
-  
-      font-size: 24px;
-      display: flex;
-      -webkit-box-align: center;
-      align-items: center;
-      color: rgb(100, 100, 100);
-      font-weight: normal;
-      line-height: 18px;
-      margin: 20px 0px 40px;
-    }
-  
-    .sidenav-logo {
-      max-width: 35px;
-      margin-left: 8px;
-      margin-bottom: 5px;
-    }
-    .sidenav {
-      background: #f8f8f8;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: sticky;
-      top: 64px;
-      height: 100%;
-      overflow-y: auto;
-      padding: 20px 50px 20px 30px;
-      width: 170px;
-  
-      ::-webkit-scrollbar {
-        width: 2px;
-        margin: 5px;
-      }
-      ::-webkit-scrollbar-track {
-        border-radius: 3px;
-        background-color: #eeeeee;
-      }
-      ::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background-color: #d3d3d3;
-      }
-  
-      .sidenav-title {
-        font-size: 24px;
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        color: rgb(100, 100, 100);
-        font-weight: normal;
-        line-height: 18px;
-        margin: 20px 0px 20px;
-      }
-      .sidenav-links {
-        padding: 20px;
-        .nav-item {
-          margin-bottom: 5px;
-          padding-left: 0px;
-          border-left: 0px;
-          a {
-            font-weight: normal;
-            font-size: 14px;
-            color: white;
-            text-decoration: none;
-          }
-          &.active {
-            margin-bottom: 5px;
-            padding-left: 3px;
-            border-left: 5px solid rgb(255, 237, 0);
-            a {
-              font-weight: bold;
-            }
-          }
-        }
-      }
-    }
+  .sidenav-logo {
+    max-width: 35px;
+    margin-left: 8px;
+    margin-bottom: 5px;
+  }
   
   .eWHGgB {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
   }
   
-    .dPfFLm {
-      color: black;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: sticky;
-      top: 64px;
-      height: calc((100vh - 64px) - 40px);
-      overflow-y: auto;
-      width: 170px;
-      background: rgb(248, 248, 248);
-      padding: 20px 50px 20px 30px;
+  .dPfFLm {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 64px;
+    height: calc((100vh - 64px) - 40px);
+    overflow-y: auto;
+    width: 170px;
+    background: rgb(248, 248, 248);
+    padding: 20px 50px 20px 30px;
   }
   
   .iRVmnC {
-      text-transform: uppercase;
-      color: grey;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
+    text-transform: uppercase;
+    color: grey;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
   }
   
   .ffpcba a {
-      font-size: 14px;
-      font-weight: normal;
-      color: grey!important;
-      text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+    color: grey !important;
+    text-decoration: none;
   }
-  
-    
   
   .ffpcba {
-      padding: 3px 0px;
+    padding: 3px 0px;
   }
   .blNloH {
-      margin-left: 10px;
-      margin-bottom: 30px;
-      display: flex;
-      flex-direction: column;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
   }
+  
+}

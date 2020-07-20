@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ComponentsPageComponent } from './pages/components-page/components-page.component';
 import { HalTablePageComponent } from './pages/hal-table-page/hal-table-page.component';
-import { AutocompleteHalComponent } from './pages/autocomplete-hal/autocomplete-hal.component';
+import { AutocompleteHalComponent } from './pages/hal-autocomplete/hal-autocomplete-page.component';
 
 const routes: Routes = [];
 routes.push({ path: "", redirectTo: "/components", pathMatch: "full" }),
