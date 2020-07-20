@@ -1,5 +1,6 @@
-<div class="body-container" theme>
-    <div class="sidenav">
+<div class="body-content">
+  <dxc-sidenav padding="medium" mode="push" displayArrow="false">
+    <dxc-sidenav-menu>
       <div class="sidenav-title">
         <img src="../assets/img/angular.png" class="sidenav-logo" />
         <h1 class="sidenav-title">ngular</h1>
@@ -9,15 +10,14 @@
           <div class="sc-rBLzX eWHGgB">
             <div class="sc-jzgbtB iRVmnC">Components</div>
             <div class="sc-gJWqzi blNloH">
-
-                <div class="sc-fhYwyz ffpcba">
-                    <a
-                      [skipLocationChange]="true"
-                      [routerLink]="[{ outlets: { components: ['autocomplete'] } }]"
-                      >Autocomplete</a
-                    >
-                  </div>
-
+              <div class="sc-fhYwyz ffpcba">
+                <a
+                  [skipLocationChange]="true"
+                  [routerLink]="[{ outlets: { components: ['autocomplete'] } }]"
+                  >Autocomplete</a
+                >
+              </div>
+  
               <div class="sc-fhYwyz ffpcba">
                 <a
                   [skipLocationChange]="true"
@@ -27,41 +27,41 @@
               </div>
             </div>
             <!-- <div class="sc-jzgbtB iRVmnC">Hal Resource Service</div>
-            <div class="sc-gJWqzi blNloH">
-              <div class="sc-fhYwyz ffpcba">
-                <a
-                  [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['hrssingle'] } }]"
-                >Single</a
-                >
-              </div>
-              <div class="sc-fhYwyz ffpcba">
+              <div class="sc-gJWqzi blNloH">
+                <div class="sc-fhYwyz ffpcba">
                   <a
-                  [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['hrsmulti'] } }]"
-                  >Multiple</a
-                >              </div>
-              <div class="sc-fhYwyz ffpcba">
-                  <a
-                  [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['hrsnested'] } }]"
-                  >Nested</a
-                >
-              </div>
-              <div class="sc-fhYwyz ffpcba">
-                  <a
-                  [skipLocationChange]="true"
-                  [routerLink]="[{ outlets: { components: ['hrscollection'] } }]"
-                  >Collection</a
-                >
-              </div>
-            </div> -->
+                    [skipLocationChange]="true"
+                    [routerLink]="[{ outlets: { components: ['hrssingle'] } }]"
+                  >Single</a
+                  >
+                </div>
+                <div class="sc-fhYwyz ffpcba">
+                    <a
+                    [skipLocationChange]="true"
+                    [routerLink]="[{ outlets: { components: ['hrsmulti'] } }]"
+                    >Multiple</a
+                  >              </div>
+                <div class="sc-fhYwyz ffpcba">
+                    <a
+                    [skipLocationChange]="true"
+                    [routerLink]="[{ outlets: { components: ['hrsnested'] } }]"
+                    >Nested</a
+                  >
+                </div>
+                <div class="sc-fhYwyz ffpcba">
+                    <a
+                    [skipLocationChange]="true"
+                    [routerLink]="[{ outlets: { components: ['hrscollection'] } }]"
+                    >Collection</a
+                  >
+                </div>
+              </div> -->
+          </div>
         </div>
       </div>
-    </div>
-
-  </div>
-  <div class="container-content">
-    <router-outlet name="components"></router-outlet>
-  </div>
+    </dxc-sidenav-menu>
+    <dxc-sidenav-content>
+      <router-outlet class="sidenavContent" name="components"></router-outlet>
+    </dxc-sidenav-content>
+  </dxc-sidenav>  
 </div>

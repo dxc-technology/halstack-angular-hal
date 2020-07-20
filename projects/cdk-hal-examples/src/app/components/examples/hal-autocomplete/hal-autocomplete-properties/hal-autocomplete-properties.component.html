@@ -1,0 +1,54 @@
+<h2 class="subtitle-example">Properties</h2>
+<dxc-table>
+  <tr>
+    <th>Name</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>halUrl: string</td>
+    <td><code></code></td>
+    <td>
+      Url of the collection from which the suggestions will be retrieved from.
+    </td>
+  </tr>
+  <tr>
+    <td>rel: string</td>
+    <td><code></code></td>
+    <td>
+      Name of the rel of the method that is going to be executed to receive the
+      options for the autocomplete.
+    </td>
+  </tr>
+  <tr>
+    <td>propertyName: string</td>
+    <td><code></code></td>
+    <td>
+      Name of the variable in the resource that will be used for the
+      suggestions.
+    </td>
+  </tr>
+  <tr>
+    <td>headers: any</td>
+    <td><code></code></td>
+    <td>Parameter that will be passed to the HttpHeaders constructor.</td>
+  </tr>
+  <tr>
+    <td>asyncHeadersHandler: function</td>
+    <td></td>
+    <td>
+      Function that returns an observable that when subscribed will return an
+      object with the new headers.
+    </td>
+  </tr>
+</dxc-table>
+
+<p>
+  In addition to these component-specific properties you will also have all the
+  properties of the Text field component that can be found on
+  <dxc-link
+    text="dxc-autocomplete"
+    href="https://developer.dxc.com/tools/angular/#/components/(components:autocomplete)"
+    [underlined]="underlined"
+  ></dxc-link>
+</p>

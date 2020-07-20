@@ -31,6 +31,16 @@
                 "glob": "**/*",
                 "input": "./node_modules/@diaas/dxc-ngx-cdk/lib/assets",
                 "output": "./assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-monaco-editor/assets/monaco",
+                "output": "./assets/monaco/"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/cdk-hal-examples/src/app/components/examples",
+                "output": "./assets/examples/"
               }
             ],
             "styles": [

@@ -1,0 +1,47 @@
+<h2 class="subtitle-example">Properties</h2>
+<dxc-table>
+  <tr>
+    <th>Name</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>colletionUrl: string</td>
+    <td><code></code></td>
+    <td>
+      The URL of the collection resource to be used for the table.
+    </td>
+  </tr>
+  <tr>
+    <td>headers: object</td>
+    <td><code></code></td>
+    <td>
+      Contains the http headers to be sent along with the http requests to the
+      collectionUrl.
+    </td>
+  </tr>
+  <tr>
+    <td>headers: object</td>
+    <td><code></code></td>
+    <td>Parameter that will be passed to the HttpHeaders constructor.</td>
+  </tr>
+  <tr>
+    <td>itemsPerPage: number</td>
+    <td></td>
+    <td>
+      The amount of items to be displayed per page. Will be used to calculate
+      the `_start` and `_num` query parameters that will be sent to the
+      collection for pagination.
+    </td>
+  </tr>
+</dxc-table>
+
+<p>
+  In addition to these component-specific properties you will also have all the
+  properties of the Table component that can be found on
+  <dxc-link
+    text="dxc-table"
+    href="https://developer.dxc.com/tools/angular/#/components/(components:table)"
+    [underlined]="underlined"
+  ></dxc-link>
+</p>
