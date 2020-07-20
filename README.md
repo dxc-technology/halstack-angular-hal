@@ -97,15 +97,15 @@ export class AutocompleteHalComponent implements OnInit {
 #### Hal Table Usage
 
 ```TS
-import { CdkTableModule, CdkTableComponent } from '@diaas/dxc-ngx-hal';
+import { DxcHalTableModule, DxcHalTableComponent } from '@diaas/dxc-ngx-hal';
 
 @NgModule({
   declarations: [
-    CdkTableComponent
+    DxcTableComponent
     ],
   imports: [
     ...
-    CdkTableModule,
+    DxcTableModule,
     ...
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { render, waitForElement } from '@testing-library/angular';
 import { screen, fireEvent } from "@testing-library/dom";
 import { DxcHalTable } from './table';
-import { CdkTableModule } from './table-module';
+import { DxcHalTableModule } from './table-module';
 import data from "./mocks/tableResponseMock";
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -33,7 +33,7 @@ describe('Hal table', () => {
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
     });
     injector = getTestBed();
@@ -60,14 +60,14 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="4">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-  });    
+  });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4`);
@@ -108,21 +108,21 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="2">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-  });    
+  });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=2`);
     expect(req.request.method).toBe('GET');
 
     req.flush(calculatePagination(1,2,array));
-    
+
     await waitForElement(() => hal.getByText(/Loading/i));
     await waitForElement(() => hal.getByRole("table"));
     const table = hal.getByRole("table");
@@ -155,14 +155,14 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="2">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-    });    
+    });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=2`);
@@ -213,14 +213,14 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="2">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-    });    
+    });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
     let req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=2`);
@@ -234,7 +234,7 @@ describe('Hal table', () => {
     expect(table).toBeTruthy();
     hal.detectChanges();
     expect(await screen.getByText("XIFYZ OROKQ")).toBeTruthy();
-    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy(); 
+    expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
 
     const lastButton = hal.getAllByRole("button")[3];
     fireEvent.click(lastButton);
@@ -271,14 +271,14 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="4">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-  });    
+  });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
 
@@ -325,14 +325,14 @@ describe('Hal table', () => {
       template:`  <dxc-hal-table halUrl="http://localhost:3000/data" [headers]="" [itemsPerPage]="4">
                       <ng-container dxcColumnDef="User" [sortable]="{isSortable:true, propertyName:'prospect-full-name'}">
                           <td *dxcCellDef="let item"> {{item["prospect-full-name"]}} </td>
-                      </ng-container>                
+                      </ng-container>
                       <ng-container dxcColumnDef="Email">
                           <td *dxcCellDef="let item"> {{item["prospect-distributor-id"]}} </td>
                       </ng-container>
                   </dxc-hal-table>`,
-     imports: [CdkTableModule, HttpClientTestingModule],
+     imports: [DxcHalTableModule, HttpClientTestingModule],
      excludeComponentDeclaration: true
-  });    
+  });
     injector = getTestBed();
     httpMock = injector.get(HttpTestingController);
 
@@ -356,7 +356,7 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     httpMock.expectNone(`http://localhost:3000/data?_start=1&_num=4&_sort=prospect-distributor-id`);
-    
+
     hal.detectChanges();
 
     expect(await screen.getByText("BOCJT FJUUZ")).toBeTruthy();
@@ -368,7 +368,7 @@ describe('Hal table', () => {
 });
 
 function calculatePagination(pageNumber:number,itemsPerPage:number, array:any){
-  let start = pageNumber * itemsPerPage - itemsPerPage;    
+  let start = pageNumber * itemsPerPage - itemsPerPage;
   let end = pageNumber * itemsPerPage;
   array._links.item = array._links.item.slice(start,end);
   return array;
