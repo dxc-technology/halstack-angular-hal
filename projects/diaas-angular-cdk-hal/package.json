@@ -8,6 +8,7 @@
     "generate-lib": "npm run build-lib && npm run package",
     "generate-lib-prod": "npm run build-lib-prod && npm run package",
     "test": "jest --config ./jest.lib.config.js",
+    "test:coverage": "jest --config ./jest.lib.config.js --coverage",
     "build-lib:watch": "ng build --watch"
   },
   "dependencies": {
@@ -19,11 +20,11 @@
     "@angular/forms": "8.2.14",
     "@angular/material": "8.2.3",
     "@angular/material-moment-adapter": "^8.1.2",
-    "@dxc-technology/halstack-client": "^1.1.5",
     "@angular/platform-browser": "8.2.14",
     "@angular/platform-browser-dynamic": "8.2.14",
     "@angular/router": "8.2.14",
-    "@diaas/dxc-ngx-cdk": "0.0.0-alpha.298",
+    "@diaas/dxc-ngx-cdk": "0.0.0-alpha.305",
+    "@dxc-technology/halstack-client": "^1.1.5",
     "@material-extended/mde": "^2.2.2",
     "@testing-library/angular": "^8.2.0",
     "@testing-library/dom": "^7.2.1",
@@ -34,9 +35,11 @@
     "jest-preset-angular": "^7.1.1",
     "moment": "^2.24.0",
     "ng-click-outside": "^6.0.0",
+    "ng-mocks": "^9.6.4",
     "ng-packagr": "^5.4.0",
     "ngx-mask": "^8.0.2",
     "rxjs": "~6.5.2",
+    "ts-jest": "^26.1.1",
     "tsickle": "^0.37.0",
     "vanilla-text-mask": "^5.1.1",
     "zone.js": "~0.9.1"

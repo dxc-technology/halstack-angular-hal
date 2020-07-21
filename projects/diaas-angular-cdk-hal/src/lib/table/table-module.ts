@@ -13,27 +13,15 @@ import { DxcHalTable } from './table';
 import {  HeaderOutlet }  from './table';
 import { DataRowOutlet } from './table';
 import { SpinnerOutlet } from './table';
-
-const EXPORTED_DECLARATIONS = [
-  DxcHalTable,
-  DxcRowDef,
-  DxcCellDef,
-  DxcCellOutlet,
-  DxcColumnDef,
-  TableSpinnerComponent,
-  DxcHeaderRowComponent,
-  HeaderOutlet,
-  DataRowOutlet,
-  SpinnerOutlet,
-  DxcRowComponent
-];
+import { Ordering } from './directives/sorting.directive';
 
 @NgModule({
   exports: [
     DxcHalTable,
     DxcCellDef,
     DxcRowDef,
-    DxcColumnDef
+    DxcColumnDef,
+    Ordering
   ],
   imports: [
     CommonModule,
@@ -48,6 +36,7 @@ const EXPORTED_DECLARATIONS = [
     DxcCellDef,
     DxcCellOutlet,
     DxcColumnDef,
+    Ordering,
     TableSpinnerComponent,
     DxcHeaderRowComponent,
     HeaderOutlet,
@@ -61,4 +50,4 @@ const EXPORTED_DECLARATIONS = [
     TableSpinnerComponent
   ]})
 
-export class CdkTableModule { }
+export class DxcHalTableModule { }

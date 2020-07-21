@@ -22,8 +22,8 @@ export class HalResourceService {
   constructor(
     public url: string,
     public headers: HttpHeaders,
-    private httpClient: HttpClient
-  ) {}
+    private httpClient: HttpClient) {
+    }
 
   fetchResource() {
     this.fetchStatus.next(fetchingStatus);
@@ -31,13 +31,11 @@ export class HalResourceService {
       resp => {
         const halResource = HalResource(Array.isArray(resp) ? resp[0] : resp);
         this.resource.next({ ...halResource });
-
         if (
           halResource.getLinks() !== null &&
           halResource.getLinks().length > 0
         ) {
           this.items.next(halResource.getItems());
-          console.debug("Resource service ITems: " + halResource.getItems());
           this.totalItems.next(
             halResource.resourceRepresentation._links._count
           );
@@ -105,10 +103,10 @@ export class HalResourceService {
         .getInteractions()
         .map(interaction => ({
           rel: interaction.rel,
-          handler: (body?: any) => {
+          handler: (body?: any, headers?: any) => {
             switch (interaction.method) {
               case "GET":
-                return this.handleGet(body);
+                return this.handleGet(body, headers);
               case "PATCH":
                 if (this.existPropertiesSchema(interaction, body)) {
                   return this.handlePatch(body);
@@ -179,13 +177,12 @@ export class HalResourceService {
   public handleGet(body, headers?) {
     let finalHalUrl = this.url;
     if(body) {
-      finalHalUrl += Object.keys(body)
+      Object.keys(body)
       .map((key) =>
-        !this.url.includes("?")
+        finalHalUrl += !finalHalUrl.includes("?")
           ? `?${key}=${body[key]}`
           : `&${key}=${body[key]}`
       )
-      .reduce((prev, act) => prev + act);
     }
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient
@@ -268,15 +265,19 @@ export class HalResourceService {
     return valid;
   }
 
-  addPageParams(page: number, itemsPerPage: number) {
-    let start = (page - 1) * itemsPerPage + 1;
-    return (
-      this.url +
-      (this.url.includes("?") ? "&" : "?") +
-      "_start=" +
-      start +
-      "&_num=" +
-      itemsPerPage
-    );
-  }
+  // addPageParams(page: number, itemsPerPage: number) {
+  //   let start = (page - 1) * itemsPerPage + 1;
+  //   return (
+  //     this.url +
+  //     (this.url.includes("?") ? "&" : "?") +
+  //     "_start=" +
+  //     start +
+  //     "&_num=" +
+  //     itemsPerPage
+  //   );
+  // }
+
+  // addSortParams(sort:string, page: number, itemsPerPage: number){
+  //   return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
+  // }
 }

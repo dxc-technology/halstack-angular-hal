@@ -17,8 +17,8 @@ export class HrsMultiPageComponent implements OnInit {
   errorTelephone = this.telephonePropectService.errorMessage;
   errorProspect = this.propectService.errorMessage;
 
-  constructor(@Inject('PropectService') private propectService: HalResourceService, 
-              @Inject('TelephonePropectService') private telephonePropectService: HalResourceService) { 
+  constructor(@Inject('PropectService') private propectService: HalResourceService,
+              @Inject('TelephonePropectService') private telephonePropectService: HalResourceService) {
     this.propectService.fetchResource();
     this.telephonePropectService.fetchResource();
   }
@@ -40,19 +40,19 @@ export class HrsMultiPageComponent implements OnInit {
   }
 
   onPatchUpdateUser(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-update-user'] = value;
     this.patchResource(payload);
   }
 
   onPatchEmail(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-email'] = value;
     this.patchResource(payload);
   }
 
   onPatchTelephoneNumber(value){
-    const payload = {};    
+    const payload = {};
     payload['prospect-email'] = value;
     this.telephonePropectService.executeHandler('update', payload);
   }

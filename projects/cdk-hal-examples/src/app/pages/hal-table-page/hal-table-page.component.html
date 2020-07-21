@@ -1,24 +1,6 @@
-<h1 class="title-example">Hal Table</h1>
-
-<div class="haltable-example-container">
-  <h2>Hal table example</h2>
-      <dxc-hal-table  halUrl="http://localhost:3000/data" headers="" itemsPerPage="5">
-        <ng-container  dxcColumnDef="User">
-            <td *dxcCellDef="let item">
-              <dxc-button [label]="item['prospect-full-name']">
-              </dxc-button>
-            </td>
-        </ng-container>
-
-        <ng-container dxcColumnDef="Date">
-          <td *dxcCellDef="let element">
-            <dxc-tag [label]="element['prospect-update-date']">
-            </dxc-tag>
-          </td>
-        </ng-container>
-
-        <ng-container dxcColumnDef="Email">
-          <td *dxcCellDef="let element"> {{element['prospect-distributor-id']}} </td>
-        </ng-container>
-      </dxc-hal-table>
+<div class="example-container">
+  <div class="title-tag">
+      <h1 class="title-example">Hal Table</h1>
+  </div>
+  <app-tabbed-section [sections]="sections"></app-tabbed-section>
 </div>

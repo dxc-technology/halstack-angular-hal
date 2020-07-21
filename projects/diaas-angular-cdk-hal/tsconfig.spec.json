@@ -5,11 +5,11 @@
     "emitDecoratorMetadata": true,
     "types": [
       "jasmine",
-      "node"
+      "node",
+      "jest"
     ]
   },
   "files": [
-    "src/test.ts"
   ],
   "include": [
     "**/*.spec.ts",
