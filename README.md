@@ -119,7 +119,7 @@ import { DxcHalTableModule, DxcHalTableComponent } from '@diaas/dxc-ngx-hal';
 
 | Name                   | Default | Description                                                                                                                                                                     |
 | :--------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| colletionUrl: `string` |         | The URL of the collection resource to be used for the table. `Required`                                                                                                         |
+| collectionUrl: `string` |         | The URL of the collection resource to be used for the table. `Required`                                                                                                         |
 | headers: `Object`      |         | Contains the http headers to be sent along with the http requests to the collectionUrl. `Optional`                                                                              |
 | itemsPerPage: `number` | 5       | The amount of items to be displayed per page. Will be used to calculate the `_start` and `_num` query parameters that will be sent to the collection for pagination. `Optional` |
 
