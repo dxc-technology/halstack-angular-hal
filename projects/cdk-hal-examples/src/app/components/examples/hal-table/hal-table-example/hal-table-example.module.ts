@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HalTableExample } from "./hal-table-example.component";
-import { DxcHalTableModule } from "@diaas/dxc-ngx-hal";
+import { DxcHalTableModule } from "@dxc-technology/halstack-angular-hal";
 import { HttpClientModule } from "@angular/common/http";
 import { ExampleViewerModule } from "../../../example-viewer/example-viewer.module";
 import { HalTableSimple } from "../hal-table-simple/hal-table-simple.component";

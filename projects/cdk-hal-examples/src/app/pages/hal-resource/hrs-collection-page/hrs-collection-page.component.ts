@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { HalResourceService } from "@diaas/dxc-ngx-hal";
+import { HalResourceService } from "@dxc-technology/halstack-angular-hal";
 
 @Component({
   selector: "app-hrs-collection-page",
