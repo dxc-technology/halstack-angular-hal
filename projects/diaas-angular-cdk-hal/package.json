@@ -1,6 +1,6 @@
 {
     "name": "@dxc-technology/halstack-angular-hal",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "scripts": {
       "build-lib": "ng build",
       "build-lib-prod": "ng build --prod",

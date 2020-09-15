@@ -27,7 +27,7 @@ jobs:
 #     - name: Test library
 #       run: cd ./projects/dxc-ngx-cdk && npm run test
 
-    - name: Build angular cdk site
+    - name: Build angular hal cdk site
       run: cd . && npm run build
     
     - name: Publish next to npm
