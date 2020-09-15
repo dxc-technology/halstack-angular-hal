@@ -1,0 +1,54 @@
+name: Publish Next Version
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+        registry-url: https://registry.npmjs.org/
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+        role-to-assume: ${{ secrets.AWS_ROLE_SANDBOX }}
+        role-duration-seconds: 3600
+        role-skip-session-tagging: true
+      
+    - name: Install lib dependencies
+      run: cd ./projects/dxc-ngx-cdk && rm -rf node_modules && npm install && npm run generate-lib
+    
+    - name: Install app dependencies
+      run: cd . && npm install
+    
+#     - name: Test library
+#       run: cd ./projects/dxc-ngx-cdk && npm run test
+
+    - name: Build angular cdk site
+      run: cd . && npm run build
+    
+    - name: Publish next to npm
+      run: |
+        sed -i "s#\"version\": \"0.0.0\"#\"version\": \"0.0.0-${GITHUB_SHA:0:7}\"#" ./dist/diaas-angular-cdk-hal/package.json
+        cd ./dist/diaas-angular-cdk-hal
+        npm publish --tag next --access public
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      
+#     - name: Publish angular cdk site next version in S3
+#       run: |
+#         aws s3 rm s3://design-system-angular-cdk-site/tools/angular/next/ --recursive
+#         aws s3 cp ./dist/angular-dxc-site s3://design-system-angular-cdk-site/tools/angular/next/ --recursive
