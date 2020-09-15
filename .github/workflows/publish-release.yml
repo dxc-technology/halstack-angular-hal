@@ -1,9 +1,7 @@
 
 name: Publish Release
 
-on:
-  release:
-    types: [published]
+on: [push]
 
 jobs:
   build:
