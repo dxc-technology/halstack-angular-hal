@@ -21,14 +21,8 @@ jobs:
     - name: Install lib dependencies
       run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install && npm run generate-lib
     
-    - name: Install app dependencies
-      run: cd . && npm install
-    
 #     - name: Test library
 #       run: cd ./projects/dxc-ngx-cdk && npm run test
-
-    - name: Build angular hal cdk site
-      run: cd . && npm run build
     
     - name: Publish next to npm
       run: |
@@ -37,8 +31,3 @@ jobs:
         npm publish --tag next --access public
       env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-      
-#     - name: Publish angular cdk site next version in S3
-#       run: |
-#         aws s3 rm s3://design-system-angular-cdk-site/tools/angular/next/ --recursive
-#         aws s3 cp ./dist/angular-dxc-site s3://design-system-angular-cdk-site/tools/angular/next/ --recursive
