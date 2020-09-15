@@ -7,7 +7,7 @@ import {
   DxcTableModule,
   DxcSpinnerModule,
   DxcLinkModule,
-} from "@diaas/dxc-ngx-cdk";
+} from "@dxc-technology/halstack-angular";
 import { DxcHalTableModule } from "@diaas/dxc-ngx-hal";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";

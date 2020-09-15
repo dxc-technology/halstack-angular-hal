@@ -5,7 +5,7 @@ import { DxcHalTableModule } from "@diaas/dxc-ngx-hal";
 import { HttpClientModule } from "@angular/common/http";
 import { ExampleViewerModule } from "../../../example-viewer/example-viewer.module";
 import { HalTableSimple } from "../hal-table-simple/hal-table-simple.component";
-import { DxcButtonModule, DxcTagModule, DxcSpinnerModule } from '@diaas/dxc-ngx-cdk';
+import { DxcButtonModule, DxcTagModule, DxcSpinnerModule } from '@dxc-technology/halstack-angular';
 
 @NgModule({
   declarations: [HalTableExample, HalTableSimple],

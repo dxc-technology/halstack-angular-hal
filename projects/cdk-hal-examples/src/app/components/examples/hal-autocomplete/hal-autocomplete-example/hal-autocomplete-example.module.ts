@@ -5,7 +5,7 @@ import { DxcAutocompleteHalModule } from "@diaas/dxc-ngx-hal";
 import { HttpClientModule } from "@angular/common/http";
 import { ExampleViewerModule } from "../../../example-viewer/example-viewer.module";
 import { AutocompleteHalSimple } from '../hal-autocomplete-simple/hal-autocomplete-simple.component';
-import { DxcTableModule } from '@diaas/dxc-ngx-cdk';
+import { DxcTableModule } from '@dxc-technology/halstack-angular';
 
 @NgModule({
   declarations: [AutocompleteHalExample, AutocompleteHalSimple],

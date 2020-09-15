@@ -5,7 +5,7 @@ import {
    MatInputModule, MatAutocompleteModule
 } from "@angular/material";
 import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
-import { DXCInputTextModule } from '@diaas/dxc-ngx-cdk';
+import { DXCInputTextModule } from '@dxc-technology/halstack-angular';
 import { HttpClientModule } from '@angular/common/http';
 
 

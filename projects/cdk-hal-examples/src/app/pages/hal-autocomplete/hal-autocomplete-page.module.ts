@@ -7,7 +7,7 @@ import { AutocompleteHalExampleModule } from '../../components/examples/hal-auto
 import { ExampleViewerModule } from '../../components/example-viewer/example-viewer.module';
 import { TabbedSectionModule } from '../../components/tabbed-section/tabbed-section.module';
 import { HalAutocompletePropertiesComponent } from '../../components/examples/hal-autocomplete/hal-autocomplete-properties/hal-autocomplete-properties.component';
-import { DxcTableModule, DxcLinkModule } from '@diaas/dxc-ngx-cdk';
+import { DxcTableModule, DxcLinkModule } from '@dxc-technology/halstack-angular';
 
 
 @NgModule({
