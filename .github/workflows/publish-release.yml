@@ -18,7 +18,7 @@ jobs:
         registry-url: https://registry.npmjs.org/
     
     - name: Install lib dependencies
-      run: cd . && dir
+      run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install && npm run generate-lib
       
     
     # - name: Test library
