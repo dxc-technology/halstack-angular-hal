@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Install lib dependencies
-      run: cd ./projects/diaas-angular-cdk-hal
+      run: cd .
     
     # - name: Test library
     #   run: cd ./projects/diaas-angular-cdk-hal && npm run test
