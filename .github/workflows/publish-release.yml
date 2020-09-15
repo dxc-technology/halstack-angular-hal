@@ -8,31 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: jungwinter/split@v1
-      id: split
-      with:
-        seperator: '.'
-        msg: ${{ github.event.release.tag_name }}
-
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install Node.js 10.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-        registry-url: https://registry.npmjs.org/
-    
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-2
-        role-to-assume: ${{ secrets.AWS_ROLE_SANDBOX }}
-        role-duration-seconds: 6000
-        role-skip-session-tagging: true
-
     - name: Install lib dependencies
       run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install && npm run generate-lib
     
