@@ -1,5 +1,5 @@
 {
-    "name": "@diaas/dxc-ngx-hal",
+    "name": "@dxc-technology/halstack-angular-hal",
     "version": "0.0.1",
     "scripts": {
       "build-lib": "ng build",
