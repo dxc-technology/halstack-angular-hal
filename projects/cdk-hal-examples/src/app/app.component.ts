@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ThemeService } from '@diaas/dxc-ngx-cdk';
+import { customTheme } from '../assets/styles/themesProperties';
 
 @Component({
   selector: "app-root",
@@ -10,28 +11,11 @@ import { ThemeService } from '@diaas/dxc-ngx-cdk';
 export class AppComponent {
   title = "cdk-hal-examples";
   constructor(
-    @Inject("ThemeService") private themeService: ThemeService,
-    private http: HttpClient
+    @Inject("ThemeService") private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
-    this.themeService.registerTheme({
-      properties: {
-        "--black": "#000000",
-        "--lightBlack": "#212121",
-        "--white": "#FFFFFF",
-        "--darkWhite": "#EEEEEE",
-        "--yellow": "#FFED00",
-        "--darkGrey": "#666666",
-        "--lightGrey": "#D9D9D9",
-        "--darkRed": "#D0011B",
-        "--lightRed": "#FF6161",
-        "--lightBlue": "#CEE0F5",
-        "--lightYellow": "#FCF2BD",
-        "--lightPink": "#F9CFCF",
-        "--lightGreen": "#DBF1C4"
-      }
-    });
+    this.themeService.registerTheme(customTheme);
   }
 
 }

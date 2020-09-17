@@ -27,6 +27,7 @@ import { ExampleService } from './service/example.service';
     DXCFooterModule,
     AutocompleteHalModule,
     HalTablePageModule,
+    ThemeModule
   ],
   providers: [
     { provide: "ThemeService", useClass: ThemeService },
