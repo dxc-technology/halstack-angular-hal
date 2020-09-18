@@ -15,7 +15,7 @@ For example, collection resources are often associated with tables, and there ar
 Assure HAL Angular Components is distributed as an npm library. In order to use it in an existing project, you must install it first:
 
 ```
-npm install @diaas/dxc-ngx-hal
+npm install @dxc-technology/halstack-angular-hal
 ```
 
 The library provides the following components and hooks to be used in your React application:
@@ -35,7 +35,7 @@ Service Facade
 #### HalAutocomplete Usage
 
 ```TS
-import { DxcAutocompleteHalModule, DxcAutocompleteHalComponent } from '@diaas/dxc-ngx-hal';
+import { DxcAutocompleteHalModule, DxcAutocompleteHalComponent } from '@dxc-technology/halstack-angular-hal';
 
 @NgModule({
   declarations: [
@@ -97,7 +97,7 @@ export class AutocompleteHalComponent implements OnInit {
 #### Hal Table Usage
 
 ```TS
-import { DxcHalTableModule, DxcHalTableComponent } from '@diaas/dxc-ngx-hal';
+import { DxcHalTableModule, DxcHalTableComponent } from '@dxc-technology/halstack-angular-hal';
 
 @NgModule({
   declarations: [
@@ -181,7 +181,7 @@ Inside of each column container, in a td html element has to be defined the elem
 #### halresource-service Usage
 
 ```
-import { HalResourceService } from from '@diaas/dxc-ngx-hal'
+import { HalResourceService } from from '@dxc-technology/halstack-angular-hal'
 
 ```
 

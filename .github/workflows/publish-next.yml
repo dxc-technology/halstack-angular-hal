@@ -1,0 +1,33 @@
+name: Publish Next Version
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+        registry-url: https://registry.npmjs.org/
+      
+    - name: Install lib dependencies
+      run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install && npm run generate-lib
+    
+#     - name: Test library
+#       run: cd ./projects/dxc-ngx-cdk && npm run test
+    
+    - name: Publish next to npm
+      run: |
+        sed -i "s#\"version\": \"0.0.0\"#\"version\": \"0.0.0-${GITHUB_SHA:0:7}\"#" ./dist/diaas-angular-cdk-hal/package.json
+        cd ./dist/diaas-angular-cdk-hal
+        npm publish --tag next --access public
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

@@ -9,7 +9,7 @@ import {
   DXCHeaderModule,
   ThemeModule,
   DXCFooterModule,
-} from "@diaas/dxc-ngx-cdk";
+} from "@dxc-technology/halstack-angular";
 import { ComponentsPageModule } from "./pages/components-page/components-page.module";
 import { HalTablePageModule } from "./pages/hal-table-page/hal-table-page.module";
 import { AutocompleteHalModule } from "./pages/hal-autocomplete/hal-autocomplete-page.module";
