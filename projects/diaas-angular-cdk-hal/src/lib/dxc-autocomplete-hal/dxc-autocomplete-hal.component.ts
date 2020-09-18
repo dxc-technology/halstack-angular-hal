@@ -23,8 +23,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   @HostBinding("class") className;
-  @HostBinding("class.dxc-light") isLight: boolean = true;
-  @HostBinding("class.dxc-dark") isDark: boolean = false;
   @HostBinding("class.disabled") isDisabled: boolean = false;
 
   @Input() public prefix: string;
@@ -32,7 +30,6 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   @Input() public prefixIconSrc: string;
   @Input() public suffixIconSrc: string;
 
-  @Input() public theme: string = "light";
   @Input() public disabled: boolean = false;
   @Input() public required: boolean = false;
   @Input() public invalid: boolean = false;
@@ -75,7 +72,6 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
     suffix: null,
     prefixIconSrc: null,
     suffixIconSrc: null,
-    theme: "light",
     disabled: false,
     required: false,
     invalid: false,
@@ -134,13 +130,6 @@ export class DxcAutocompleteHalComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (this.theme === "dark") {
-      this.isLight = false;
-      this.isDark = true;
-    } else {
-      this.isLight = true;
-      this.isDark = false;
-    }
     this.isDisabled = this.disabled;
 
     this.label = this.label || "";
