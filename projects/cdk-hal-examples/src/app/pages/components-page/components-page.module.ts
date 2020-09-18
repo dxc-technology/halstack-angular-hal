@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { DxcSideNavModule, DxcTableModule } from '@diaas/dxc-ngx-cdk';
+import { DxcSideNavModule, DxcTableModule } from '@dxc-technology/halstack-angular';
 import { HalTableExample } from '../../components/examples/hal-table/hal-table-example/hal-table-example.component';
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { HalResourceService } from '@diaas/dxc-ngx-hal';
+import { HalResourceService } from '@dxc-technology/halstack-angular-hal';
 
 @Component({
   selector: 'app-hrs-nested-page',
