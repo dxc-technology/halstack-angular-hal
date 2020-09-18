@@ -21,8 +21,8 @@ jobs:
     - name: Install lib dependencies
       run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install && npm run generate-lib
     
-#     - name: Test library
-#       run: cd ./projects/dxc-ngx-cdk && npm run test
+     - name: Test library
+       run: cd ./projects/diaas-angular-cdk-hal && npm run test
     
     - name: Publish next to npm
       run: |
