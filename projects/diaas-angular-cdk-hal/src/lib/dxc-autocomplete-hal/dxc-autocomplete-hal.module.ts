@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DxcAutocompleteHalComponent } from './dxc-autocomplete-hal.component';
-import { DXCInputTextModule } from '@dxc-technology/halstack-angular';
+import { DxcInputTextModule } from '@dxc-technology/halstack-angular';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    DXCInputTextModule
+    DxcInputTextModule
   ],
   exports: [DxcAutocompleteHalComponent]
 })

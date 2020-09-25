@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { DXCInputTextModule, DxcButtonModule, DxcSpinnerModule, DXCAlertModule } from '@dxc-technology/halstack-angular';
+import { DxcInputTextModule, DxcButtonModule, DxcSpinnerModule, DxcAlertModule } from '@dxc-technology/halstack-angular';
 import { HrsMultiPageComponent } from './hrs-multi-page.component';
 import { HalResourceServiceFactoryProvider } from '../../../../../../diaas-angular-cdk-hal/src/lib/diaas-angular-cdk-hal.factory-provider';
 
@@ -11,9 +11,9 @@ import { HalResourceServiceFactoryProvider } from '../../../../../../diaas-angul
   declarations: [HrsMultiPageComponent],
   imports: [
     HttpClientModule,
-    DXCInputTextModule,
+    DxcInputTextModule,
     DxcButtonModule,
-    DXCAlertModule,
+    DxcAlertModule,
     DxcSpinnerModule,
     CommonModule
   ],
