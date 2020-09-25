@@ -2,7 +2,6 @@ import { Component, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ThemeService } from '@dxc-technology/halstack-angular';
 import { customTheme } from '../assets/styles/themesProperties';
-import { ThemeService } from '@dxc-technology/halstack-angular';
 
 @Component({
   selector: "app-root",
