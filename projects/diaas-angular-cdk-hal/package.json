@@ -25,7 +25,7 @@
     "@angular/platform-browser-dynamic": "8.2.14",
     "@angular/router": "8.2.14",
     "@dxc-technology/halstack-client": "^1.1.5",
-    "@dxc-technology/halstack-angular": "0.0.0-7616864",
+    "@dxc-technology/halstack-angular": "0.0.0-8ac2080",
     "@material-extended/mde": "^2.2.2",
     "@testing-library/angular": "^8.2.0",
     "@testing-library/dom": "^7.2.1",

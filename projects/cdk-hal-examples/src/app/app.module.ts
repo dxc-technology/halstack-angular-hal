@@ -6,9 +6,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {
   ThemeService,
-  DXCHeaderModule,
+  DxcHeaderModule,
   ThemeModule,
-  DXCFooterModule,
+  DxcFooterModule,
 } from "@dxc-technology/halstack-angular";
 import { ComponentsPageModule } from "./pages/components-page/components-page.module";
 import { HalTablePageModule } from "./pages/hal-table-page/hal-table-page.module";
@@ -23,8 +23,8 @@ import { ExampleService } from './service/example.service';
     FormsModule,
     CommonModule,
     ComponentsPageModule,
-    DXCHeaderModule,
-    DXCFooterModule,
+    DxcHeaderModule,
+    DxcFooterModule,
     AutocompleteHalModule,
     HalTablePageModule,
     ThemeModule
