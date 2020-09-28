@@ -2,9 +2,10 @@
   "name": "@dxc-technology/halstack-angular-hal",
   "version": "0.0.0",
   "scripts": {
-    "build-lib": "ng build",
-    "build-lib-prod": "ng build --prod",
+    "build-lib": "ng build && npm run copy-md-lib",
+    "build-lib-prod": "ng build --prod && npm run copy-md-lib",
     "package": "cd ./../../dist/diaas-angular-cdk-hal && npm pack",
+    "copy-md-lib": "cp ./../../README.md ./../../dist/diaas-angular-cdk-hal/",
     "generate-lib": "npm run build-lib && npm run package",
     "generate-lib-prod": "npm run build-lib-prod && npm run package",
     "test": "jest --config ./jest.lib.config.js",
