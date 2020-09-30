@@ -17,15 +17,17 @@ server.use(router);
 
 const data = {};
 
-  //Aquí es donde manipulamos la respuesta (req es la petición que se hizo y res es la respuesta que vamos a devolver)
+//Aquí es donde manipulamos la respuesta (req es la petición que se hizo y res es la respuesta que vamos a devolver)
 router.render = (req, res) => {
   if (res.locals.data) {
-    if(!this.data){
+    if (!this.data) {
       this.data = JSON.parse(JSON.stringify(res.locals.data));
     }
     if (req.originalUrl.includes("sort")) {//Si la petición incluye el parametro de sort, tenemos que ordenar
       const propertyToSort = req.query._sort;//Cogemos de la url property a ordenar
       const order = propertyToSort.charAt(0) === "-" ? "desc" : "asc";//Aqui sabemos si ordenamos ASC o DESC
+
+
       res.locals.data._links.item = this.data._links.item.sort( //Hacemos la ordenación de los items de la respuesta (res.locals.data[0]._links._item)
         sortArray(
           propertyToSort.charAt(0) === "-" ? propertyToSort.slice(1) : propertyToSort,
@@ -36,11 +38,10 @@ router.render = (req, res) => {
     if (req.originalUrl.includes("start") && req.originalUrl.includes("num")) {
       let pageNumber = req.query._start;
       let itemsPerPage = req.query._num;
-      let start = pageNumber * itemsPerPage - itemsPerPage;    
+      let start = pageNumber * itemsPerPage - itemsPerPage;
       let end = pageNumber * itemsPerPage;
-      res.locals.data._links.item = this.data._links.item.slice(start,end);
+      res.locals.data._links.item = this.data._links.item.slice(start, end);
     }
-
   }
   res.jsonp(res.locals.data);
 };

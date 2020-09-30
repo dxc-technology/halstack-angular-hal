@@ -23,11 +23,22 @@ export class HalResourceService {
     public url: string,
     public headers: HttpHeaders,
     private httpClient: HttpClient) {
+  }
+
+  fetchResource(body?) {
+
+    let finalHalUrl = this.url;
+    if (body) {
+      Object.keys(body)
+        .map((key) =>
+          finalHalUrl += !finalHalUrl.includes("?")
+            ? `?${key}=${body[key]}`
+            : `&${key}=${body[key]}`
+        )
     }
 
-  fetchResource() {
     this.fetchStatus.next(fetchingStatus);
-    return this.httpClient.get(this.url, { headers: this.headers }).subscribe(
+    return this.httpClient.get(finalHalUrl, { headers: this.headers }).subscribe(
       resp => {
         const halResource = HalResource(Array.isArray(resp) ? resp[0] : resp);
         this.resource.next({ ...halResource });
@@ -35,6 +46,7 @@ export class HalResourceService {
           halResource.getLinks() !== null &&
           halResource.getLinks().length > 0
         ) {
+          console.debug(halResource.getItems());
           this.items.next(halResource.getItems());
           this.totalItems.next(
             halResource.resourceRepresentation._links._count
@@ -147,7 +159,7 @@ export class HalResourceService {
     return pathHandler !== undefined ? pathHandler : null;
   }
 
-  executeHandler(handlerName: string, payload?: any, additionalHeaders?:any) {
+  executeHandler(handlerName: string, payload?: any, additionalHeaders?: any) {
     const pathHandler = this.getHandlers().find(x => x.rel == handlerName);
     if (pathHandler !== null && pathHandler !== undefined) {
       pathHandler.handler(payload, additionalHeaders);
@@ -174,15 +186,15 @@ export class HalResourceService {
       );
   }
 
-  public handleGet(body, headers?) {
+  private handleGet(body, headers?) {
     let finalHalUrl = this.url;
-    if(body) {
+    if (body) {
       Object.keys(body)
-      .map((key) =>
-        finalHalUrl += !finalHalUrl.includes("?")
-          ? `?${key}=${body[key]}`
-          : `&${key}=${body[key]}`
-      )
+        .map((key) =>
+          finalHalUrl += !finalHalUrl.includes("?")
+            ? `?${key}=${body[key]}`
+            : `&${key}=${body[key]}`
+        )
     }
     this.fetchStatus.next(fetchingStatus);
     return this.httpClient
@@ -264,20 +276,4 @@ export class HalResourceService {
     });
     return valid;
   }
-
-  // addPageParams(page: number, itemsPerPage: number) {
-  //   let start = (page - 1) * itemsPerPage + 1;
-  //   return (
-  //     this.url +
-  //     (this.url.includes("?") ? "&" : "?") +
-  //     "_start=" +
-  //     start +
-  //     "&_num=" +
-  //     itemsPerPage
-  //   );
-  // }
-
-  // addSortParams(sort:string, page: number, itemsPerPage: number){
-  //   return this.url + (this.url.includes("?") ? "&" : "?") + "_sort=" + sort  + "&_start=" + page + "&_num=" + itemsPerPage;
-  // }
 }

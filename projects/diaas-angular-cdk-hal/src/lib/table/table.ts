@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import {Directionality} from '@angular/cdk/bidi';
-import {CollectionViewer, DataSource, isDataSource} from '@angular/cdk/collections';
+import { Directionality } from '@angular/cdk/bidi';
+import { CollectionViewer, DataSource, isDataSource } from '@angular/cdk/collections';
 import { DOCUMENT } from '@angular/common';
 import {
   AfterContentChecked,
@@ -44,7 +44,7 @@ import {
   Subscription,
   isObservable,
 } from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import {
   DxcCellOutlet,
   DxcCellOutletRowContext
@@ -52,7 +52,7 @@ import {
 import {
   getTableUnknownDataSourceError
 } from './table-errors';
-import {DXC_HAL_TABLE} from './tokens';
+import { DXC_HAL_TABLE } from './tokens';
 import { TableSpinnerComponent } from './components/table-spinner/table-spinner.component';
 import { DxcHeaderRowComponent } from './components/dxc-header-row/dxc-header-row.component';
 import { DxcRowComponent } from './components/dxc-row/dxc-row.component';
@@ -72,24 +72,24 @@ export interface RowOutlet {
  * @docs-private
  */
 type DxcHalTableDataSourceInput<T> =
-    DataSource<T>|Observable<ReadonlyArray<T>|T[]>|ReadonlyArray<T>|T[];
+  DataSource<T> | Observable<ReadonlyArray<T> | T[]> | ReadonlyArray<T> | T[];
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert spinner.
  * @docs-private
  */
-@Directive({selector: '[spinnerOutlet]'})
+@Directive({ selector: '[spinnerOutlet]' })
 export class SpinnerOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) { }
 }
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({selector: '[headerOutlet]'})
+@Directive({ selector: '[headerOutlet]' })
 export class HeaderOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) { }
 }
 
 
@@ -97,9 +97,9 @@ export class HeaderOutlet implements RowOutlet {
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({selector: '[rowOutlet]'})
+@Directive({ selector: '[rowOutlet]' })
 export class DataRowOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) { }
 }
 
 
@@ -108,13 +108,13 @@ export class DataRowOutlet implements RowOutlet {
  * Interface used to conveniently type the possible context interfaces for the render row.
  * @docs-private
  */
-export interface RowContext<T> extends DxcCellOutletRowContext<T> {}
+export interface RowContext<T> extends DxcCellOutletRowContext<T> { }
 
 /**
  * Class used to conveniently type the embedded view ref for rows with a context.
  * @docs-private
  */
-abstract class RowViewRef<T> extends EmbeddedViewRef<RowContext<T>> {}
+abstract class RowViewRef<T> extends EmbeddedViewRef<RowContext<T>> { }
 
 /**
  * Set of properties that represents the identity of a single rendered row.
@@ -136,8 +136,8 @@ export interface RenderRow<T> {
 }
 
 export interface Columns {
-    columns: Array<string>;
-    labels:Array<string>;
+  columns: Array<string>;
+  labels: Array<string>;
 }
 /**
  * The table template that can be used by the mat-table. Should not be used outside of the
@@ -145,7 +145,7 @@ export interface Columns {
  * @docs-private
  */
 export const CDK_TABLE_TEMPLATE =
-    `
+  `
     <dxc-table [margin]="margin">
       <ng-container headerOutlet>
       </ng-container>
@@ -183,7 +183,7 @@ export const CDK_TABLE_TEMPLATE =
   // declared elsewhere, they are checked when their declaration points are checked.
   // tslint:disable-next-line:validate-decorators
   changeDetection: ChangeDetectionStrategy.Default,
-  providers: [{provide: DXC_HAL_TABLE, useExisting: DxcHalTable}, SortService]
+  providers: [{ provide: DXC_HAL_TABLE, useExisting: DxcHalTable }, SortService]
 })
 export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
 
@@ -194,21 +194,21 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   halUrl;
 
   @Input()
-  headers:any;
+  headers: any;
 
-  @Input() margin:string;
+  @Input() margin: string;
 
   @HostBinding("class") className;
 
   collectionResource: HalResourceService;
 
-  displayedColumns:string[] = [];
+  displayedColumns: string[] = [];
 
   totalItems;
 
   fetchStatus;
 
-  page : number = 1;
+  page: number = 1;
 
   private _document: Document;
 
@@ -216,7 +216,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   private _allOrderingRefs: Ordering[] = [];
 
   /** Latest data provided by the data source. */
-  protected _data: T[]|ReadonlyArray<T>;
+  protected _data: T[] | ReadonlyArray<T>;
 
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
@@ -225,7 +225,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   private _renderRows: RenderRow<T>[];
 
   /** Subscription that listens for the data provided by the data source. */
-  private _renderChangeSubscription: Subscription|null;
+  private _renderChangeSubscription: Subscription | null;
 
   /**
    * Map of all the user's defined columns (header, data, and footer cell template) identified by
@@ -280,7 +280,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
   set trackBy(fn: TrackByFunction<T>) {
     if (isDevMode() && fn != null && typeof fn !== 'function' && <any>console &&
-        <any>console.warn) {
+      <any>console.warn) {
       console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}.`);
     }
     this._trackByFn = fn;
@@ -297,27 +297,27 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
    *
    * @docs-private
    */
-  viewChange: BehaviorSubject<{start: number, end: number}> =
-      new BehaviorSubject<{start: number, end: number}>({start: 0, end: Number.MAX_VALUE});
+  viewChange: BehaviorSubject<{ start: number, end: number }> =
+    new BehaviorSubject<{ start: number, end: number }>({ start: 0, end: Number.MAX_VALUE });
 
   // Outlets in the table's template where the header, data rows, and footer will be inserted.
-  @ViewChild(SpinnerOutlet, {static: true}) _spinnerOutlet: SpinnerOutlet;
-  @ViewChild(HeaderOutlet, {static: true}) _headerOutlet: HeaderOutlet;
-  @ViewChild(DataRowOutlet, {static: true}) _rowOutlet: DataRowOutlet;
+  @ViewChild(SpinnerOutlet, { static: true }) _spinnerOutlet: SpinnerOutlet;
+  @ViewChild(HeaderOutlet, { static: true }) _headerOutlet: HeaderOutlet;
+  @ViewChild(DataRowOutlet, { static: true }) _rowOutlet: DataRowOutlet;
 
   /**
    * The column definitions provided by the user that contain what the header, data, and footer
    * cells should render for each column.
    */
-  @ContentChildren(DxcColumnDef, {descendants: true}) _contentColumnDefs: QueryList<DxcColumnDef>;
+  @ContentChildren(DxcColumnDef, { descendants: true }) _contentColumnDefs: QueryList<DxcColumnDef>;
 
   constructor(
-      protected readonly _differs: IterableDiffers,
-      protected readonly _changeDetectorRef: ChangeDetectorRef,
-      protected readonly _elementRef: ElementRef, @Attribute('role') role: string,
-      private httpClient: HttpClient,
-      @Optional() protected readonly _dir: Directionality, @Inject(DOCUMENT) _document: any,
-      private resolver: ComponentFactoryResolver, private sortService: SortService) {
+    protected readonly _differs: IterableDiffers,
+    protected readonly _changeDetectorRef: ChangeDetectorRef,
+    protected readonly _elementRef: ElementRef, @Attribute('role') role: string,
+    private httpClient: HttpClient,
+    @Optional() protected readonly _dir: Directionality, @Inject(DOCUMENT) _document: any,
+    private resolver: ComponentFactoryResolver, private sortService: SortService) {
 
 
 
@@ -332,13 +332,13 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   ngOnInit() {
-    this.collectionResource = new HalResourceService(this.halUrl,new HttpHeaders(this.headers), this.httpClient);
+    this.collectionResource = new HalResourceService(this.halUrl, new HttpHeaders(this.headers), this.httpClient);
 
     this.totalItems = this.collectionResource.totalItems;
     this.fetchStatus = this.collectionResource.fetchStatus;
     this.dataSource = new TableDataSource(this.collectionResource.items);
 
-    this.collectionResource.handleGet({
+    this.collectionResource.fetchResource({
       _start: this.page,
       _num: this.itemsPerPage
     });
@@ -369,7 +369,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
 
     // If there is a data source and row definitions, connect to the data source unless a
     // connection has already been made.
-    if (this.dataSource  && !this._renderChangeSubscription) {
+    if (this.dataSource && !this._renderChangeSubscription) {
       this._observeRenderChanges();
     }
 
@@ -388,11 +388,11 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     }
   }
 
-  renderHeaders(){
+  renderHeaders() {
     this._headerOutlet.viewContainer.clear();
-    if (this._columnDefsByName !== null ){
+    if (this._columnDefsByName !== null) {
 
-      this._columnDefsByName.forEach((value: DxcColumnDef , key: string) => {
+      this._columnDefsByName.forEach((value: DxcColumnDef, key: string) => {
         const factory = this.resolver.resolveComponentFactory(DxcHeaderRowComponent);
         const viewRef = this._headerOutlet.viewContainer.createComponent(factory);
         viewRef.instance.columnName = key;
@@ -400,8 +400,8 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
         viewRef.instance.state = this.getMapStateHeaders().get(key); //Get header's current state for sorting and save it in the created component
         viewRef.instance.parentClassName = this.className; // just in case there ar more tables in the page
         viewRef.instance.value = value.sortable.propertyName;
-        if (!this.displayedColumns.includes(key)){
-          this.displayedColumns.push( key );
+        if (!this.displayedColumns.includes(key)) {
+          this.displayedColumns.push(key);
         }
       });
     }
@@ -426,17 +426,17 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     }
     const viewContainer = this._rowOutlet.viewContainer;
     changes.forEachOperation(
-        (record: IterableChangeRecord<RenderRow<T>>, prevIndex: number|null,
-         currentIndex: number|null) => {
-          if (record.previousIndex == null) {
-            this._insertRow(record.item, currentIndex!);
-          } else if (currentIndex == null) {
-            viewContainer.remove(prevIndex!);
-          } else {
-            const view = <RowViewRef<T>>viewContainer.get(prevIndex!);
-            viewContainer.move(view!, currentIndex);
-          }
-        });
+      (record: IterableChangeRecord<RenderRow<T>>, prevIndex: number | null,
+        currentIndex: number | null) => {
+        if (record.previousIndex == null) {
+          this._insertRow(record.item, currentIndex!);
+        } else if (currentIndex == null) {
+          viewContainer.remove(prevIndex!);
+        } else {
+          const view = <RowViewRef<T>>viewContainer.get(prevIndex!);
+          viewContainer.move(view!, currentIndex);
+        }
+      });
 
     // Update the meta context of a row's context data (index, count, first, last, ...)
     this._updateRowIndexContext();
@@ -451,8 +451,8 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     this._spinnerOutlet.viewContainer.clear();
   }
 
-  renderSpinner(outlet: RowOutlet){
-    const spinnerOutletContainer =  outlet.viewContainer;
+  renderSpinner(outlet: RowOutlet) {
+    const spinnerOutletContainer = outlet.viewContainer;
     const spinnerComponentFactory = this.resolver.resolveComponentFactory(TableSpinnerComponent);
     spinnerOutletContainer.createComponent(spinnerComponentFactory);
 
@@ -505,7 +505,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
    * `(T, DxcRowDef)` pair.
    */
   private _getRenderRowsForData(
-      data: T, dataIndex: number, cache?: WeakMap<Object, RenderRow<T>[]>): RenderRow<T>[] {
+    data: T, dataIndex: number, cache?: WeakMap<Object, RenderRow<T>[]>): RenderRow<T>[] {
     return this.displayedColumns.map(rowDef => {
       const cachedRenderRows = (cache && cache.has(rowDef)) ? cache.get(rowDef)! : [];
       if (cachedRenderRows.length) {
@@ -513,7 +513,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
         dataRow.dataIndex = dataIndex;
         return dataRow;
       } else {
-        return {data, rowDef, dataIndex};
+        return { data, rowDef, dataIndex };
       }
     });
   }
@@ -522,7 +522,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   private _cacheColumnDefs() {
     this._columnDefsByName.clear();
     const columnDefs = mergeArrayAndSet(
-        this._getOwnDefs(this._contentColumnDefs), this._customColumnDefs);
+      this._getOwnDefs(this._contentColumnDefs), this._customColumnDefs);
     columnDefs.forEach(columnDef => {
       // if (this._columnDefsByName.has(columnDef.name)) {
       //   throw getTableDuplicateColumnNameError(columnDef.name);
@@ -531,11 +531,11 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     });
   }
 
- /**
-   * Switch to the provided data source by resetting the data and unsubscribing from the current
-   * render change subscription if one exists. If the data source is null, interpret this by
-   * clearing the row outlet. Otherwise start listening for new data.
-   */
+  /**
+    * Switch to the provided data source by resetting the data and unsubscribing from the current
+    * render change subscription if one exists. If the data source is null, interpret this by
+    * clearing the row outlet. Otherwise start listening for new data.
+    */
   private _switchDataSource(dataSource: DxcHalTableDataSourceInput<T>) {
     this._data = [];
 
@@ -565,7 +565,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
       return;
     }
 
-    let dataStream: Observable<T[]|ReadonlyArray<T>>|undefined;
+    let dataStream: Observable<T[] | ReadonlyArray<T>> | undefined;
 
     if (isDataSource(this.dataSource)) {
       dataStream = this.dataSource.connect(this);
@@ -604,8 +604,8 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
    * within the data row view container.
    */
   private _insertRow(renderRow: RenderRow<T>, renderIndex: number) {
-    const context: RowContext<T> = {$implicit: renderRow.data};
-    this._renderRow(this._rowOutlet,renderRow, renderIndex, context);
+    const context: RowContext<T> = { $implicit: renderRow.data };
+    this._renderRow(this._rowOutlet, renderRow, renderIndex, context);
   }
 
   /**
@@ -614,7 +614,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
    * of where to place the new row template in the outlet.
    */
   private _renderRow(
-      outlet: RowOutlet,renderRow: Object, index: number, context: RowContext<T> = {}) {
+    outlet: RowOutlet, renderRow: Object, index: number, context: RowContext<T> = {}) {
     // TODO(andrewseguin): enforce that one outlet was instantiated from createEmbeddedView
     const factory = this.resolver.resolveComponentFactory(DxcRowComponent);
     outlet.viewContainer.createComponent(factory, index);
@@ -637,7 +637,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     const viewContainer = this._rowOutlet.viewContainer;
     for (let renderIndex = 0, count = viewContainer.length; renderIndex < count; renderIndex++) {
       const viewRef = viewContainer.get(renderIndex) as RowViewRef<T>;
-      if (viewRef !== null && viewRef.context !== null){
+      if (viewRef !== null && viewRef.context !== null) {
         const context = viewRef.context as RowContext<T>;
         context.count = count;
         context.first = renderIndex === 0;
@@ -667,7 +667,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     const documentFragment = this._document.createDocumentFragment();
     const sections = [
       // {tag: 'thead', outlet: this._headerRowOutlet},
-      {tag: 'tbody', outlet: this._rowOutlet}
+      { tag: 'tbody', outlet: this._rowOutlet }
     ];
 
     for (const section of sections) {
@@ -693,33 +693,18 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   /** Filters definitions that belong to this table from a QueryList. */
-  private _getOwnDefs<I extends {_table?: any}>(items: QueryList<I>): I[] {
+  private _getOwnDefs<I extends { _table?: any }>(items: QueryList<I>): I[] {
     return items.filter(item => !item._table || item._table === this);
   }
 
-  navigate(page: number, operation:string){
+  navigate(page: number, operation: string) {
     switch (operation) {
       case 'next':
-        this.page=page;
-        return this.collectionResource.handleGet({
-          _start: this.page,
-          _num: this.itemsPerPage
-        });
       case 'first':
-        this.page=page;
-        return this.collectionResource.handleGet({
-          _start: this.page,
-          _num: this.itemsPerPage
-        });
       case 'prev':
-        this.page=page;
-        return this.collectionResource.handleGet({
-          _start: this.page,
-          _num: this.itemsPerPage
-        });
       case 'last':
-        this.page=page;
-        return this.collectionResource.handleGet({
+        this.page = page;
+        return this.collectionResource.fetchResource({
           _start: this.page,
           _num: this.itemsPerPage
         });
@@ -731,18 +716,18 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
     }
   }
 
-      //It is needed to give a unique id to the resultset table
-  private setClassName(){
-        this.className =  `${Math.round(Math.random() * 100)}`;
-      }
+  //It is needed to give a unique id to the resultset table
+  private setClassName() {
+    this.className = `${Math.round(Math.random() * 100)}`;
+  }
 
-      /** Set to default others header's states if they are different to default state ("up" or "down"). */
-  removeOtherSorts(actualIdHeader){
+  /** Set to default others header's states if they are different to default state ("up" or "down"). */
+  removeOtherSorts(actualIdHeader) {
     this._allOrderingRefs.forEach(element => {
       let nativeElement = element.elementRef.nativeElement;
-      if(actualIdHeader != nativeElement.id){
+      if (actualIdHeader != nativeElement.id) {
         let stateElement = nativeElement.getAttribute("state");
-        if(stateElement === "up" || stateElement === "down"){
+        if (stateElement === "up" || stateElement === "down") {
           this.sortService.removeOtherSortings(nativeElement.id);
         }
       }
@@ -754,7 +739,7 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   /** Set to default all headers that are sortable. */
-  setDefaultStateHeaders(){
+  setDefaultStateHeaders() {
     this._allOrderingRefs.forEach(element => {
       let id = element.elementRef.nativeElement.id;
       let columnName = id.split("-")[1];
@@ -768,16 +753,16 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   /** Sort row elements from given column depending on given state. */
-  sortCells(value,state) {
-    if(state === "up"){
-      return this.collectionResource.handleGet({
+  sortCells(value, state) {
+    if (state === "up") {
+      return this.collectionResource.fetchResource({
         _start: this.page,
         _num: this.itemsPerPage,
         _sort: `${value}`
       });
     }
-    else if(state === "down"){
-      return this.collectionResource.handleGet({
+    else if (state === "down") {
+      return this.collectionResource.fetchResource({
         _start: this.page,
         _num: this.itemsPerPage,
         _sort: `${value}`
@@ -786,22 +771,22 @@ export class DxcHalTable<T> implements AfterContentChecked, CollectionViewer, On
   }
 
   /** Change icon to up icon */
-  changeAscIcon(el: Ordering){
+  changeAscIcon(el: Ordering) {
     this.sortService.setAscIconSort(el);
   }
 
   /** Change icon to down icon */
-  changeDescIcon(el: Ordering){
+  changeDescIcon(el: Ordering) {
     this.sortService.setDescIconSort(el);
   }
 
   /** Change icon to default icon */
-  changeDefaultIcon(el: Ordering){
+  changeDefaultIcon(el: Ordering) {
     this.sortService.setDefaultIconSort(el);
   }
 
   /** Return map with header's states */
-  getMapStateHeaders(){
+  getMapStateHeaders() {
     return this.sortService.mapStatesHeaders;
   }
 }
@@ -817,7 +802,7 @@ export class TableDataSource extends DataSource<any> {
 
   data = new BehaviorSubject<[]>([]);
 
-  constructor(items){
+  constructor(items) {
     super();
     this.data = items;
   }
@@ -827,5 +812,5 @@ export class TableDataSource extends DataSource<any> {
     return this.data;
   }
 
-  disconnect() {}
+  disconnect() { }
 }
