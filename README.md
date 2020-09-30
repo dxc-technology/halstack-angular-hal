@@ -296,7 +296,7 @@ node server.js
 If you are watching for changes, anytime you make a change to the library or the app, `angular cli` will live-reload your local dev server so you can iterate on your component in real-time.
 
 ## Running the tests
-Run tests of the library with JEST.
+Run tests from the library folder `projects\diaas-angular-cdk-hal`.
 
 ```bash
 cd projects\diaas-angular-cdk-hal
