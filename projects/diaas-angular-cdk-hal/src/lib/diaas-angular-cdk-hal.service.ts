@@ -46,7 +46,6 @@ export class HalResourceService {
           halResource.getLinks() !== null &&
           halResource.getLinks().length > 0
         ) {
-          console.debug(halResource.getItems());
           this.items.next(halResource.getItems());
           this.totalItems.next(
             halResource.resourceRepresentation._links._count
