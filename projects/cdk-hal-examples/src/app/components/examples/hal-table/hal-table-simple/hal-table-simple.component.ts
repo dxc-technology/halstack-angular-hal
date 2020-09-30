@@ -9,14 +9,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./hal-table-simple.component.scss']
 })
 export class HalTableSimple  {
-
-  displayedColumns =
-    {
-        columns: ["prospect-update-user",
-                  "prospect-birthdate",
-                  "prospect-email"],
-        labels: ['PROSPECT', 'BIRTHDATE', 'EMAIL']
-    };
   
     constructor() { 
     }
