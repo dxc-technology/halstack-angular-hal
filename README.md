@@ -100,6 +100,8 @@ import { DxcHalTableModule, DxcHalTableComponent } from '@dxc-technology/halstac
 | headers: `Object`      |         | Contains the http headers to be sent along with the http requests to the collectionUrl. `Optional`                                                                              |
 | itemsPerPage: `number` | 5       | The amount of items to be displayed per page. Will be used to calculate the `_start` and `_num` query parameters that will be sent to the collection for pagination. `Optional` |
 
+In addition to these component-specific properties you will also have all the properties of the Table component that can be found on [its site](https://developer.dxc.com/tools/angular/0/#/components/table).
+
 ### HAL Table Directives
 
 Directives are used to add functionality and new syntax into HTML components. The following directives are customized and you can use them on this component.
