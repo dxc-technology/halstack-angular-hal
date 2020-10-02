@@ -58,7 +58,9 @@ import { DxcAutocompleteHalModule, DxcAutocompleteHalComponent } from '@dxc-tech
 | asyncHeadersHandler: ()=>Observable<obj>                                                                                                                                                                               |         | Async function that will be executed right before every http request in order to retrieve dynamic headers. It must return an observable that resolves into an object with the keys and values of the headers. These headers will be merged with the ones indicated in the `headers` prop. `Optional` |
 | propertyName: `string`                                                                                                                                                                                                 |         | Name of the property to be used for filtering the data. `Required`                                                                                                                                                                                                                                   |
 | rel: `string`                                                                                                                                                                                                          |         | Name of the rel of the method that is going to be executed to receive the options for the autocomplete. `Required`                                                                                                                                                                                   |
-| In addition to these component-specific properties you will also have all the properties of the Text field component that can be found on [its site](https://developer.dxc.com/tools/angular/next/#/components/input). |         |                                                                                                                                                                                                                                                                                                      |
+|
+
+In addition to these component-specific properties you will also have all the properties of the Text field component that can be found on [its site](https://developer.dxc.com/tools/angular/next/#/components/input).
 
 ### HAL Autocomplete Example
 
@@ -88,7 +90,6 @@ import { DxcHalTableModule, DxcHalTableComponent } from '@dxc-technology/halstac
   ],
   providers: [],
   entryComponents: []
-
 ```
 
 ### HAL Table Props
@@ -98,6 +99,8 @@ import { DxcHalTableModule, DxcHalTableComponent } from '@dxc-technology/halstac
 | halUrl: `string`       |         | The URL of the collection resource to be used for the table. `Required`                                                                                                         |
 | headers: `Object`      |         | Contains the http headers to be sent along with the http requests to the collectionUrl. `Optional`                                                                              |
 | itemsPerPage: `number` | 5       | The amount of items to be displayed per page. Will be used to calculate the `_start` and `_num` query parameters that will be sent to the collection for pagination. `Optional` |
+
+In addition to these component-specific properties you will also have all the properties of the Table component that can be found on [its site](https://developer.dxc.com/tools/angular/0/#/components/table).
 
 ### HAL Table Directives
 
@@ -118,7 +121,7 @@ In this view component, angular provides a container element and in this hal tab
 going to be defined inside as a column of the dxc hal table.
 These columns has the property name defined in the dxcColumnDef directive in the ng-container component.
 
-Inside of each column container, in a td html element has to be defined the element variable to reach the item value of a hal resource element as it's seen in the next example \*dxcCellDef="let item"
+Inside of each column container, in a td html element has to be defined the element variable to reach the item value of a hal resource element as it's seen in the next example \*dxcCellDef="let item".
 
 ```html
 <dxc-hal-table halUrl="http://..." headers="" itemsPerPage="4">
@@ -152,7 +155,6 @@ Inside of each column container, in a td html element has to be defined the elem
 
 ```ts
 import { HalResourceService } from from '@dxc-technology/halstack-angular-hal'
-
 ```
 
 ### HAL Resource Service Parameters
@@ -179,7 +181,6 @@ The object facade service class has the following properties:
 | executeItemsHandler: `Function` | This is a function used when the resource is a collection. It needs the rel of the iteration as handlerName parameter.|
 | getHandler: `Function` |  This is a function used when the resource is not a collection.  It needs the rel of the iteration as handlerName parameter. |
 | executeHandler: `Function` | This is a function used when the resource is not a collection. Besides, you can execute it passing a payload or additionals headers as parameters.|
-| 
 
 ### Example
 
