@@ -12,6 +12,22 @@
     "test:coverage": "jest --config ./jest.lib.config.js --coverage",
     "build-lib:watch": "ng build --watch"
   },
+  "peerDependencies": {
+    "@angular/animations": "8.2.14",
+    "@angular/cdk": "8.0.2",
+    "@angular/common": "8.2.14",
+    "@angular/compiler": "8.2.14",
+    "@angular/core": "8.2.14",
+    "@angular/forms": "8.2.14",
+    "@angular/material": "8.0.2",
+    "@angular/material-moment-adapter": "^8.1.2",
+    "@angular/platform-browser": "8.2.14",
+    "@angular/platform-browser-dynamic": "8.2.14",
+    "@dxc-technology/halstack-client": "^1.1.5",
+    "@dxc-technology/halstack-angular": "1.2.5",
+    "ngx-mask": "^8.0.2",
+    "rxjs": "~6.5.2"
+  },
   "dependencies": {
     "@angular/animations": "8.2.14",
     "@angular/cdk": "8.2.3",
@@ -25,7 +41,7 @@
     "@angular/platform-browser-dynamic": "8.2.14",
     "@angular/router": "8.2.14",
     "@dxc-technology/halstack-client": "^1.1.5",
-    "@dxc-technology/halstack-angular": "0.0.0-8ac2080",
+    "@dxc-technology/halstack-angular": "1.2.5",
     "@material-extended/mde": "^2.2.2",
     "@testing-library/angular": "^8.2.0",
     "@testing-library/dom": "^7.2.1",
