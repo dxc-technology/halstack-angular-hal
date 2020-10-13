@@ -32,7 +32,7 @@ jobs:
     - name: Publish RELEASE to npm
       run: |
         sed -i "s#\"version\": \"0.0.0\"#\"version\": \"${TAG_NAME}\"#" ./dist/diaas-angular-cdk-hal/package.json
-        cd lib
+        cd ./dist/diaas-angular-cdk-hal/
         npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
