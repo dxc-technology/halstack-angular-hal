@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "8.2.14",
     "@angular/router": "8.2.14",
     "@babel/preset-env": "^7.4.5",
-    "@dxc-technology/halstack-angular": "1.2.7",
+    "@dxc-technology/halstack-angular": "file:src/dxc-technology-halstack-angular.tgz",
     "@dxc-technology/halstack-angular-hal": "file:dist/diaas-angular-cdk-hal",
     "@types/jest": "^25.2.1",
     "babel-jest": "^24.8.0",
