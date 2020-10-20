@@ -8,6 +8,8 @@ import { DataPropertiesTable } from '../../../../model/data-properties-table';
 })
 export class HalAutocompletePropertiesComponent implements OnInit {
 
+  underlined = false;
+  
   @Input()
   tablePropertiesExample: Array<DataPropertiesTable>;
 
