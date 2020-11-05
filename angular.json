@@ -23,7 +23,7 @@
             "main": "projects/cdk-hal-examples/src/main.ts",
             "polyfills": "projects/cdk-hal-examples/src/polyfills.ts",
             "tsConfig": "projects/cdk-hal-examples/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/cdk-hal-examples/src/favicon.ico",
               "projects/cdk-hal-examples/src/assets",
@@ -63,7 +63,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
