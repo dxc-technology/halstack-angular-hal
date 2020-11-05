@@ -18,6 +18,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": { 
+      "@angular/*": [ "./node_modules/@angular/*" ],
+      "@dxc-technology/halstack-angular-hal": [ "./dist/diaas-angular-cdk-hal" ],
+      "@dxc-technology/halstack-angular-hal/*": [ "./dist/diaas-angular-cdk-hal/*" ]
+    }
   }
 }
