@@ -20,7 +20,8 @@
     "@dxc-technology/halstack-angular": "0.0.0-bfdd610",
     "@dxc-technology/halstack-client": "^1.1.5",
     "@testing-library/angular": "^8.2.0",
-    "@testing-library/dom": "^7.2.1"
+    "@testing-library/dom": "^7.2.1",
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^12.11.1"
