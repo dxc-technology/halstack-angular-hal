@@ -14,11 +14,13 @@
   },
   "peerDependencies": {
     "@dxc-technology/halstack-client": "^1.1.5",
-    "@dxc-technology/halstack-angular": "1.2.7"
+    "@dxc-technology/halstack-angular": "0.0.0-bfdd610"
   },
   "dependencies": {
+    "@dxc-technology/halstack-angular": "0.0.0-bfdd610",
     "@dxc-technology/halstack-client": "^1.1.5",
-    "@dxc-technology/halstack-angular": "1.2.7"
+    "@testing-library/angular": "^8.2.0",
+    "@testing-library/dom": "^7.2.1"
   },
   "devDependencies": {
     "@types/node": "^12.11.1"
