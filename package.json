@@ -8,6 +8,7 @@
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "link-lib":"cd ./projects/cdk-hal-examples && npm link ../../dist/diaas-angular-cdk-hal",
     "test:watch": "jest --watch"
   },
   "jest": {
@@ -31,7 +32,6 @@
     "@angular/router": "10.2.0",
     "@babel/preset-env": "^7.4.5",
     "@dxc-technology/halstack-angular": "0.0.0-bfdd610",
-    "@dxc-technology/halstack-angular-hal": "file:dist/diaas-angular-cdk-hal",
     "@types/jest": "^25.2.1",
     "babel-jest": "^24.8.0",
     "emotion": "10.0.27",
