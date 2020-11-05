@@ -291,12 +291,12 @@ describe('HalResourceService', () => {
   );
 
   it('should be created', () => {
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
     expect(service).toBeTruthy();
   });
 
   it('should be initialized: fetchStatus, resource, and error.', () => {
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const fetchStatus = service.fetchStatus;
     const resource = service.resource;
@@ -310,8 +310,8 @@ describe('HalResourceService', () => {
 
   it('should be returned a halResource:  Fetch operation and resource is returned.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
     const fetchStatus = service.fetchStatus;
     const resource = service.resource;
     const error = service.errorMessage;
@@ -328,8 +328,8 @@ describe('HalResourceService', () => {
 
   it('should retrieves an error in patch operation: propety patch does not exist.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const error = service.errorMessage;
     service.fetchResource();
@@ -343,8 +343,8 @@ describe('HalResourceService', () => {
 
   it('should retrieves response in patch operation: propety patch exist and patch is done.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const resource = service.resource;
     const fetchStatus = service.fetchStatus;
@@ -370,8 +370,8 @@ describe('HalResourceService', () => {
 
   it('should retrieves an error in patch operation: propety patch does not exist.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const error = service.errorMessage;
     service.fetchResource();
@@ -385,8 +385,8 @@ describe('HalResourceService', () => {
 
   it('should retrieves an error in patch operation: propety patch exist but retrieves an error.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const error = service.errorMessage;
     service.fetchResource();
@@ -402,8 +402,8 @@ describe('HalResourceService', () => {
 
   it('should retrieves response in patch operation: property patch exist and patch is done.', () => {
 
-    httpMock = TestBed.get(HttpTestingController);
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    httpMock = TestBed.inject(HttpTestingController);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
 
     const resource = service.resource;
     const fetchStatus = service.fetchStatus;
@@ -1235,15 +1235,15 @@ describe('HalResourceService Collection', ()=> {
   );
 
   it('should instanced a hal resource service', () => {
-    const service: HalResourceService = TestBed.get(HalResourceService);
+    const service: HalResourceService = TestBed.inject(HalResourceService);
     expect(service).toBeTruthy();
   });
 
     it('should retrieves response in delete operation: delete exists and operations is done.',
     () => {
 
-      httpMockCollection = TestBed.get(HttpTestingController);
-      const service: HalResourceService = TestBed.get(HalResourceService);
+      httpMockCollection = TestBed.inject(HttpTestingController);
+      const service: HalResourceService = TestBed.inject(HalResourceService);
 
       const resource = service.resource;
       const fetchStatus = service.fetchStatus;
@@ -1266,8 +1266,8 @@ describe('HalResourceService Collection', ()=> {
     it('should retrieves an error response in delete operation: delete exists and operations retrieves an error.',
     () => {
 
-      httpMockCollection = TestBed.get(HttpTestingController);
-      const service: HalResourceService = TestBed.get(HalResourceService);
+      httpMockCollection = TestBed.inject(HttpTestingController);
+      const service: HalResourceService = TestBed.inject(HalResourceService);
 
       const fetchStatus = service.fetchStatus;
       const error = service.errorMessage;
@@ -1287,8 +1287,8 @@ describe('HalResourceService Collection', ()=> {
     it('should retrieves response in post operation: post exists and operations is done.',
     () => {
 
-      httpMockCollection = TestBed.get(HttpTestingController);
-      const service: HalResourceService = TestBed.get(HalResourceService);
+      httpMockCollection = TestBed.inject(HttpTestingController);
+      const service: HalResourceService = TestBed.inject(HalResourceService);
 
       const resource = service.resource;
       const fetchStatus = service.fetchStatus;
@@ -1312,8 +1312,8 @@ describe('HalResourceService Collection', ()=> {
     it('should retrieves an error response in post operation: post exists and operation retrieves an error.',
     () => {
 
-      httpMockCollection = TestBed.get(HttpTestingController);
-      const service: HalResourceService = TestBed.get(HalResourceService);
+      httpMockCollection = TestBed.inject(HttpTestingController);
+      const service: HalResourceService = TestBed.inject(HalResourceService);
 
       const fetchStatus = service.fetchStatus;
       const error = service.errorMessage;
@@ -1334,8 +1334,8 @@ describe('HalResourceService Collection', ()=> {
     it('should retrieves an error response in get operation: get exists and operation retrieves an error.',
     () => {
 
-      httpMockCollection = TestBed.get(HttpTestingController);
-      const service: HalResourceService = TestBed.get(HalResourceService);
+      httpMockCollection = TestBed.inject(HttpTestingController);
+      const service: HalResourceService = TestBed.inject(HalResourceService);
 
       const fetchStatus = service.fetchStatus;
       const error = service.errorMessage;

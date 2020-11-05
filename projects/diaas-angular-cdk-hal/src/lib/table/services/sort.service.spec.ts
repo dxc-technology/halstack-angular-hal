@@ -34,7 +34,7 @@ describe('SortService', () => {
           ]
         }).compileComponents();
         fixture = TestBed.createComponent(TestHeaderComponent);
-        sort = TestBed.get(SortService);
+        sort = TestBed.inject(SortService);
         component = fixture.componentInstance;
         headerEl = fixture.debugElement.query(By.css('div'));
         spyDefaultIcon = jest.spyOn(sort, 'getDefaultIcon');
