@@ -273,11 +273,17 @@ Contained in the `cdk-hal-examples` folder, but it can be run from the root of t
 cd halstack-angular-hal
 ```
 
-Install the application dependencies. The Assure HAL Angular CDK dependency is linked to the local `diaas-angular-cdk-hal` folder. This one must have been previously built.
+Install the application dependencies.
 
-```bash
+````bash
 npm install
-```
+````
+
+The Assure HAL Angular CDK needs to be linked to the application (from the folder `dist\diaas-angular-cdk-hal`). This one must have been previously built as shown before.
+
+````bash
+npm run link-lib
+````
 
 Start the application.
 
@@ -297,7 +303,7 @@ node server.js
 If you are watching for changes, anytime you make a change to the library or the app, `angular cli` will live-reload your local dev server so you can iterate on your component in real-time.
 
 ## Running the tests
-Run tests from the library folder `projects\diaas-angular-cdk-hal`.
+Run tests from the library folder `projects\diaas-angular-cdk-hal` after the library dependencies have been installed.
 
 ```bash
 cd projects\diaas-angular-cdk-hal
