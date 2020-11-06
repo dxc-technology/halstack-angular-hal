@@ -275,15 +275,15 @@ cd halstack-angular-hal
 
 Install the application dependencies.
 
-````bash
+```bash
 npm install
-````
+```
 
 The Assure HAL Angular CDK needs to be linked to the application (from the folder `dist\diaas-angular-cdk-hal`). This one must have been previously built as shown before.
 
-````bash
+```bash
 npm run link-lib
-````
+```
 
 Start the application.
 
