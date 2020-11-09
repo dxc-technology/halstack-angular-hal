@@ -25,7 +25,7 @@ export class DynamicComponentComponent implements AfterViewInit,OnDestroy {
   @Input()
   selector;
 
-  @ViewChild(CdkPortal, {static:false}) cdkPortal;
+  @ViewChild(CdkPortal) cdkPortal;
 
   private portalHost: DomPortalHost;
   private portal;

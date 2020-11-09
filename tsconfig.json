@@ -5,12 +5,13 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "es2020",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "useDefineForClassFields": false,
     "target": "es6",
     "typeRoots": [
       "node_modules/@types"
@@ -18,6 +19,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": { 
+      "@angular/*": [ "./node_modules/@angular/*" ],
+      "@dxc-technology/halstack-angular-hal": [ "./dist/diaas-angular-cdk-hal" ],
+      "@dxc-technology/halstack-angular-hal/*": [ "./dist/diaas-angular-cdk-hal/*" ]
+    }
   }
 }
