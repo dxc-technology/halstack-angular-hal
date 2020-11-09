@@ -8,7 +8,7 @@
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "link-lib":"cd ./projects/cdk-hal-examples && npm link ../../dist/diaas-angular-cdk-hal",
+    "link-lib": "cd ./projects/cdk-hal-examples && npm link ../../dist/diaas-angular-cdk-hal",
     "test:watch": "jest --watch"
   },
   "jest": {
