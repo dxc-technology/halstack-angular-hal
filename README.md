@@ -1,18 +1,18 @@
-# Assure HAL Angular Components
+# Halstack HAL Angular Components
 
-Assure HAL angular Components is an npm library of reusable Angular components. It brings together two different responsibilities:
+Halstack HAL angular Components is an npm library of reusable Angular components. It brings together two different responsibilities:
 
 - Consuming Hal REST API's implementing following the [DXC API Guidelines](https://developer.dxc.com/apis)
 
 - Rendering these API resources as UI components that are compliant with the [DXC UX Guidelines](https://developer.dxc.com/design/principles)
 
-We have other libraries that will help you handling these responsibilities individually ([Halstack Client](https://github.com/dxc-technology/dxc-halstack-client) / [Assure Angular CDK](https://github.com/dxc-technology/halstack-angular/) ). Assure HAL Angular Components uses them under the hood, but it's a higher level abstraction that puts both responsibilities together using the most common association patterns.
+We have other libraries that will help you handling these responsibilities individually ([Halstack Client](https://github.com/dxc-technology/dxc-halstack-client) / [Halstack Angular CDK](https://github.com/dxc-technology/halstack-angular/) ). Halstack HAL Angular Components uses them under the hood, but it's a higher level abstraction that puts both responsibilities together using the most common association patterns.
 
 For example, collection resources are often associated with tables, and there are a lot of semantics in the standards described by the DXC API guidelines for collections (sorting, paginating...) that could be associated with UI interactions (clicking a table header for sorting, clicking pages for paginating)
 
 ## Usage
 
-Assure HAL Angular Components is distributed as an npm library. In order to use it in an existing project, you must install it first:
+Halstack HAL Angular Components is distributed as an npm library. In order to use it in an existing project, you must install it first:
 
 ```
 npm install @dxc-technology/halstack-angular-hal
@@ -279,7 +279,7 @@ Install the application dependencies.
 npm install
 ```
 
-The Assure HAL Angular CDK needs to be linked to the application (from the folder `dist\diaas-angular-cdk-hal`). This one must have been previously built as shown before.
+The Halstack HAL Angular CDK needs to be linked to the application (from the folder `dist\diaas-angular-cdk-hal`). This one must have been previously built as shown before.
 
 ```bash
 npm run link-lib
