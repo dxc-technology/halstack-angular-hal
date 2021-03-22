@@ -1,0 +1,8 @@
+.isSortable {
+    cursor: pointer;
+    width: fit-content;
+    svg {
+      fill: var(--table-headerFontColor);
+    }
+  }
+  
