@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { DxcSideNavModule, DxcTableModule } from '@dxc-technology/halstack-angular';
 
 @NgModule({
   declarations: [ComponentsPageComponent],
@@ -16,8 +15,6 @@ import { DxcSideNavModule, DxcTableModule } from '@dxc-technology/halstack-angul
     FormsModule,
     RouterModule,
     BrowserAnimationsModule,
-    DxcSideNavModule,
-    DxcTableModule
   ],
   exports: [ComponentsPageComponent]
 })

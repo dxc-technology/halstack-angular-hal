@@ -1,21 +1,34 @@
-<div class="header-container" theme>
-  <dxc-header padding="medium">
-      <a class="header-link" routerLinkActive="active-route" routerLink="/overview">Overview</a>
-      <a class="header-link" routerLinkActive="active-route" routerLink="/components" >Components</a>
-      <a class="header-link" target="_blank" rel="noopener noreferrer" href="https://developer.dxc.com">Design Guidelines</a>
-      <a class="header-link" target="_blank" rel="noopener noreferrer" href="https://github.dxc.com/DIaaS/diaas-angular-cdk">
-        <img src='../assets/img/github-logo.png' alt="GitHub logo" class="logo-32">
-      </a>
-  </dxc-header>
-</div>
-<div class="body-container" theme>
-  <div class="container-content">
-    <div class="styled-container">
-      <router-outlet #routerOutlet="outlet"></router-outlet>
+<dxc-application-layout theme>
+  <dxc-header [underlined]="true"></dxc-header>
+  <dxc-application-layout-sidenav padding="medium">
+    <div class="sidenavContent">
+      <img src="../assets/img/angular.png" class="sidenav-logo" />
+      <h1 class="sidenav-title">ngular</h1>
     </div>
-  </div>
-</div>
-<div class="portal-footer" theme>
+    <div class="sidenavLinks">
+      <div class="listItem">
+        <a
+        [skipLocationChange]="true"
+        routerLink="components/autocomplete"
+        >Autocomplete</a
+      >
+      </div>
+      <div class="listItem">
+        <a
+        [skipLocationChange]="true"
+        routerLink="components/haltable"
+        >HalTable</a
+      >
+      </div>
+    </div>
+  </dxc-application-layout-sidenav>
+  <dxc-application-layout-main>
+    <div class="container-content">
+      <div class="styled-container">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
+    </div>
+  </dxc-application-layout-main>
   <dxc-footer
     [bottomLinks]="[
       { text: 'Twitter', href: 'http://www.google.com' },
@@ -25,4 +38,4 @@
     [copyright]="'© DXC Technology 2019. All rights reserved.'"
   >
   </dxc-footer>
-</div>
+</dxc-application-layout>

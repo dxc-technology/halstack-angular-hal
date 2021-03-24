@@ -97,7 +97,6 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     expect(hal.getByText("5 to 6 of 6")).toBeTruthy();
-    expect(hal.getByText("Page: 2 of 2")).toBeTruthy();
     expect(hal.getByText("THISG ZDZOC")).toBeTruthy();
     expect(hal.getByText("AAAA BBBB")).toBeTruthy();
   });
@@ -144,7 +143,6 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     expect(hal.getByText("5 to 6 of 6")).toBeTruthy();
-    expect(hal.getByText("Page: 3 of 3")).toBeTruthy();
     expect(hal.getByText("THISG ZDZOC")).toBeTruthy();
     expect(hal.getByText("AAAA BBBB")).toBeTruthy();
   });
@@ -201,7 +199,6 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     expect(hal.getByText("3 to 4 of 6")).toBeTruthy();
-    expect(hal.getByText("Page: 2 of 3")).toBeTruthy();
     expect(hal.getByText("UOPSC CFRHV")).toBeTruthy();
     expect(hal.getByText("RBGMX SAWLZ")).toBeTruthy();
 
@@ -259,7 +256,6 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     expect(hal.getByText("1 to 2 of 6")).toBeTruthy();
-    expect(hal.getByText("Page: 1 of 3")).toBeTruthy();
     expect(hal.getByText("BOCJT FJUUZ")).toBeTruthy();
     expect(hal.getByText("XIFYZ OROKQ")).toBeTruthy();
 
@@ -302,7 +298,7 @@ describe('Hal table', () => {
     hal.detectChanges();
 
     array = JSON.parse(JSON.stringify(data));
-    req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4&_sort=prospect-full-name`);
+    req = httpMock.expectOne(`http://localhost:3000/data?_start=1&_num=4&_sort=prospect-full-name&_state=asc`);
     expect(req.request.method).toBe('GET');
     array._links.item = await array._links.item.sort(sortArray("prospect-full-name","asc"));
     req.flush(array);

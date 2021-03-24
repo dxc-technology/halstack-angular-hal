@@ -25,12 +25,10 @@ router.render = (req, res) => {
     }
     if (req.originalUrl.includes("sort")) {//Si la petición incluye el parametro de sort, tenemos que ordenar
       const propertyToSort = req.query._sort;//Cogemos de la url property a ordenar
-      const order = propertyToSort.charAt(0) === "-" ? "desc" : "asc";//Aqui sabemos si ordenamos ASC o DESC
-
-
+      const order = req.query._state;//Aqui sabemos si ordenamos ASC o DESC
       res.locals.data._links.item = this.data._links.item.sort( //Hacemos la ordenación de los items de la respuesta (res.locals.data[0]._links._item)
         sortArray(
-          propertyToSort.charAt(0) === "-" ? propertyToSort.slice(1) : propertyToSort,
+          propertyToSort,
           order
         )
       );

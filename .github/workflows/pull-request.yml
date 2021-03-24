@@ -1,0 +1,33 @@
+name: Build and test
+
+on:
+  pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+        registry-url: https://registry.npmjs.org/
+          
+    - name: Install lib dependencies
+      run: cd ./projects/diaas-angular-cdk-hal && rm -rf node_modules && npm install
+
+    - name: Install app dependencies
+      run: cd . && rm -rf node_modules && npm install
+    
+    - name: Generate lib
+      run: cd ./projects/diaas-angular-cdk-hal && npm run generate-lib
+
+    - name: Link lib
+      run: cd . && npm run link-lib
+        
+    - name: Test library
+      run: cd ./projects/diaas-angular-cdk-hal && npm run test
