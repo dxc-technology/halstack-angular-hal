@@ -258,7 +258,7 @@ export class HalResourceService {
   }
 
   public buildErrorResponse(err: any) {
-    this.errorMessage.next(err.message);
+    this.errorMessage.next(err?.error?.message || err?.message);
     this.fetchStatus.next(null);
     this.fetchStatus.next(doneStatus);
   }
