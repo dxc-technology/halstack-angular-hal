@@ -31,6 +31,8 @@
   "dependencies": {
     "@dxc-technology/halstack-client": "^1.1.5",
     "@dxc-technology/halstack-angular": "^3.0.5",
+    "@testing-library/angular": "^8.2.0",
+    "@testing-library/dom": "^7.2.1",
     "@angular/animations": "10.2.0",
     "@angular/cdk": "^10.2.5",
     "@angular/common": "10.2.0",
@@ -52,8 +54,6 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1002.0",
     "@angular-devkit/build-ng-packagr": "0.1002.0",
-    "@testing-library/angular": "^8.2.0",
-    "@testing-library/dom": "^7.2.1",
     "@angular/cli": "10.2.0",
     "@angular/compiler-cli": "10.2.0",
     "@angular/language-service": "10.2.0",
