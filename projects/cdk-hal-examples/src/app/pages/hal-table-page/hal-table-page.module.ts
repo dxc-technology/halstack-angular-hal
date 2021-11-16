@@ -4,6 +4,7 @@ import { HalTablePageComponent } from "./hal-table-page.component";
 import {
   DxcTableModule,
   DxcLinkModule,
+  DxcHeadingModule,
 } from "@dxc-technology/halstack-angular";
 import { DxcHalTableModule } from "@dxc-technology/halstack-angular-hal";
 import { HttpClientModule } from "@angular/common/http";
@@ -25,6 +26,7 @@ import { HalTablePropertiesComponent } from "../../components/examples/hal-table
     HalTableExampleModule,
     ExampleViewerModule,
     TabbedSectionModule,
+    DxcHeadingModule
   ],
   exports: [HalTablePageComponent, HalTablePropertiesComponent],
 })
