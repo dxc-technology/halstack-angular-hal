@@ -1,3 +1,35 @@
+
+
+# ⚠️ Halstack Angular Hal - Discontinuation Notice ⚠️
+
+Dear Community,
+
+We have decided to discontinue active maintenance and development of Halstack Angular Hal project .
+
+**Key Points:**
+
+1. **No Further Updates:**
+   - we will no longer actively maintain or release new versions of Halstack Angular. This decision is based on various factors, including shifts in project priorities and resource allocation.
+
+2. **GitHub Repository:**
+   - The GitHub repository will remain accessible. While we won't actively address issues or pull requests, you are welcome to fork the project and continue its development independently.
+
+3. **No New npm Versions:**
+   - We will not be publishing any new versions of halstack-angular-hal on npm. Existing versions will still be available for use in [npm](https://www.npmjs.com/package/@dxc-technology/halstack-angular?activeTab=readme).
+
+4. **Thank You:**
+   - We want to express our gratitude for the support and contributions from the Halstack Angular community. Your involvement has been invaluable, and we appreciate the journey we've shared.
+
+- **Archived Status:**
+  - We will eventually archive the GitHub repository to signify its inactive status. This is a standard practice for projects that are no longer actively maintained.
+
+
+
+Once again, thank you for being a part of the Halstack Angular community. We appreciate your understanding, and we look forward to the continued success of projects built upon the foundation of Halstack.
+
+
+-----------------------
+
 # Halstack HAL Angular Components
 
 Halstack HAL angular Components is an npm library of reusable Angular components. It brings together two different responsibilities:
