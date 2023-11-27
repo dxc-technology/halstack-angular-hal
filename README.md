@@ -15,7 +15,7 @@ We have decided to discontinue active maintenance and development of Halstack An
    - The GitHub repository will remain accessible. While we won't actively address issues or pull requests, you are welcome to fork the project and continue its development independently.
 
 3. **No New npm Versions:**
-   - We will not be publishing any new versions of halstack-angular-hal on npm. Existing versions will still be available for use in [npm](https://www.npmjs.com/package/@dxc-technology/halstack-angular?activeTab=readme).
+   - We will not be publishing any new versions of halstack-angular-hal on npm. Existing versions will still be available for use in [npm](https://www.npmjs.com/package/@dxc-technology/halstack-angular-hal).
 
 4. **Thank You:**
    - We want to express our gratitude for the support and contributions from the Halstack Angular community. Your involvement has been invaluable, and we appreciate the journey we've shared.
